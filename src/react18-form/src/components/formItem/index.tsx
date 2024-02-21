@@ -1,25 +1,11 @@
-import {
-  IFormPorps,
-  TFormItemProps,
-  IComponentFormItemProps,
-  IRenderFormItemProps,
-  componentMap,
-} from "@/react18-form";
+import { IFormPorps, TFormItemProps, componentMap } from "@/react18-form";
 import { Col, Form } from "antd";
+import {
+  isComponentFormItemProps,
+  isRenderFormItemProps,
+} from "@/react18-form";
 import style from "./index.module.css";
 import React from "react";
-
-function isComponentFormItemProps(
-  item: TFormItemProps
-): item is IComponentFormItemProps {
-  return "component" in item;
-}
-
-function isRenderFormItemProps(
-  item: TFormItemProps
-): item is IRenderFormItemProps {
-  return "render" in item;
-}
 
 function FormItem({
   formProps,
@@ -30,7 +16,7 @@ function FormItem({
   itemProps: TFormItemProps;
   model: any;
 }) {
-  const { name, label, show, componentProps } = itemProps;
+  const { name, label, show, componentProps, rules } = itemProps;
   const isComponent = isComponentFormItemProps(itemProps);
   const isRender = isRenderFormItemProps(itemProps);
 
@@ -47,7 +33,7 @@ function FormItem({
 
   return (
     <Col className={show ? "" : style["form-item-hidden"]}>
-      <Form.Item name={name} label={label}>
+      <Form.Item name={name} label={label} rules={rules}>
         {renderContent()}
       </Form.Item>
     </Col>
