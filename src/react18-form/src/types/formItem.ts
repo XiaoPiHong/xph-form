@@ -1,4 +1,4 @@
-import { TComponentPropsMap, TComponentType } from "./component";
+import { TComponentPropsMap } from "./component";
 import { Rule } from "antd/es/form";
 
 export interface IBaseFormItemProps {
@@ -23,7 +23,7 @@ export interface IRenderFormItemProps extends IBaseFormItemProps {
 }
 /** component props */
 export interface IComponentFormItemProps extends IBaseFormItemProps {
-  component: TComponentType /** 映射组件 */;
+  component: TComponentPropsMap[keyof TComponentPropsMap] /** 映射组件 */;
   componentProps?: TComponentPropsMap[keyof TComponentPropsMap];
 }
 
