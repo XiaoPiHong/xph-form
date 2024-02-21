@@ -1,6 +1,6 @@
-import { IFormPorps, TFormItemProps } from "@r/src/types";
+import { IFormPorps, TFormItemProps } from "@/react18-form/index";
 import { Col, Form } from "antd";
-import style from "./index.module.less";
+import style from "./index.module.css";
 
 function FormItem({
   formProps,
