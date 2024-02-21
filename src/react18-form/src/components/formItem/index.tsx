@@ -1,11 +1,12 @@
-import { IFormPorps, TFormItemProps, componentMap } from "@/react18-form";
-import { Col, Form } from "antd";
 import {
+  IFormPorps,
+  TFormItemProps,
   isComponentFormItemProps,
   isRenderFormItemProps,
-} from "@/react18-form";
+} from "../../types";
+import { componentMap } from "../../components";
+import { Col, Form } from "antd";
 import style from "./index.module.css";
-import React from "react";
 
 function FormItem({
   formProps,
