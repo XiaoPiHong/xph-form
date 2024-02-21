@@ -36,7 +36,7 @@ function FormItem({
 
   const renderContent = () => {
     if (isComponent) {
-      const Component = componentMap.get(itemProps.component) as React.FC;
+      const Component = componentMap.get(itemProps.component)!;
       return <Component {...componentProps} />;
     }
     if (isRender) {

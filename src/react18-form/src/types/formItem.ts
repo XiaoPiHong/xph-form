@@ -3,6 +3,7 @@ import { TComponentPropsMap } from "./component";
 export interface IBaseFormItemProps {
   name: string /** 字段名 */;
   label: string /** 标签名 */;
+  valuePropName?: string /** 子节点的值的属性，如 Switch、Checkbox 的是 checked */;
   show?: boolean | Function /** 是否显示（相当于display:none） */;
   ifShow?: boolean | Function /** 是否显示（会新增或删除节点） */;
 }
