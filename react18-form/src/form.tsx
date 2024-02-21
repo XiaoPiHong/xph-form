@@ -1,6 +1,7 @@
 import { Form as AForm, Row } from "antd";
 import { IFormPorps } from "./types";
 import { useFormItem } from "./hooks";
+import FormItem from "./components/formItem";
 
 function Form(props: IFormPorps) {
   const [formInstance] = AForm.useForm();
@@ -10,7 +11,11 @@ function Form(props: IFormPorps) {
   const { formItems } = useFormItem({ props, model });
   return (
     <AForm form={formInstance}>
-      <Row></Row>
+      <Row>
+        {formItems.map((item, index) => (
+          <FormItem key={index} itemProps={item} formProps={props} />
+        ))}
+      </Row>
     </AForm>
   );
 }

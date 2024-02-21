@@ -22,11 +22,16 @@ function useFormItemShow(item: TFormItemProps, model: any) {
 
 export default function ({ props, model }: { props: IFormPorps; model: any }) {
   const { items } = props;
-  const formItems = items.map((item) => {
-    return {
-      ...item,
-    };
-  });
+  const formItems = items
+    .map((item) => {
+      const { isIfShow, isShow } = useFormItemShow(item, model);
+      return {
+        ...item,
+        show: isShow,
+        ifShow: isIfShow,
+      };
+    })
+    .filter((item) => item.ifShow); /** 过滤出要渲染的项 */
   return {
     formItems,
   };
