@@ -23,7 +23,7 @@ export interface IRenderFormItemProps extends IBaseFormItemProps {
 }
 /** component props */
 export interface IComponentFormItemProps extends IBaseFormItemProps {
-  component: TComponentPropsMap[keyof TComponentPropsMap] /** 映射组件 */;
+  component: keyof TComponentPropsMap /** 映射组件 */;
   componentProps?: TComponentPropsMap[keyof TComponentPropsMap];
 }
 
