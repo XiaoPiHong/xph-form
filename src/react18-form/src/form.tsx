@@ -13,7 +13,12 @@ function Form(props: IFormPorps) {
     <AForm form={formInstance}>
       <Row>
         {formItems.map((item, index) => (
-          <FormItem key={index} itemProps={item} formProps={props} />
+          <FormItem
+            key={index}
+            model={model}
+            itemProps={item}
+            formProps={props}
+          />
         ))}
       </Row>
     </AForm>

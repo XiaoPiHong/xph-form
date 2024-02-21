@@ -13,12 +13,12 @@ export interface IBaseFormItemProps {
 export type Recordable<T> = Record<string, T>;
 
 /** render props */
-interface IRenderFormItemProps extends IBaseFormItemProps {
-  render: () => React.ReactNode /** 自定义渲染组件 */;
+export interface IRenderFormItemProps extends IBaseFormItemProps {
+  render: (args: Recordable<string>) => React.ReactNode /** 自定义渲染组件 */;
   componentProps?: Recordable<any>;
 }
 /** component props */
-interface IComponentFormItemProps extends IBaseFormItemProps {
+export interface IComponentFormItemProps extends IBaseFormItemProps {
   component: keyof TComponentPropsMap /** 映射组件 */;
   componentProps: TComponentPropsMap[keyof TComponentPropsMap];
 }
