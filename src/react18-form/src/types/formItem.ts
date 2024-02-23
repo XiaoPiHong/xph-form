@@ -1,6 +1,11 @@
 import { TComponentPropsMap } from "./component";
 import { Rule } from "antd/es/form";
 
+/**
+ * 字符串类型对象
+ */
+export type Recordable<T> = Record<string, T>;
+
 export interface IBaseFormItemProps {
   name: string /** 字段名 */;
   label: string /** 标签名 */;
@@ -9,22 +14,16 @@ export interface IBaseFormItemProps {
   ifShow?: boolean | Function /** 是否显示（会新增或删除节点） */;
   required?: boolean | Function /** 是否必填 */;
   rules?: Rule[] /** 校验规则 */;
+  componentProps?: Recordable<any> /** 组件属性 */;
 }
-
-/**
- * 字符串类型对象
- */
-export type Recordable<T> = Record<string, T>;
 
 /** render props */
 export interface IRenderFormItemProps extends IBaseFormItemProps {
   render: (args: Recordable<string>) => React.ReactNode /** 自定义渲染组件 */;
-  componentProps?: Recordable<any>;
 }
 /** component props */
 export interface IComponentFormItemProps extends IBaseFormItemProps {
   component: keyof TComponentPropsMap /** 映射组件 */;
-  componentProps?: TComponentPropsMap[keyof TComponentPropsMap];
 }
 
 export type TFormItemProps = IRenderFormItemProps | IComponentFormItemProps;

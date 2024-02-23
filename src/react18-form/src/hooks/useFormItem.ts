@@ -90,7 +90,7 @@ function useFormItemRules(item: TFormItemProps, model: any, show: boolean) {
       rule.required = false;
     }
     if (isComponent) {
-      const { component, componentProps } = item;
+      const { component, componentProps = {} } = item;
       if (!Reflect.has(rule, "type")) {
         rule.type = component === "InputNumber" ? "number" : "string";
       }
@@ -100,7 +100,7 @@ function useFormItemRules(item: TFormItemProps, model: any, show: boolean) {
       if (component.includes("Input") || component.includes("Textarea")) {
         rule.whitespace = true;
       }
-      const valueFormat = (componentProps as any).valueFormat;
+      const valueFormat = componentProps.valueFormat;
       setComponentRuleType(rule, component, valueFormat);
     }
   }
