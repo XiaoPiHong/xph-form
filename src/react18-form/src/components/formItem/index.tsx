@@ -7,16 +7,13 @@ import {
 import { componentMap } from "../../components";
 import { Col, Form } from "antd";
 import style from "./index.module.css";
+import React from "react";
 
-function FormItem({
-  formProps,
-  itemProps,
-  model,
-}: {
+const FormItem: React.FC<{
   formProps: IFormPorps;
   itemProps: TFormItemProps;
   model: any;
-}) {
+}> = ({ formProps, itemProps, model }) => {
   const { name, label, show, componentProps, rules } = itemProps;
   const isComponent = isComponentFormItemProps(itemProps);
   const isRender = isRenderFormItemProps(itemProps);
@@ -39,6 +36,6 @@ function FormItem({
       </Form.Item>
     </Col>
   );
-}
+};
 
 export default FormItem;
