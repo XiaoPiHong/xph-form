@@ -6,7 +6,7 @@ import {
 } from "../../types";
 import { componentMap } from "../../components";
 import { Col, Form } from "antd";
-import style from "./index.module.css";
+import style from "./index.module.less";
 import React from "react";
 
 const FormItem: React.FC<{
