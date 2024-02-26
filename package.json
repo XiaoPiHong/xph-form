@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start-react": "react-scripts start  --entry ./src/react18-form/ReactIndex.tsx",
+    "react": "react-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx rimraf ./dist && gulp"
   },

@@ -8,7 +8,6 @@ const Form: React.FC<IFormPorps> = (props) => {
   const [formInstance] = AForm.useForm();
   /** 响应式数据源 */
   const model = AForm.useWatch((values) => values, formInstance);
-
   const { formItems } = useFormItem({ props, model });
   return (
     <AForm form={formInstance}>

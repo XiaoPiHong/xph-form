@@ -28,7 +28,6 @@ const FormItem: React.FC<{
     }
     return null;
   };
-  console.log(show);
   return (
     <Col className={show ? "" : style["form-item-hidden"]}>
       <Form.Item name={name} label={label} rules={rules}>

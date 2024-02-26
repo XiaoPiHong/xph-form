@@ -16,14 +16,14 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false
   },
   "exclude": [
     "node_modules",
     "dist",
     "gulpfile.mjs",
-    /* 排除react测试的启动文件 */
-    "./src/react18-form/ReactApp.tsx",
-    "./src/react18-form/ReactIndex.tsx"
+    /* 排除启动入口文件 */
+    "./src/index.tsx"
   ]
 }
