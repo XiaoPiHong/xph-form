@@ -1,9 +1,7 @@
 import gulp from "gulp";
 import ts from "gulp-typescript";
 import less from "gulp-less";
-import postcss from "gulp-postcss";
-import modules from "postcss-modules";
-
+import replace from "gulp-replace";
 
 const tsProject = ts.createProject("tsconfig.json");
 
@@ -14,23 +12,22 @@ gulp.task("compile-ts", () => {
   // 复制生成的 .d.ts 文件到输出目录
   tsResult.dts.pipe(gulp.dest("dist"));
 
-  // 输出编译后的 JavaScript 文件
-  return tsResult.js.pipe(gulp.dest("dist"));
+  // 替换 LESS 文件引入为 CSS
+  return tsResult.js
+    .pipe(
+      replace(
+        /import\s+(\w+)\s+from\s+".*?\.less";/g,
+        (match, variableName) => {
+          return match.replace(".less", ".css");
+        }
+      )
+    )
+    .pipe(gulp.dest("dist"));
 });
 
 // LESS 编译任务
 gulp.task("compile-less", () => {
-  return gulp
-    .src("src/**/*.less")
-    .pipe(less())
-    .pipe(
-      postcss([
-        modules({
-          generateScopedName: "[local]__[hash:base64:5]", // 定义生成的类名格式
-        }),
-      ])
-    )
-    .pipe(gulp.dest("dist/src"));
+  return gulp.src("src/**/*.less").pipe(less()).pipe(gulp.dest("dist/src"));
 });
 
 // 默认任务
