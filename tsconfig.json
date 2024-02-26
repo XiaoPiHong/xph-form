@@ -14,7 +14,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "moduleResolution": "node",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "dist", "gulpfile.mjs"]
 }
