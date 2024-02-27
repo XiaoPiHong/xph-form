@@ -1,5 +1,7 @@
-import React18Form, { IFormPorps } from "./react18-form";
+/** 这个是react-form表单项目启动入口文件 */
 import React from "react";
+import ReactForm from "./form";
+import { IFormPorps } from "./types";
 import ReactDOM from "react-dom/client";
 
 const ReactApp: React.FC = () => {
@@ -8,12 +10,13 @@ const ReactApp: React.FC = () => {
       name: "test",
       label: "测试",
       component: "Input",
-      show: ({ model }) => {
+      ifShow: ({ model }) => {
+        console.log("ifShow", model);
         return false;
       },
-      ifShow: ({ model }) => {
-        console.log(model);
-        return true;
+      show: ({ model }) => {
+        console.log("show", model);
+        return false;
       },
       componentProps: {
         a: 1,
@@ -22,7 +25,7 @@ const ReactApp: React.FC = () => {
   ];
   return (
     <section>
-      <React18Form items={items}></React18Form>
+      <ReactForm items={items}></ReactForm>
     </section>
   );
 };

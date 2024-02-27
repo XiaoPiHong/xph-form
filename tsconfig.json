@@ -1,29 +1,28 @@
 {
   "compilerOptions": {
-    "target": "ES2016",
-    "jsx": "react",
-    "module": "ESNext",
+    "target": "ES2018",
+    "module": "CommonJS",
     "baseUrl": "./",
-    "paths": {
-      "@": ["src"],
-      "@/*": ["src/*"]
-    },
     "declaration": true,
     "outDir": "./dist",
+    "paths": {
+      "@": ["packages"],
+      "@/*": ["packages/*"]
+    },
+    "jsx": "preserve",
+    /* 生成附加的 JavaScript 以简化对 CommonJS 模块的导入支持。这启用了类型兼容性的 allowSyntheticDefaultImports */
     "esModuleInterop": true,
+    /* 确保导入时的大小写正确 */
     "forceConsistentCasingInFileNames": true,
+    /* 启用所有严格的类型检查选项 */
     "strict": true,
+    /* 指定 TypeScript 如何查找给定模块说明符的文件 */
     "moduleResolution": "node",
+    /* 跳过对所有 .d.ts 文件进行类型检查 */
     "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
+    /* 对具有隐含的 any 类型的表达式和声明启用错误报告 */
     "noImplicitAny": false
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "gulpfile.mjs",
-    /* 排除启动入口文件 */
-    "./src/index.tsx"
-  ]
+  /* 指定要从编译中排除的文件列表 */
+  "exclude": ["node_modules", "dist"]
 }

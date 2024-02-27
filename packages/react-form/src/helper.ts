@@ -1,5 +1,5 @@
 import { RuleObject } from "antd/es/form";
-import { TComponentPropsMap } from "@/react18-form";
+import { TComponentPropsMap } from "./types";
 
 /**
  * @description: 生成placeholder

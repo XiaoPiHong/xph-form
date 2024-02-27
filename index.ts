@@ -1,5 +1,4 @@
-import React18Form, {
-  IFormPorps as React18IFormPorps,
-} from "./src/react18-form";
+import ReactForm from "@/react-form/src/form";
+import { IFormPorps as IReactFormPorps } from "@/react-form/src/types";
 
-export { React18Form, React18IFormPorps };
+export { ReactForm, IReactFormPorps };

@@ -3,7 +3,7 @@ import { isBoolean, isFunction, isNull, cloneDeep } from "lodash-es";
 import { setComponentRuleType, createPlaceholderMessage } from "../helper";
 import { RuleObject } from "antd/es/form";
 
-function useFormItemShow(item: TFormItemProps, model: any = {}) {
+function useFormItemShow(item: TFormItemProps, model: any) {
   const { show, ifShow } = item;
   let isShow = true;
   let isIfShow = true;
@@ -14,19 +14,15 @@ function useFormItemShow(item: TFormItemProps, model: any = {}) {
     isIfShow = ifShow;
   }
   if (isFunction(show)) {
-    isShow = show(model);
+    isShow = show({ model });
   }
   if (isFunction(ifShow)) {
-    isIfShow = ifShow(model);
+    isIfShow = ifShow({ model });
   }
   return { isShow, isIfShow };
 }
 
-function useFormItemRules(
-  item: TFormItemProps,
-  model: any = {},
-  show: boolean
-) {
+function useFormItemRules(item: TFormItemProps, model: any, show: boolean) {
   const { rules: defRules = [], label, required } = item;
 
   let rules = cloneDeep(defRules) as RuleObject[];
@@ -120,18 +116,11 @@ function useFormItemRules(
   };
 }
 
-export default function ({
-  props,
-  model = {},
-}: {
-  props: IFormPorps;
-  model: any;
-}) {
+export default function ({ props, model }: { props: IFormPorps; model: any }) {
   const { items } = props;
   const formItems = items
     .map((item) => {
       const { isIfShow, isShow } = useFormItemShow(item, model);
-      console.log(isShow);
       const { rules } = useFormItemRules(item, model, isShow);
       return {
         ...item,

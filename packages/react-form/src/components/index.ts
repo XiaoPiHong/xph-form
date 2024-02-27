@@ -1,5 +1,6 @@
+import React from "react";
 import { Input, Select, InputNumber } from "antd";
-import { TComponentPropsMap } from "@/react18-form";
+import { TComponentPropsMap } from "../types";
 
 const componentMap = new Map<keyof TComponentPropsMap, React.FC>();
 

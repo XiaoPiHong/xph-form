@@ -1,5 +1,6 @@
 import { TComponentPropsMap } from "./component";
 import { Rule } from "antd/es/form";
+import React from "react";
 
 /**
  * 字符串类型对象
