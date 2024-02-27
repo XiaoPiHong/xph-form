@@ -14,26 +14,28 @@ function buildTsTask(
   const tsProject = ts.createProject(tsconfigFullPath);
   const tsResult = gulp.src(srcFolder).pipe(tsProject());
 
-  // 复制生成的 .d.ts 文件到输出目录
+  /** 复制生成的 .d.ts 文件到输出目录 */
   tsResult.dts.pipe(gulp.dest(distFolder));
 
-  // 替换 LESS 文件引入为 CSS 并输出 JS 文件
-  return tsResult.js
-    .pipe(
-      replace(
-        /import\s+(\w+)\s+from\s+".*?\.less";/g,
-        (match, variableName) => {
-          return match.replace(".less", ".css");
-        }
-      )
-    )
-    .pipe(gulp.dest(distFolder));
+  /** 替换 LESS 文件引入为 CSS */
+  tsResult.js.pipe(
+    replace(/import\s+(\w+)\s+from\s+".*?\.less";/g, (match, variableName) => {
+      return match.replace(".less", ".css");
+    })
+  );
+
+  /** 输出JS */
+  return tsResult.js.pipe(gulp.dest(distFolder));
 }
 
 /** 编译less */
 function buildLessTask(srcFolder: string[], distFolder: string) {
   return gulp.src(srcFolder).pipe(less()).pipe(gulp.dest(distFolder));
 }
+
+gulp.task("build:entry", () => {
+  buildTsTask("tsconfig.entry.json", ["index.ts"], "dist");
+});
 
 gulp.task("build:react", () =>
   buildTsTask(
@@ -46,6 +48,7 @@ gulp.task("build:react", () =>
     "dist/packages/react-form"
   )
 );
+
 gulp.task("build:vue", () =>
   buildTsTask(
     "packages/vue-form/tsconfig.json",
@@ -61,4 +64,7 @@ gulp.task("compile-less", () =>
   )
 );
 
-gulp.task("default", gulp.parallel("build:react", "build:vue", "compile-less"));
+gulp.task(
+  "default",
+  gulp.parallel("build:entry", "build:react", "build:vue", "compile-less")
+);
