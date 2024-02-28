@@ -26,6 +26,5 @@
     "resolveJsonModule": true
   },
   /* 指定要从编译中排除的文件列表 */
-  "exclude": ["node_modules", "dist"],
-  "include": ["packages/**/*"]
+  "exclude": ["node_modules", "dist"]
 }
