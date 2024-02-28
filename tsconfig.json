@@ -23,5 +23,6 @@
   },
   /* 指定要从编译中排除的文件列表 */
   "exclude": ["node_modules", "dist"],
+  /* 指定与编译中包括的文件匹配的全局模式列表。如果在 tsconfig.json 文件中没有指定 'files' 或 'include' 属性，则编译器默认包括包含目录和子目录中的所有文件，除了 'exclude' 属性指定的文件。需要 TypeScript 2.0 或更高版本 */
   "include": ["src/**/*"]
 }
