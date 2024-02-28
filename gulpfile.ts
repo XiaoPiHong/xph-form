@@ -21,8 +21,8 @@ function buildTsTask(
 
 gulp.task("compile-ts", () =>
   buildTsTask(
-    "packages/tsconfig.gulp.json",
-    ["packages/**/*.{ts,tsx,vue}", "!packages/react-form/src/index.tsx"],
+    "tsconfig.gulp.json",
+    ["src/**/*.{ts,tsx,vue}", "!src/packages/react-form/src/index.tsx"],
     "dist"
   )
 );
