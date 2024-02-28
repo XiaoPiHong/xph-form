@@ -33,31 +33,10 @@ function buildLessTask(srcFolder: string[], distFolder: string) {
   return gulp.src(srcFolder).pipe(less()).pipe(gulp.dest(distFolder));
 }
 
-gulp.task("build:react", () =>
-  buildTsTask(
-    "packages/react-form/tsconfig.json",
-    [
-      "packages/react-form/src/**/*.{ts,tsx}",
-      /** 排除测试react-form表单项目启动入口文件 */
-      "!packages/react-form/src/index.tsx",
-    ],
-    "dist/packages/react-form"
-  )
+gulp.task("compile-ts", () =>
+  buildTsTask("packages/tsconfig.json", ["packages/**/*.{ts,tsx,vue}"], "dist")
 );
 
-gulp.task("build:vue", () =>
-  buildTsTask(
-    "packages/vue-form/tsconfig.json",
-    ["packages/vue-form/src/**/*.{ts,vue}"],
-    "dist/packages/vue-form"
-  )
-);
+gulp.task("compile-less", () => buildLessTask(["packages/**/*.less"], "dist"));
 
-gulp.task("compile-less", () =>
-  buildLessTask(
-    ["packages/react-form/src/**/*.less"],
-    "dist/packages/react-form"
-  )
-);
-
-gulp.task("default", gulp.parallel("build:react", "build:vue", "compile-less"));
+gulp.task("default", gulp.parallel("compile-ts", "compile-less"));

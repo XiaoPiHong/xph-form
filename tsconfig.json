@@ -5,10 +5,6 @@
     "baseUrl": "./",
     "declaration": true,
     "outDir": "./dist",
-    "paths": {
-      "@": ["packages"],
-      "@/*": ["packages/*"]
-    },
     "jsx": "preserve",
     /* 生成附加的 JavaScript 以简化对 CommonJS 模块的导入支持。这启用了类型兼容性的 allowSyntheticDefaultImports */
     "esModuleInterop": true,
