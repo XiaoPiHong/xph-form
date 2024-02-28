@@ -33,10 +33,6 @@ function buildLessTask(srcFolder: string[], distFolder: string) {
   return gulp.src(srcFolder).pipe(less()).pipe(gulp.dest(distFolder));
 }
 
-gulp.task("build:entry", () => {
-  buildTsTask("tsconfig.entry.json", ["index.ts"], "dist");
-});
-
 gulp.task("build:react", () =>
   buildTsTask(
     "packages/react-form/tsconfig.json",
@@ -64,7 +60,4 @@ gulp.task("compile-less", () =>
   )
 );
 
-gulp.task(
-  "default",
-  gulp.parallel("build:entry", "build:react", "build:vue", "compile-less")
-);
+gulp.task("default", gulp.parallel("build:react", "build:vue", "compile-less"));
