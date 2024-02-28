@@ -20,8 +20,6 @@
     "@types/gulp-typescript": "^2.13.0",
     "@types/lodash-es": "^4.17.12",
     "gulp": "^4.0.2",
-    "gulp-less": "^5.0.0",
-    "gulp-replace": "^1.1.4",
     "gulp-typescript": "6.0.0-alpha.1",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",

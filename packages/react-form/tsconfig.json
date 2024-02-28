@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2018",
     "module": "CommonJS",
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "declaration": true,
     "outDir": "./dist",
     "jsx": "react",

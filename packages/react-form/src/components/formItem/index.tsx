@@ -6,7 +6,7 @@ import {
 } from "../../types";
 import { componentMap } from "../../components";
 import { Col, Form } from "antd";
-import style from "./index.module.less";
+import style from "./index.module.css";
 import React from "react";
 
 const FormItem: React.FC<{
@@ -28,6 +28,7 @@ const FormItem: React.FC<{
     }
     return null;
   };
+  console.log(style);
   return (
     <Col className={show ? "" : style["form-item-hidden"]}>
       <Form.Item name={name} label={label} rules={rules}>

@@ -12,14 +12,14 @@ const ReactApp: React.FC = () => {
       component: "Input",
       ifShow: ({ model }) => {
         console.log("ifShow", model);
-        return false;
+        return true;
       },
       show: ({ model }) => {
         console.log("show", model);
         return false;
       },
       componentProps: {
-        a: 1,
+        allowClear: true,
       },
     },
   ];
