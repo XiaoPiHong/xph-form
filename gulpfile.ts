@@ -1,6 +1,7 @@
 import gulp from "gulp";
 import ts from "gulp-typescript";
 import path from "path";
+import postcss from "gulp-postcss";
 
 /** 编译ts */
 function buildTsTask(
@@ -19,6 +20,13 @@ function buildTsTask(
   return tsResult.js.pipe(gulp.dest(distFolder));
 }
 
+/** 编译CSS */
+function buildCssTask(srcFolder: string[], distFolder: string) {
+  const plugins = []; // 添加其他 PostCSS 插件
+
+  return gulp.src(srcFolder).pipe(postcss(plugins)).pipe(gulp.dest(distFolder));
+}
+
 gulp.task("compile-ts", () =>
   buildTsTask(
     "tsconfig.gulp.json",
@@ -27,4 +35,8 @@ gulp.task("compile-ts", () =>
   )
 );
 
-gulp.task("default", gulp.parallel("compile-ts"));
+gulp.task("compile-css", () =>
+  buildCssTask(["src/**/*.css", "!**/node_modules/**"], "dist")
+);
+
+gulp.task("default", gulp.parallel("compile-ts", "compile-css"));
