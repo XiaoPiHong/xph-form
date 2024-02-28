@@ -20,7 +20,7 @@ export interface IBaseFormItemProps {
 
 /** render props */
 export interface IRenderFormItemProps extends IBaseFormItemProps {
-  render: (args: Recordable<string>) => React.ReactNode /** 自定义渲染组件 */;
+  render: (args: Recordable<any>) => React.ReactNode /** 自定义渲染组件 */;
 }
 /** component props */
 export interface IComponentFormItemProps extends IBaseFormItemProps {

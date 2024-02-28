@@ -16,7 +16,23 @@ const ReactApp: React.FC = () => {
       },
       show: ({ model }) => {
         console.log("show", model);
-        return false;
+        return true;
+      },
+      componentProps: {
+        allowClear: true,
+      },
+    },
+    {
+      name: "test2",
+      label: "测试2",
+      render: ({ model }) => <div>{model.test === "1" ? "成功" : "失败"}</div>,
+      ifShow: ({ model }) => {
+        console.log("ifShow", model);
+        return true;
+      },
+      show: ({ model }) => {
+        console.log("show", model);
+        return true;
       },
       componentProps: {
         allowClear: true,
