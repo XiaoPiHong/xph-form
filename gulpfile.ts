@@ -34,7 +34,11 @@ function buildLessTask(srcFolder: string[], distFolder: string) {
 }
 
 gulp.task("compile-ts", () =>
-  buildTsTask("packages/tsconfig.json", ["packages/**/*.{ts,tsx,vue}"], "dist")
+  buildTsTask(
+    "packages/tsconfig.json",
+    ["packages/**/*.{ts,tsx,vue}", "!packages/react-form/src/index.tsx"],
+    "dist"
+  )
 );
 
 gulp.task("compile-less", () => buildLessTask(["packages/**/*.less"], "dist"));

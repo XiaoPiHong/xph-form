@@ -4,7 +4,5 @@
     "target": "es5",
     "module": "ESNext",
     "jsx": "react"
-  },
-  /* 排除项目启动文件 */
-  "exclude": ["react-form/src/index.tsx"]
+  }
 }
