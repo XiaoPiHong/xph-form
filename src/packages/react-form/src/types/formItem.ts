@@ -14,6 +14,7 @@ export interface IBaseFormItemProps {
   show?: boolean | Function /** 是否显示（相当于display:none） */;
   ifShow?: boolean | Function /** 是否显示（会新增或删除节点） */;
   required?: boolean | Function /** 是否必填 */;
+  dynamicDisabled?: boolean | Function /** 是否禁用 */;
   rules?: Rule[] /** 校验规则 */;
   componentProps?: Recordable<any> /** 组件属性 */;
 }

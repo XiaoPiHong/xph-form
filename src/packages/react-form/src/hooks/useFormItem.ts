@@ -116,17 +116,27 @@ function useFormItemRules(item: TFormItemProps, model: any, show: boolean) {
   };
 }
 
+function useFormItemDisabled(item: TFormItemProps, model: any) {
+  const { dynamicDisabled } = item;
+  if (isFunction(dynamicDisabled)) {
+    return dynamicDisabled({ model });
+  }
+  return dynamicDisabled;
+}
+
 export default function ({ props, model }: { props: IFormPorps; model: any }) {
   const { items } = props;
   const formItems = items
     .map((item) => {
       const { isIfShow, isShow } = useFormItemShow(item, model);
       const { rules } = useFormItemRules(item, model, isShow);
+      const dynamicDisabled = useFormItemDisabled(item, model);
       return {
         ...item,
         show: isShow,
         ifShow: isIfShow,
         rules,
+        dynamicDisabled,
       };
     })
     .filter((item) => item.ifShow); /** 过滤出要渲染的项 */
