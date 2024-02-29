@@ -6,22 +6,22 @@ import ReactDOM from "react-dom/client";
 
 const ReactApp: React.FC = () => {
   const items: IFormPorps["items"] = [
-    {
-      name: "test",
-      label: "测试",
-      component: "Input",
-      ifShow: ({ model }) => {
-        console.log("ifShow", model);
-        return true;
-      },
-      show: ({ model }) => {
-        console.log("show", model);
-        return true;
-      },
-      componentProps: {
-        allowClear: true,
-      },
-    },
+    // {
+    //   name: "test",
+    //   label: "测试",
+    //   component: "Input",
+    //   ifShow: ({ model }) => {
+    //     console.log("ifShow", model);
+    //     return true;
+    //   },
+    //   show: ({ model }) => {
+    //     console.log("show", model);
+    //     return true;
+    //   },
+    //   componentProps: {
+    //     allowClear: true,
+    //   },
+    // },
     {
       name: "test2",
       label: "测试2",

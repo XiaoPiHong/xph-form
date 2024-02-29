@@ -1,4 +1,7 @@
 import ReactForm from "./packages/react-form/src/form";
-import { IFormPorps as IReactFormPorps } from "./packages/react-form/src/types";
+import {
+  IFormPorps as IReactFormPorps,
+  TFormItemProps as TReactFormItemProps,
+} from "./packages/react-form/src/types";
 
-export { ReactForm, IReactFormPorps };
+export { ReactForm, IReactFormPorps, TReactFormItemProps };
