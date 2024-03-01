@@ -12,11 +12,6 @@ const ReactApp: React.FC = () => {
         name: "test",
         label: "测试",
         component: "Input",
-        ifShow: true,
-        show: true,
-        componentProps: {
-          allowClear: true,
-        },
         labelCol: {
           span: 10,
         },
@@ -30,37 +25,31 @@ const ReactApp: React.FC = () => {
         render: ({ model }) => (
           <div>{model.test === "1" ? <InputNumber /> : "失败"}</div>
         ),
-        ifShow: true,
-        show: true,
-        componentProps: {
-          allowClear: true,
-        },
       },
       {
         name: "test3",
         label: "测试3",
         component: "InputNumber",
-        ifShow: ({ model }) => {
-          return true;
-        },
-        show: ({ model }) => {
-          return true;
-        },
-        componentProps: {},
       },
       {
         name: "test4",
-        label: "测试3",
+        label: "测试4",
         component: "Select",
         ifShow: ({ model }) => {
           console.log("ifShow", model);
-          return false;
+          return true;
         },
         show: ({ model }) => {
           console.log("show", model);
-          return false;
+          return true;
         },
         componentProps: {
+          options: [
+            {
+              label: "测试",
+              value: "1",
+            },
+          ],
           allowClear: true,
         },
       },

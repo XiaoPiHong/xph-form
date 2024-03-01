@@ -11,17 +11,8 @@ import React from "react";
 
 const useFormItemBindProps = (props: TFormItemProps) => {
   const { name, label, rules, wrapperCol, labelCol } = props;
-
-  const formItemBindProps = {
-    name,
-    label,
-    rules,
-    wrapperCol,
-    labelCol,
-  };
-  return {
-    formItemBindProps,
-  };
+  const formItemBindProps = { name, label, rules, wrapperCol, labelCol };
+  return { formItemBindProps };
 };
 
 const FormItem: React.FC<{

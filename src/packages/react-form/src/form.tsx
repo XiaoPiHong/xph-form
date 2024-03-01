@@ -10,6 +10,7 @@ const useFormModel = (instance: FormInstance<any>) => {
 
   /** 重写model */
   const rewritingModel = useMemo(() => {
+    console.log("useMemo");
     return realModel || {};
   }, [realModel]);
 
@@ -22,10 +23,7 @@ const useFormModel = (instance: FormInstance<any>) => {
 const useFormBindProps = (props: IFormPorps) => {
   const { layout, wrapperCol, labelCol } = props;
   const formBindProps = { layout, wrapperCol, labelCol };
-
-  return {
-    formBindProps,
-  };
+  return { formBindProps };
 };
 
 const Form: React.FC<IFormPorps> = (props) => {
