@@ -147,13 +147,11 @@ function useFormItemDisabled(item: TFormItemProps, model: any) {
 
 function useFormItemComponentProps(item: TFormItemProps, model: any) {
   let props: Recordable<any> = {};
-  const { componentProps } = item;
+  const { componentProps = {} } = item;
   if (isFunction(componentProps)) {
-    props = { ...componentProps({ model }) };
+    Object.assign(props, componentProps({ model }));
   }
-  if (isObject(componentProps)) {
-    props = { ...componentProps };
-  }
+  Object.assign(props, componentProps);
   return {
     componentProps: props,
   };

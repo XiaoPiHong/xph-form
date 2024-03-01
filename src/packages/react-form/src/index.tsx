@@ -31,7 +31,14 @@ const ReactApp: React.FC = () => {
         label: "测试3",
         component: "InputNumber",
         componentProps: ({ model }) => {
-          console.log("test3", model);
+          return {
+            onBlur: (e) => {
+              console.log(e);
+            },
+            onChange: (e) => {
+              console.log(e);
+            },
+          };
         },
       },
       {
@@ -44,14 +51,22 @@ const ReactApp: React.FC = () => {
         show: ({ model }) => {
           return true;
         },
-        componentProps: {
-          options: [
-            {
-              label: "测试",
-              value: "1",
+        componentProps: ({ model }) => {
+          return {
+            options: [
+              {
+                label: "测试",
+                value: "1",
+              },
+              {
+                label: "测试2",
+                value: "2",
+              },
+            ],
+            onChange: (e) => {
+              console.log(e);
             },
-          ],
-          allowClear: true,
+          };
         },
       },
     ],

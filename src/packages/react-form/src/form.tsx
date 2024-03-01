@@ -10,7 +10,6 @@ const useFormModel = (instance: FormInstance<any>) => {
 
   /** 重写model */
   const rewritingModel = useMemo(() => {
-    console.log("useMemo");
     return realModel || {};
   }, [realModel]);
 
