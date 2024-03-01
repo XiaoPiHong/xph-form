@@ -5,7 +5,7 @@ import {
   isRenderFormItemProps,
 } from "../../types";
 import { componentMap } from "../../components";
-import { Col, Form } from "antd";
+import { Form } from "antd";
 import style from "./index.module.css";
 import React from "react";
 
@@ -14,7 +14,7 @@ const FormItem: React.FC<{
   itemProps: TFormItemProps;
   model: any;
 }> = ({ formProps, itemProps, model }) => {
-  const { name, label, show, componentProps, rules } = itemProps;
+  const { name, label, show, componentProps, rules, wrapperCol } = itemProps;
   const isComponent = isComponentFormItemProps(itemProps);
   const isRender = isRenderFormItemProps(itemProps);
 
@@ -29,11 +29,14 @@ const FormItem: React.FC<{
     return null;
   };
   return (
-    <Col className={show ? "" : style["form-item-hidden"]}>
-      <Form.Item name={name} label={label} rules={rules}>
-        {renderContent()}
-      </Form.Item>
-    </Col>
+    <Form.Item
+      name={name}
+      label={label}
+      rules={rules}
+      className={show ? "" : style["form-item-hidden"]}
+    >
+      {renderContent()}
+    </Form.Item>
   );
 };
 

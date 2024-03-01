@@ -3,45 +3,66 @@ import React from "react";
 import ReactForm from "./form";
 import { IFormPorps } from "./types";
 import ReactDOM from "react-dom/client";
+import { InputNumber } from "antd";
 
 const ReactApp: React.FC = () => {
-  const items: IFormPorps["items"] = [
-    // {
-    //   name: "test",
-    //   label: "测试",
-    //   component: "Input",
-    //   ifShow: ({ model }) => {
-    //     console.log("ifShow", model);
-    //     return true;
-    //   },
-    //   show: ({ model }) => {
-    //     console.log("show", model);
-    //     return true;
-    //   },
-    //   componentProps: {
-    //     allowClear: true,
-    //   },
-    // },
-    {
-      name: "test2",
-      label: "测试2",
-      render: ({ model }) => <div>{model.test === "1" ? "成功" : "失败"}</div>,
-      ifShow: ({ model }) => {
-        console.log("ifShow", model);
-        return true;
+  const props: IFormPorps = {
+    items: [
+      {
+        name: "test",
+        label: "测试",
+        component: "Input",
+        ifShow: true,
+        show: true,
+        componentProps: {
+          allowClear: true,
+        },
       },
-      show: ({ model }) => {
-        console.log("show", model);
-        return true;
+      {
+        name: "test2",
+        label: "测试2",
+        render: ({ model }) => (
+          <div>{model.test === "1" ? <InputNumber /> : "失败"}</div>
+        ),
+        ifShow: true,
+        show: true,
+        componentProps: {
+          allowClear: true,
+        },
       },
-      componentProps: {
-        allowClear: true,
+      {
+        name: "test3",
+        label: "测试3",
+        component: "InputNumber",
+        ifShow: ({ model }) => {
+          return true;
+        },
+        show: ({ model }) => {
+          return true;
+        },
+        componentProps: {},
       },
-    },
-  ];
+      {
+        name: "test4",
+        label: "测试3",
+        component: "Select",
+        ifShow: ({ model }) => {
+          console.log("ifShow", model);
+          return false;
+        },
+        show: ({ model }) => {
+          console.log("show", model);
+          return false;
+        },
+        componentProps: {
+          allowClear: true,
+        },
+      },
+    ],
+  };
   return (
     <section>
-      <ReactForm items={items}></ReactForm>
+      <ReactForm {...props}></ReactForm>
     </section>
   );
 };

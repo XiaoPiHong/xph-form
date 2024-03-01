@@ -1,6 +1,7 @@
 import { TComponentPropsMap } from "./component";
 import { Rule } from "antd/es/form";
 import React from "react";
+import { ColProps } from "antd";
 
 /**
  * 字符串类型对象
@@ -17,6 +18,8 @@ export interface IBaseFormItemProps {
   dynamicDisabled?: boolean | Function /** 是否禁用 */;
   rules?: Rule[] /** 校验规则 */;
   componentProps?: Recordable<any> /** 组件属性 */;
+  wrapperCol?: ColProps /** 表单项组件的布局方式（当和 Form 同时设置时，以 Item 为准） */;
+  labelCol?: ColProps /** 表单项label标签布局方式（当和 Form 同时设置时，以 Item 为准） */;
 }
 
 /** render props */
