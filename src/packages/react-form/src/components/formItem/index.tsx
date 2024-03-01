@@ -20,7 +20,7 @@ const FormItem: React.FC<{
   itemProps: TFormItemProps;
   model: any;
 }> = ({ formProps, itemProps, model }) => {
-  const { name, show, componentProps } = itemProps;
+  const { name, show, componentProps, dynamicDisabled: disabled } = itemProps;
 
   const { formItemBindProps } = useFormItemBindProps(itemProps);
 
@@ -30,10 +30,10 @@ const FormItem: React.FC<{
   const renderContent = () => {
     if (isComponent) {
       const Component = componentMap.get(itemProps.component)!;
-      return <Component {...componentProps} />;
+      return <Component {...componentProps} disabled={disabled} />;
     }
     if (isRender) {
-      return itemProps.render({ model, name });
+      return itemProps.render({ model, name, disabled });
     }
     return null;
   };

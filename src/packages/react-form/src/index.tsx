@@ -30,17 +30,18 @@ const ReactApp: React.FC = () => {
         name: "test3",
         label: "测试3",
         component: "InputNumber",
+        componentProps: ({ model }) => {
+          console.log("test3", model);
+        },
       },
       {
         name: "test4",
         label: "测试4",
         component: "Select",
         ifShow: ({ model }) => {
-          console.log("ifShow", model);
           return true;
         },
         show: ({ model }) => {
-          console.log("show", model);
           return true;
         },
         componentProps: {

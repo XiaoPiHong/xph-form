@@ -1,5 +1,10 @@
-import { IFormPorps, TFormItemProps, isComponentFormItemProps } from "../types";
-import { isBoolean, isFunction, isNull, cloneDeep } from "lodash-es";
+import {
+  IFormPorps,
+  TFormItemProps,
+  isComponentFormItemProps,
+  Recordable,
+} from "../types";
+import { isBoolean, isFunction, isNull, isObject, cloneDeep } from "lodash-es";
 import { setComponentRuleType, createPlaceholderMessage } from "../helper";
 import { RuleObject } from "antd/es/form";
 
@@ -22,7 +27,17 @@ function useFormItemShow(item: TFormItemProps, model: any) {
   return { isShow, isIfShow };
 }
 
-function useFormItemRules(item: TFormItemProps, model: any, show: boolean) {
+function useFormItemRules({
+  item,
+  model,
+  isShow,
+  componentProps,
+}: {
+  item: TFormItemProps;
+  model: any;
+  isShow: boolean;
+  componentProps: Recordable<any>;
+}) {
   const { rules: defRules = [], label, required } = item;
 
   let rules = cloneDeep(defRules) as RuleObject[];
@@ -86,11 +101,11 @@ function useFormItemRules(item: TFormItemProps, model: any, show: boolean) {
 
   if (requiredRuleIndex !== -1) {
     const rule = rules[requiredRuleIndex];
-    if (!show) {
+    if (!isShow) {
       rule.required = false;
     }
     if (isComponent) {
-      const { component, componentProps = {} } = item;
+      const { component } = item;
       if (!Reflect.has(rule, "type")) {
         rule.type = component === "InputNumber" ? "number" : "string";
       }
@@ -117,19 +132,31 @@ function useFormItemRules(item: TFormItemProps, model: any, show: boolean) {
 }
 
 function useFormItemDisabled(item: TFormItemProps, model: any) {
+  let disabled = false;
   const { dynamicDisabled } = item;
   if (isFunction(dynamicDisabled)) {
-    return dynamicDisabled({ model });
+    disabled = dynamicDisabled({ model });
   }
-  return dynamicDisabled;
+  if (isBoolean(dynamicDisabled)) {
+    disabled = dynamicDisabled;
+  }
+  return {
+    dynamicDisabled: disabled,
+  };
 }
 
 function useFormItemComponentProps(item: TFormItemProps, model: any) {
+  let props: Recordable<any> = {};
   const { componentProps } = item;
   if (isFunction(componentProps)) {
-    return componentProps({ model });
+    props = { ...componentProps({ model }) };
   }
-  return componentProps;
+  if (isObject(componentProps)) {
+    props = { ...componentProps };
+  }
+  return {
+    componentProps: props,
+  };
 }
 
 export default function ({ props, model }: { props: IFormPorps; model: any }) {
@@ -137,9 +164,14 @@ export default function ({ props, model }: { props: IFormPorps; model: any }) {
   const formItems = items
     .map((item) => {
       const { isIfShow, isShow } = useFormItemShow(item, model);
-      const { rules } = useFormItemRules(item, model, isShow);
-      const dynamicDisabled = useFormItemDisabled(item, model);
-      const componentProps = useFormItemComponentProps(item, model);
+      const { componentProps } = useFormItemComponentProps(item, model);
+      const { rules } = useFormItemRules({
+        item,
+        model,
+        isShow,
+        componentProps,
+      });
+      const { dynamicDisabled } = useFormItemDisabled(item, model);
       return {
         ...item,
         show: isShow,
