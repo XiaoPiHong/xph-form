@@ -17,6 +17,12 @@ const ReactApp: React.FC = () => {
         componentProps: {
           allowClear: true,
         },
+        labelCol: {
+          span: 10,
+        },
+        wrapperCol: {
+          span: 14,
+        },
       },
       {
         name: "test2",

@@ -9,12 +9,30 @@ import { Form } from "antd";
 import style from "./index.module.css";
 import React from "react";
 
+const useFormItemBindProps = (props: TFormItemProps) => {
+  const { name, label, rules, wrapperCol, labelCol } = props;
+
+  const formItemBindProps = {
+    name,
+    label,
+    rules,
+    wrapperCol,
+    labelCol,
+  };
+  return {
+    formItemBindProps,
+  };
+};
+
 const FormItem: React.FC<{
   formProps: IFormPorps;
   itemProps: TFormItemProps;
   model: any;
 }> = ({ formProps, itemProps, model }) => {
-  const { name, label, show, componentProps, rules, wrapperCol } = itemProps;
+  const { name, show, componentProps } = itemProps;
+
+  const { formItemBindProps } = useFormItemBindProps(itemProps);
+
   const isComponent = isComponentFormItemProps(itemProps);
   const isRender = isRenderFormItemProps(itemProps);
 
@@ -30,9 +48,7 @@ const FormItem: React.FC<{
   };
   return (
     <Form.Item
-      name={name}
-      label={label}
-      rules={rules}
+      {...formItemBindProps}
       className={show ? "" : style["form-item-hidden"]}
     >
       {renderContent()}
