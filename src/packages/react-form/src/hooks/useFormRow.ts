@@ -1,4 +1,4 @@
-import { TFormItemProps } from "src/types";
+import { TFormItemProps } from "../types";
 
 /** 给表单项分组，强制换行的情况 */
 const useFormRow = (items: TFormItemProps[]) => {

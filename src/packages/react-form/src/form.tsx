@@ -15,6 +15,7 @@ const Form: React.FC<IFormPorps> = (props) => {
   const { formItems } = useFormItem({ props, model: rewritingModel });
   const { formBindProps } = useFormBindProps(props);
   const { formItemRows } = useFormRow(formItems);
+
   return (
     <AForm form={formInstance} {...formBindProps}>
       {formItemRows.map((row, rowIndex) => {

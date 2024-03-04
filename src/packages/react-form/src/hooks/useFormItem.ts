@@ -7,6 +7,7 @@ import {
 import { isBoolean, isFunction, isNull, cloneDeep } from "lodash-es";
 import { setComponentRuleType, createPlaceholderMessage } from "../helper";
 import { RuleObject } from "antd/es/form";
+import { ColProps } from "antd";
 
 export const useFormItemShow = (item: TFormItemProps, model: any) => {
   const { show, ifShow } = item;
@@ -176,13 +177,13 @@ export const useFormItemColProps = (
   const { colProps: itemColProps = {} } = itemProps;
   /** 默认占一行 */
   const { colProps: formColProps = { span: 24 } } = formProps;
-  const colProps = { ...formColProps, ...itemColProps };
+  const colProps: ColProps = { ...formColProps, ...itemColProps };
   return { colProps };
 };
 
 const useFormItem = ({ props, model }: { props: IFormPorps; model: any }) => {
   const { items } = props;
-  const formItems = items
+  const formItems: TFormItemProps[] = items
     .map((item) => {
       const { isIfShow, isShow } = useFormItemShow(item, model);
       const { colProps } = useFormItemColProps(item, props);
