@@ -1,4 +1,4 @@
-import { Form as AForm, FormInstance } from "antd";
+import { Form as AForm, FormInstance, Row } from "antd";
 import { IFormPorps } from "./types";
 import { useFormItem } from "./hooks";
 import FormItem from "./components/formItem";
@@ -33,14 +33,16 @@ const Form: React.FC<IFormPorps> = (props) => {
 
   return (
     <AForm form={formInstance} {...formBindProps}>
-      {formItems.map((item, index) => (
-        <FormItem
-          key={index}
-          model={rewritingModel}
-          itemProps={item}
-          formProps={props}
-        />
-      ))}
+      <Row>
+        {formItems.map((item, index) => (
+          <FormItem
+            key={index}
+            model={rewritingModel}
+            itemProps={item}
+            formProps={props}
+          />
+        ))}
+      </Row>
     </AForm>
   );
 };

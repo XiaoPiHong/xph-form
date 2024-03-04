@@ -5,13 +5,19 @@ import {
   isRenderFormItemProps,
 } from "../../types";
 import { componentMap } from "../../components";
-import { Form } from "antd";
+import { Form, Col } from "antd";
 import style from "./index.module.css";
 import React from "react";
 
-const useFormItemBindProps = (props: TFormItemProps) => {
-  const { name, label, rules, wrapperCol, labelCol } = props;
-  const formItemBindProps = { name, label, rules, wrapperCol, labelCol };
+const useFormItemBindProps = (itemProps: TFormItemProps) => {
+  const { name, label, rules, wrapperCol, labelCol } = itemProps;
+  const formItemBindProps = {
+    name,
+    label,
+    rules,
+    wrapperCol,
+    labelCol,
+  };
   return { formItemBindProps };
 };
 
@@ -20,7 +26,15 @@ const FormItem: React.FC<{
   itemProps: TFormItemProps;
   model: any;
 }> = ({ formProps, itemProps, model }) => {
-  const { name, show, componentProps, dynamicDisabled: disabled } = itemProps;
+  const {
+    name,
+    show,
+    componentProps,
+    dynamicDisabled: disabled,
+    colProps,
+  } = itemProps;
+  /** 默认每个表单项占满一行 */
+  const { colProps: baseColProps = { span: 24 } } = formProps;
 
   const { formItemBindProps } = useFormItemBindProps(itemProps);
 
@@ -38,12 +52,12 @@ const FormItem: React.FC<{
     return null;
   };
   return (
-    <Form.Item
-      {...formItemBindProps}
+    <Col
+      {...{ ...baseColProps, ...colProps }}
       className={show ? "" : style["form-item-hidden"]}
     >
-      {renderContent()}
-    </Form.Item>
+      <Form.Item {...formItemBindProps}>{renderContent()}</Form.Item>
+    </Col>
   );
 };
 

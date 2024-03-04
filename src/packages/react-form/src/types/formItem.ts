@@ -22,6 +22,7 @@ export interface IBaseFormItemProps {
   rules?: Rule[] /** 校验规则 */;
   wrapperCol?: ColProps /** 表单项组件的布局方式（当和 Form 同时设置时，以 Item 为准） */;
   labelCol?: ColProps /** 表单项label标签布局方式（当和 Form 同时设置时，以 Item 为准） */;
+  colProps?: ColProps /** 表单项的栅格配置（当和 Form 同时设置时，以 Item 为准） */;
 }
 
 /** render props */
