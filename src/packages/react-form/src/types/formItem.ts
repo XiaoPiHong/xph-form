@@ -1,7 +1,7 @@
 import { TComponentPropsMap } from "./component";
 import { Rule } from "antd/es/form";
 import React from "react";
-import { ColProps } from "antd";
+import { ColProps, RowProps } from "antd";
 
 /**
  * 字符串类型对象
@@ -23,6 +23,7 @@ export interface IBaseFormItemProps {
   wrapperCol?: ColProps /** 表单项组件的布局方式（当和 Form 同时设置时，以 Item 为准） */;
   labelCol?: ColProps /** 表单项label标签布局方式（当和 Form 同时设置时，以 Item 为准） */;
   colProps?: ColProps /** 表单项的栅格配置（当和 Form 同时设置时，以 Item 为准） */;
+  forceRow?: boolean /** 是否强制换一行显示该表单项（强制换行后续会跟随换行表单项） */;
 }
 
 /** render props */

@@ -169,11 +169,23 @@ export const useFormItemBindProps = (itemProps: TFormItemProps) => {
   return { formItemBindProps };
 };
 
+export const useFormItemColProps = (
+  itemProps: TFormItemProps,
+  formProps: IFormPorps
+) => {
+  const { colProps: itemColProps = {} } = itemProps;
+  /** 默认占一行 */
+  const { colProps: formColProps = { span: 24 } } = formProps;
+  const colProps = { ...formColProps, ...itemColProps };
+  return { colProps };
+};
+
 const useFormItem = ({ props, model }: { props: IFormPorps; model: any }) => {
   const { items } = props;
   const formItems = items
     .map((item) => {
       const { isIfShow, isShow } = useFormItemShow(item, model);
+      const { colProps } = useFormItemColProps(item, props);
       const { componentProps } = useFormItemComponentProps(item, model);
       const { rules } = useFormItemRules({
         item,
@@ -189,6 +201,7 @@ const useFormItem = ({ props, model }: { props: IFormPorps; model: any }) => {
         rules,
         dynamicDisabled,
         componentProps,
+        colProps,
       };
     })
     .filter((item) => item.ifShow); /** 过滤出要渲染的项 */

@@ -7,21 +7,14 @@ import { InputNumber } from "antd";
 
 const ReactApp: React.FC = () => {
   const props: IFormPorps = {
-    colProps: {
-      span: 6,
-    },
-    layout: "horizontal",
-    labelCol: {
-      span: 5,
-    },
-    wrapperCol: {
-      span: 19,
-    },
     items: [
       {
         name: "test",
         label: "测试",
         component: "Input",
+        colProps: {
+          span: 6,
+        },
       },
       {
         name: "test2",
@@ -29,6 +22,10 @@ const ReactApp: React.FC = () => {
         render: ({ model }) => (
           <div>{model.test === "1" ? <InputNumber /> : "失败"}</div>
         ),
+        colProps: {
+          span: 6,
+        },
+        forceRow: true,
       },
       {
         name: "test3",
@@ -43,6 +40,9 @@ const ReactApp: React.FC = () => {
               console.log(e);
             },
           };
+        },
+        colProps: {
+          span: 6,
         },
       },
       {
@@ -71,6 +71,9 @@ const ReactApp: React.FC = () => {
               console.log(e);
             },
           };
+        },
+        colProps: {
+          span: 6,
         },
       },
     ],

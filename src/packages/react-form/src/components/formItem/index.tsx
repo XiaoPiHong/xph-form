@@ -22,9 +22,6 @@ const FormItem: React.FC<{
     dynamicDisabled: disabled,
     colProps,
   } = itemProps;
-  /** 默认每个表单项占满一行 */
-  const { colProps: baseColProps = { span: 24 } } = formProps;
-
   const { formItemBindProps } = useFormItemBindProps(itemProps);
 
   const isComponent = isComponentFormItemProps(itemProps);
@@ -41,10 +38,7 @@ const FormItem: React.FC<{
     return null;
   };
   return (
-    <Col
-      {...{ ...baseColProps, ...colProps }}
-      className={show ? "" : style["form-item-hidden"]}
-    >
+    <Col {...colProps} className={show ? "" : style["form-item-hidden"]}>
       <Form.Item {...formItemBindProps}>{renderContent()}</Form.Item>
     </Col>
   );
