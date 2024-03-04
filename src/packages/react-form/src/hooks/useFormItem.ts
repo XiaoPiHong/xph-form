@@ -4,11 +4,11 @@ import {
   isComponentFormItemProps,
   Recordable,
 } from "../types";
-import { isBoolean, isFunction, isNull, isObject, cloneDeep } from "lodash-es";
+import { isBoolean, isFunction, isNull, cloneDeep } from "lodash-es";
 import { setComponentRuleType, createPlaceholderMessage } from "../helper";
 import { RuleObject } from "antd/es/form";
 
-function useFormItemShow(item: TFormItemProps, model: any) {
+export const useFormItemShow = (item: TFormItemProps, model: any) => {
   const { show, ifShow } = item;
   let isShow = true;
   let isIfShow = true;
@@ -25,9 +25,9 @@ function useFormItemShow(item: TFormItemProps, model: any) {
     isIfShow = ifShow({ model });
   }
   return { isShow, isIfShow };
-}
+};
 
-function useFormItemRules({
+export const useFormItemRules = ({
   item,
   model,
   isShow,
@@ -37,7 +37,7 @@ function useFormItemRules({
   model: any;
   isShow: boolean;
   componentProps: Recordable<any>;
-}) {
+}) => {
   const { rules: defRules = [], label, required } = item;
 
   let rules = cloneDeep(defRules) as RuleObject[];
@@ -129,9 +129,9 @@ function useFormItemRules({
   return {
     rules,
   };
-}
+};
 
-function useFormItemDisabled(item: TFormItemProps, model: any) {
+export const useFormItemDisabled = (item: TFormItemProps, model: any) => {
   let disabled = false;
   const { dynamicDisabled } = item;
   if (isFunction(dynamicDisabled)) {
@@ -143,9 +143,9 @@ function useFormItemDisabled(item: TFormItemProps, model: any) {
   return {
     dynamicDisabled: disabled,
   };
-}
+};
 
-function useFormItemComponentProps(item: TFormItemProps, model: any) {
+export const useFormItemComponentProps = (item: TFormItemProps, model: any) => {
   let props: Recordable<any> = {};
   const { componentProps = {} } = item;
   if (isFunction(componentProps)) {
@@ -155,9 +155,21 @@ function useFormItemComponentProps(item: TFormItemProps, model: any) {
   return {
     componentProps: props,
   };
-}
+};
 
-export default function ({ props, model }: { props: IFormPorps; model: any }) {
+export const useFormItemBindProps = (itemProps: TFormItemProps) => {
+  const { name, label, rules, wrapperCol, labelCol } = itemProps;
+  const formItemBindProps = {
+    name,
+    label,
+    rules,
+    wrapperCol,
+    labelCol,
+  };
+  return { formItemBindProps };
+};
+
+const useFormItem = ({ props, model }: { props: IFormPorps; model: any }) => {
   const { items } = props;
   const formItems = items
     .map((item) => {
@@ -183,4 +195,6 @@ export default function ({ props, model }: { props: IFormPorps; model: any }) {
   return {
     formItems,
   };
-}
+};
+
+export default useFormItem;

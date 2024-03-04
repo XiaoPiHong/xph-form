@@ -8,18 +8,7 @@ import { componentMap } from "../../components";
 import { Form, Col } from "antd";
 import style from "./index.module.css";
 import React from "react";
-
-const useFormItemBindProps = (itemProps: TFormItemProps) => {
-  const { name, label, rules, wrapperCol, labelCol } = itemProps;
-  const formItemBindProps = {
-    name,
-    label,
-    rules,
-    wrapperCol,
-    labelCol,
-  };
-  return { formItemBindProps };
-};
+import { useFormItemBindProps } from "../../hooks";
 
 const FormItem: React.FC<{
   formProps: IFormPorps;
