@@ -7,6 +7,8 @@ import { InputNumber } from "antd";
 
 const ReactApp: React.FC = () => {
   const props: IFormPorps = {
+    labelCol: { span: 12 },
+    wrapperCol: { span: 12 },
     items: [
       {
         name: "test",
@@ -25,7 +27,6 @@ const ReactApp: React.FC = () => {
         colProps: {
           span: 6,
         },
-        forceRow: true,
       },
       {
         name: "test3",
