@@ -2,7 +2,6 @@ import {
   SelectProps,
   InputProps,
   InputNumberProps,
-  TreeProps,
   TreeSelectProps,
   TransferProps,
   SwitchProps,
@@ -18,7 +17,6 @@ export type TComponentPropsMap = {
   Select: SelectProps;
   Input: InputProps;
   InputNumber: InputNumberProps;
-  Tree: TreeProps;
   TreeSelect: TreeSelectProps;
   Transfer: TransferProps;
   Switch: SwitchProps;

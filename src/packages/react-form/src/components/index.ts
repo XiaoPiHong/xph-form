@@ -3,7 +3,6 @@ import {
   Input,
   Select,
   InputNumber,
-  Tree,
   TreeSelect,
   Transfer,
   Switch,
@@ -21,7 +20,6 @@ const componentMap = new Map<keyof TComponentPropsMap, React.FC<any>>();
 componentMap.set("Input", Input);
 componentMap.set("Select", Select);
 componentMap.set("InputNumber", InputNumber);
-componentMap.set("Tree", Tree);
 componentMap.set("TreeSelect", TreeSelect);
 componentMap.set("Transfer", Transfer);
 componentMap.set("Switch", Switch);

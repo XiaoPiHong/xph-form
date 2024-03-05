@@ -77,6 +77,19 @@ const ReactApp: React.FC = () => {
           span: 6,
         },
       },
+      {
+        name: "test5",
+        label: "测试5",
+        component: "Button",
+        componentProps: ({ model }) => {
+          return {
+            children: "测试",
+          };
+        },
+        colProps: {
+          span: 6,
+        },
+      },
     ],
   };
   return (
