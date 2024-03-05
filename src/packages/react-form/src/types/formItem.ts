@@ -1,7 +1,7 @@
 import { TComponentPropsMap } from "./component";
 import { Rule } from "antd/es/form";
 import React from "react";
-import { ColProps, RowProps } from "antd";
+import { ColProps } from "antd";
 
 /**
  * 字符串类型对象

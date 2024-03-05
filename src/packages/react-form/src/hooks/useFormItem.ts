@@ -158,18 +158,6 @@ export const useFormItemComponentProps = (item: TFormItemProps, model: any) => {
   };
 };
 
-export const useFormItemBindProps = (itemProps: TFormItemProps) => {
-  const { name, label, rules, wrapperCol, labelCol } = itemProps;
-  const formItemBindProps = {
-    name,
-    label,
-    rules,
-    wrapperCol,
-    labelCol,
-  };
-  return { formItemBindProps };
-};
-
 export const useFormItemColProps = (
   itemProps: TFormItemProps,
   formProps: IFormPorps
