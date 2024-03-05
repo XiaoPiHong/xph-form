@@ -27,13 +27,15 @@ const FormItem: React.FC<{
    * @description 后续绑定给formItem的属性需在这里扩展一下
    */
   const getFormItemBindProps = () => {
-    const { name, label, rules, wrapperCol, labelCol } = itemProps;
+    const { name, label, rules, wrapperCol, labelCol, valuePropName } =
+      itemProps;
     return {
       name,
       label,
       rules,
       wrapperCol,
       labelCol,
+      valuePropName,
     };
   };
 

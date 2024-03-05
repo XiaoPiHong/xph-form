@@ -11,26 +11,22 @@ const ReactApp: React.FC = () => {
     wrapperCol: { span: 12 },
     items: [
       {
-        name: "test",
-        label: "测试",
+        name: "Input",
+        label: "Input",
         component: "Input",
-        colProps: {
-          span: 6,
-        },
+        colProps: { span: 6 },
       },
       {
-        name: "test2",
-        label: "测试2",
+        name: "render",
+        label: "render",
         render: ({ model }) => (
           <div>{model.test === "1" ? <InputNumber /> : "失败"}</div>
         ),
-        colProps: {
-          span: 6,
-        },
+        colProps: { span: 6 },
       },
       {
-        name: "test3",
-        label: "测试3",
+        name: "InputNumber",
+        label: "InputNumber",
         component: "InputNumber",
         componentProps: ({ model }) => {
           return {
@@ -42,13 +38,11 @@ const ReactApp: React.FC = () => {
             },
           };
         },
-        colProps: {
-          span: 6,
-        },
+        colProps: { span: 6 },
       },
       {
-        name: "test4",
-        label: "测试4",
+        name: "Select",
+        label: "Select",
         component: "Select",
         ifShow: ({ model }) => {
           return true;
@@ -59,36 +53,83 @@ const ReactApp: React.FC = () => {
         componentProps: ({ model }) => {
           return {
             options: [
-              {
-                label: "测试",
-                value: "1",
-              },
-              {
-                label: "测试2",
-                value: "2",
-              },
+              { label: "测试", value: "1" },
+              { label: "测试2", value: "2" },
             ],
             onChange: (e) => {
               console.log(e);
             },
           };
         },
-        colProps: {
-          span: 6,
-        },
+        colProps: { span: 6 },
       },
       {
-        name: "test5",
-        label: "测试5",
-        component: "Button",
+        name: "Transfer",
+        label: "Transfer",
+        component: "Transfer",
         componentProps: ({ model }) => {
-          return {
-            children: "测试",
-          };
+          return {};
         },
-        colProps: {
-          span: 6,
+        colProps: { span: 6 },
+      },
+      {
+        name: "TreeSelect",
+        label: "TreeSelect",
+        component: "TreeSelect",
+        componentProps: ({ model }) => {
+          return {};
         },
+        colProps: { span: 6 },
+      },
+      {
+        name: "Switch",
+        label: "Switch",
+        component: "Switch",
+        componentProps: {},
+        colProps: { span: 6 },
+      },
+      {
+        name: "Button",
+        label: "Button",
+        component: "Button",
+        componentProps: { children: "Button" },
+        colProps: { span: 6 },
+      },
+      {
+        name: "Radio",
+        label: "Radio",
+        component: "Radio",
+        componentProps: {},
+        colProps: { span: 6 },
+      },
+      {
+        name: "Checkbox",
+        label: "Checkbox",
+        component: "Checkbox",
+        componentProps: {},
+        valuePropName: "checked",
+        colProps: { span: 6 },
+      },
+      {
+        name: "Cascader",
+        label: "Cascader",
+        component: "Cascader",
+        componentProps: {},
+        colProps: { span: 6 },
+      },
+      {
+        name: "TimePicker",
+        label: "TimePicker",
+        component: "TimePicker",
+        componentProps: {},
+        colProps: { span: 6 },
+      },
+      {
+        name: "DatePicker",
+        label: "DatePicker",
+        component: "DatePicker",
+        componentProps: {},
+        colProps: { span: 6 },
       },
     ],
   };
