@@ -1,6 +1,5 @@
 import { Form, FormInstance } from "antd";
 import { useMemo } from "react";
-import { IFormPorps } from "../types";
 
 export const useFormModel = (instance: FormInstance<any>) => {
   /** 响应式数据源 */
@@ -15,12 +14,6 @@ export const useFormModel = (instance: FormInstance<any>) => {
     realModel,
     rewritingModel,
   };
-};
-
-export const useFormBindProps = (props: IFormPorps) => {
-  const { layout, wrapperCol, labelCol } = props;
-  const formBindProps = { layout, wrapperCol, labelCol };
-  return { formBindProps };
 };
 
 const useForm = () => {};
