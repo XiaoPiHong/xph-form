@@ -21,7 +21,7 @@ const ReactApp: React.FC = () => {
         name: "render",
         label: "render",
         render: ({ model }) => (
-          <div>{model.test === "1" ? <InputNumber /> : "失败"}</div>
+          <div>{model.Input === "1" ? <InputNumber /> : "失败"}</div>
         ),
         colProps: { span: 6 },
       },
