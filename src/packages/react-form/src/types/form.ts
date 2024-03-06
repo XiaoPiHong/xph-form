@@ -20,4 +20,6 @@ export interface IFormActionType {
   setFieldsValue: FormInstance["setFieldsValue"];
   getFieldsValue: FormInstance["getFieldsValue"];
   resetFields: FormInstance["resetFields"];
+  validator: FormInstance["validateFields"];
+  scrollToField: FormInstance["scrollToField"];
 }

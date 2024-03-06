@@ -24,6 +24,8 @@ const Form = forwardRef((props: IFormProps, ref) => {
     setFieldsValue: formInstance.setFieldsValue,
     getFieldsValue: formInstance.getFieldsValue,
     resetFields: formInstance.resetFields,
+    validator: formInstance.validateFields,
+    scrollToField: formInstance.scrollToField,
   }));
 
   return (

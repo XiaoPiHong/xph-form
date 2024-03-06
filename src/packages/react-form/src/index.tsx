@@ -15,6 +15,7 @@ const ReactApp: React.FC = () => {
         label: "Input",
         component: "Input",
         colProps: { span: 6 },
+        required: true,
       },
       {
         name: "render",
@@ -131,7 +132,8 @@ const ReactApp: React.FC = () => {
         componentProps: {
           children: "Button",
           onClick: () => {
-            console.log(reactFormRef.current?.setFieldsValue({ Input: "123" }));
+            // console.log(reactFormRef.current?.setFieldsValue({ Input: "123" }));
+            reactFormRef.current?.validator();
           },
         },
         colProps: { span: 6 },
