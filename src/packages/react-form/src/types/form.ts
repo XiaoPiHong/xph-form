@@ -1,7 +1,7 @@
 import { TFormItemProps } from "./formItem";
-import { ColProps } from "antd";
+import { ColProps, FormInstance } from "antd";
 
-export interface IFormPorps {
+export interface IFormProps {
   items: TFormItemProps[] /** 表单项配置集合 */;
   /**
    * @description 表单布局方式（默认horizontal）
@@ -14,4 +14,10 @@ export interface IFormPorps {
   labelCol?: ColProps;
   /** 表单项的栅格配置 */
   colProps?: ColProps;
+}
+
+export interface IFormActionType {
+  setFieldsValue: FormInstance["setFieldsValue"];
+  getFieldsValue: FormInstance["getFieldsValue"];
+  resetFields: FormInstance["resetFields"];
 }

@@ -1,5 +1,5 @@
 import {
-  IFormPorps,
+  IFormProps,
   TFormItemProps,
   isComponentFormItemProps,
   Recordable,
@@ -160,7 +160,7 @@ export const useFormItemComponentProps = (item: TFormItemProps, model: any) => {
 
 export const useFormItemColProps = (
   itemProps: TFormItemProps,
-  formProps: IFormPorps
+  formProps: IFormProps
 ) => {
   const { colProps: itemColProps = {} } = itemProps;
   /** 默认占一行 */
@@ -169,7 +169,7 @@ export const useFormItemColProps = (
   return { colProps };
 };
 
-const useFormItem = ({ props, model }: { props: IFormPorps; model: any }) => {
+const useFormItem = ({ props, model }: { props: IFormProps; model: any }) => {
   const { items } = props;
   const formItems: TFormItemProps[] = items
     .map((item) => {

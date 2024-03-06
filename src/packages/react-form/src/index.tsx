@@ -1,12 +1,12 @@
 /** 这个是react-form表单项目启动入口文件 */
 import React from "react";
 import ReactForm from "./form";
-import { IFormPorps } from "./types";
+import { IFormProps, IFormActionType } from "./types";
 import ReactDOM from "react-dom/client";
 import { InputNumber } from "antd";
 
 const ReactApp: React.FC = () => {
-  const props: IFormPorps = {
+  const props: IFormProps = {
     labelCol: { span: 12 },
     wrapperCol: { span: 12 },
     items: [
@@ -89,13 +89,6 @@ const ReactApp: React.FC = () => {
         colProps: { span: 6 },
       },
       {
-        name: "Button",
-        label: "Button",
-        component: "Button",
-        componentProps: { children: "Button" },
-        colProps: { span: 6 },
-      },
-      {
         name: "Radio",
         label: "Radio",
         component: "Radio",
@@ -131,11 +124,26 @@ const ReactApp: React.FC = () => {
         componentProps: {},
         colProps: { span: 6 },
       },
+      {
+        name: "Button",
+        label: "Button",
+        component: "Button",
+        componentProps: {
+          children: "Button",
+          onClick: () => {
+            console.log(reactFormRef.current?.setFieldsValue({ Input: "123" }));
+          },
+        },
+        colProps: { span: 6 },
+      },
     ],
   };
+
+  const reactFormRef = React.useRef<IFormActionType>();
+
   return (
     <section>
-      <ReactForm {...props}></ReactForm>
+      <ReactForm ref={reactFormRef} {...props}></ReactForm>
     </section>
   );
 };

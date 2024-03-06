@@ -1,5 +1,5 @@
 import {
-  IFormPorps,
+  IFormProps,
   TFormItemProps,
   isComponentFormItemProps,
   isRenderFormItemProps,
@@ -10,7 +10,7 @@ import style from "./index.module.css";
 import React from "react";
 
 const FormItem: React.FC<{
-  formProps: IFormPorps;
+  formProps: IFormProps;
   itemProps: TFormItemProps;
   model: any;
 }> = ({ itemProps, model }) => {

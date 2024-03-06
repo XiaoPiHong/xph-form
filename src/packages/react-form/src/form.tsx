@@ -1,10 +1,10 @@
 import { Form as AForm, Row } from "antd";
-import { IFormPorps } from "./types";
+import { IFormProps } from "./types";
 import FormItem from "./components/formItem";
-import React from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import { useFormModel, useFormItem, useFormRow } from "./hooks";
 
-const Form: React.FC<IFormPorps> = (props) => {
+const Form = forwardRef((props: IFormProps, ref) => {
   const [formInstance] = AForm.useForm();
   const { rewritingModel } = useFormModel(formInstance);
   const { formItems } = useFormItem({ props, model: rewritingModel });
@@ -18,6 +18,13 @@ const Form: React.FC<IFormPorps> = (props) => {
     const { layout, wrapperCol, labelCol } = props;
     return { layout, wrapperCol, labelCol };
   };
+
+  // 使用 useImperativeHandle 暴露指定的属性或方法
+  useImperativeHandle(ref, () => ({
+    setFieldsValue: formInstance.setFieldsValue,
+    getFieldsValue: formInstance.getFieldsValue,
+    resetFields: formInstance.resetFields,
+  }));
 
   return (
     <AForm form={formInstance} {...getFormBindProps()}>
@@ -37,6 +44,6 @@ const Form: React.FC<IFormPorps> = (props) => {
       })}
     </AForm>
   );
-};
+});
 
 export default Form;
