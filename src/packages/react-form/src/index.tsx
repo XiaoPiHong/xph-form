@@ -135,9 +135,12 @@ const ReactApp: React.FC = () => {
         component: "Button",
         componentProps: {
           children: "Button",
-          onClick: () => {
+          onClick: async () => {
             // console.log(reactFormRef.current?.setFieldsValue({ Input: "123" }));
-            reactFormRef.current?.validator();
+            console.log(await reactFormRef.current?.validator());
+            console.log(await setFieldsValue({ Input: "123" }));
+            console.log(await getFieldsValue(true));
+            console.log(await getFieldsValue(["Input"]));
           },
         },
         colProps: { span: 6 },
@@ -161,7 +164,7 @@ const ReactApp: React.FC = () => {
    * 第二种调用form组件api的方式，通过封装的useForm方法
    *=============================================
    *  */
-  const [register, methods] = useForm();
+  const [register, { setFieldsValue, getFieldsValue }] = useForm();
 
   return (
     <section>

@@ -1,6 +1,10 @@
 import { TFormItemProps } from "./formItem";
 import { ColProps, FormInstance } from "antd";
 
+export interface IRegister {
+  (methods: IFormActionType): void;
+}
+
 export interface IFormProps {
   items: TFormItemProps[] /** 表单项配置集合 */;
   /**
@@ -15,7 +19,7 @@ export interface IFormProps {
   /** 表单项的栅格配置 */
   colProps?: ColProps;
   /** 注册事件（useForm使用，form组件会在挂载后调用） */
-  register?: (methods: IFormActionType | null) => void;
+  register?: IRegister;
 }
 
 export interface IFormActionType {
