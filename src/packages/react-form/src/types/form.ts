@@ -14,6 +14,8 @@ export interface IFormProps {
   labelCol?: ColProps;
   /** 表单项的栅格配置 */
   colProps?: ColProps;
+  /** 注册事件（useForm使用，form组件会在挂载后调用） */
+  register?: (methods: IFormActionType | null) => void;
 }
 
 export interface IFormActionType {

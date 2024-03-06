@@ -1,7 +1,7 @@
 import { Form as AForm, Row } from "antd";
-import { IFormProps } from "./types";
+import { IFormProps, IFormActionType } from "./types";
 import FormItem from "./components/formItem";
-import React, { forwardRef, useImperativeHandle } from "react";
+import React, { forwardRef, useImperativeHandle, useEffect } from "react";
 import { useFormModel, useFormItem, useFormRow } from "./hooks";
 
 const Form = forwardRef((props: IFormProps, ref) => {
@@ -19,14 +19,22 @@ const Form = forwardRef((props: IFormProps, ref) => {
     return { layout, wrapperCol, labelCol };
   };
 
-  // 使用 useImperativeHandle 暴露指定的属性或方法
-  useImperativeHandle(ref, () => ({
+  const methods: IFormActionType = {
     setFieldsValue: formInstance.setFieldsValue,
     getFieldsValue: formInstance.getFieldsValue,
     resetFields: formInstance.resetFields,
     validator: formInstance.validateFields,
     scrollToField: formInstance.scrollToField,
+  };
+
+  // 使用 useImperativeHandle 暴露指定的属性或方法
+  useImperativeHandle(ref, () => ({
+    ...methods,
   }));
+
+  useEffect(() => {
+    props.register && props.register(methods);
+  }, []);
 
   return (
     <AForm form={formInstance} {...getFormBindProps()}>

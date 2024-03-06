@@ -4,6 +4,7 @@ import ReactForm from "./form";
 import { IFormProps, IFormActionType } from "./types";
 import ReactDOM from "react-dom/client";
 import { InputNumber } from "antd";
+import { useForm } from "./hooks";
 
 const ReactApp: React.FC = () => {
   const props: IFormProps = {
@@ -20,9 +21,12 @@ const ReactApp: React.FC = () => {
       {
         name: "render",
         label: "render",
-        render: ({ model }) => (
-          <div>{model.Input === "1" ? <InputNumber /> : "失败"}</div>
+        render: ({ model, disabled }) => (
+          <div>
+            {model.Input === "1" ? <InputNumber disabled={disabled} /> : "失败"}
+          </div>
         ),
+        dynamicDisabled: true,
         colProps: { span: 6 },
       },
       {
@@ -141,16 +145,35 @@ const ReactApp: React.FC = () => {
     ],
   };
 
+  /**
+   * ==========================================
+   * 一、
+   *
+   * 第一种调用form组件api的方式，通过useRef
+   *=============================================
+   *  */
   const reactFormRef = React.useRef<IFormActionType>();
+
+  /**
+   * ==========================================
+   * 二、
+   *
+   * 第二种调用form组件api的方式，通过封装的useForm方法
+   *=============================================
+   *  */
+  const [register, methods] = useForm();
 
   return (
     <section>
-      <ReactForm ref={reactFormRef} {...props}></ReactForm>
+      <ReactForm register={register} ref={reactFormRef} {...props}></ReactForm>
     </section>
   );
 };
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  /**
+   * @description 严格模式 用于检测不合理的代码 会导致ReactApp组件渲染两次
+   */
   <React.StrictMode>
     <ReactApp />
   </React.StrictMode>
