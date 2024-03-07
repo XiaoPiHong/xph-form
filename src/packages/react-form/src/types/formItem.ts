@@ -36,10 +36,11 @@ export interface IFRenderProps {
 }
 
 /** render props */
+/**
+ * @description: 自定义渲染组件，若根节点为antd组件，就会和form组件进行双向绑定，model也是响应式的；若根节点为非antd组件，就不会和form组件进行双向绑定，需根据实际业务手动处理表单项的值
+ */
 export interface IRenderFormItemProps extends IBaseFormItemProps {
-  render: (
-    props: IFRenderProps
-  ) => React.ReactNode /** 自定义渲染组件（自定义渲染组件不会与form表单有任何关联，需根据实际业务做成受控组件或者非受控组件） */;
+  render: (props: IFRenderProps) => React.ReactNode /** 自定义渲染组件 */;
 }
 /** component props */
 export interface IComponentFormItemProps extends IBaseFormItemProps {
