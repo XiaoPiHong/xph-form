@@ -5,7 +5,7 @@ import React, { forwardRef, useImperativeHandle, useEffect } from "react";
 import { useFormModel, useFormItem, useFormRow } from "./hooks";
 
 const Form = forwardRef((props: IFormProps, ref) => {
-  console.log("Form render");
+  // console.log("Form render=============================");
   const [formInstance] = AForm.useForm();
   const { rewritingModel } = useFormModel(formInstance);
   const { formItems } = useFormItem({ props, model: rewritingModel });
@@ -54,10 +54,10 @@ const Form = forwardRef((props: IFormProps, ref) => {
   }));
 
   useEffect(() => {
-    console.log("Form is mounted");
+    // console.log("Form is mounted=======================");
     props.register && props.register(methods);
     return () => {
-      console.log("Form is unmounted");
+      // console.log("Form is unmounted=========================");
     };
   }, []);
 
@@ -70,6 +70,7 @@ const Form = forwardRef((props: IFormProps, ref) => {
               <FormItem
                 key={itemIndex}
                 model={rewritingModel}
+                methods={methods}
                 itemProps={item}
                 formProps={props}
               />

@@ -3,6 +3,8 @@ import {
   TFormItemProps,
   isComponentFormItemProps,
   isRenderFormItemProps,
+  IFormActionType,
+  IFRenderProps,
 } from "../../types";
 import { componentMap } from "../../components";
 import { Form, Col } from "antd";
@@ -13,7 +15,8 @@ const FormItem: React.FC<{
   formProps: IFormProps;
   itemProps: TFormItemProps;
   model: any;
-}> = ({ itemProps, model }) => {
+  methods: IFormActionType;
+}> = ({ itemProps, model, methods }) => {
   const { name, show, componentProps, disabled, colProps } = itemProps;
 
   /**
@@ -50,7 +53,12 @@ const FormItem: React.FC<{
       return <Component {...componentProps} disabled={disabled} />;
     }
     if (isRender) {
-      return itemProps.render({ model, name, disabled });
+      return itemProps.render({
+        model,
+        name,
+        disabled,
+        methods,
+      } as IFRenderProps);
     }
     return null;
   };

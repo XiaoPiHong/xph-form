@@ -24,16 +24,16 @@ export const useFormModel = (instance: FormInstance<any>) => {
  *
  */
 const useForm = (): [IRegister, IFormActionType] => {
-  console.log("ParentComponent render");
+  // console.log("ParentComponent render=========================================");
   let methods: IFormActionType | null = null;
 
   async function getMethods(): Promise<IFormActionType> {
     return new Promise((resolve, reject) => {
       if (methods) {
-        console.log("resolve");
+        // console.log("resolve===========================================");
         resolve(methods);
       } else {
-        console.log("reject");
+        // console.log("reject===========================================");
         reject();
       }
     });
@@ -67,9 +67,9 @@ const useForm = (): [IRegister, IFormActionType] => {
   };
 
   useEffect(() => {
-    console.log("ParentComponent is mounted");
+    // console.log("ParentComponent is mounted=====================================");
     return () => {
-      console.log("ParentComponent is unmounted");
+      // console.log("ParentComponent is unmounted====================================");
       methods = null;
     };
   }, []);

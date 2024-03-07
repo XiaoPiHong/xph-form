@@ -2,6 +2,7 @@ import { TComponentPropsMap } from "./component";
 import { Rule } from "antd/es/form";
 import React from "react";
 import { ColProps } from "antd";
+import { IFormActionType } from "./form";
 
 /**
  * 字符串类型对象
@@ -27,9 +28,16 @@ export interface IBaseFormItemProps {
   initialValue?: any /** 默认值 */;
 }
 
+export interface IFRenderProps {
+  name: string;
+  model: any;
+  disabled: boolean;
+  methods: IFormActionType;
+}
+
 /** render props */
 export interface IRenderFormItemProps extends IBaseFormItemProps {
-  render: (args: Recordable<any>) => React.ReactNode /** 自定义渲染组件 */;
+  render: (props: IFRenderProps) => React.ReactNode /** 自定义渲染组件 */;
 }
 /** component props */
 export interface IComponentFormItemProps extends IBaseFormItemProps {

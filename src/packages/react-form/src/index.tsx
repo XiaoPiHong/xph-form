@@ -8,13 +8,6 @@ import { useForm } from "./hooks";
 
 const ReactApp: React.FC = () => {
   const props: IFormProps = {
-    disabled: true,
-    labelCol: {
-      span: 6,
-    },
-    wrapperCol: {
-      span: 18,
-    },
     items: [
       {
         name: "Input",
@@ -22,18 +15,22 @@ const ReactApp: React.FC = () => {
         component: "Input",
         required: true,
         colProps: { span: 6 },
-        disabled: ({ model }) => false,
+        initialValue: "Input",
       },
       {
         name: "render",
         label: "render",
-        render: ({ model, disabled }) => (
+        render: ({ model, disabled, name, methods: { setFieldsValue } }) => (
           <div>
-            {model.Input === "1" ? <InputNumber disabled={disabled} /> : "失败"}
+            <InputNumber
+              disabled={disabled}
+              value={model[name]}
+              onChange={(e) => setFieldsValue({ [name]: e })}
+            />
           </div>
         ),
         colProps: { span: 6 },
-        disabled: ({ model }) => false,
+        initialValue: 2,
       },
       {
         name: "InputNumber",
@@ -49,6 +46,7 @@ const ReactApp: React.FC = () => {
             },
           };
         },
+        initialValue: 2,
         colProps: { span: 6 },
       },
       {
@@ -171,7 +169,6 @@ const ReactApp: React.FC = () => {
    *=============================================
    *  */
   const [register, { setFieldsValue, getFieldsValue }] = useForm();
-  console.log(setFieldsValue, getFieldsValue);
   return (
     <section>
       <ReactForm register={register} ref={reactFormRef} {...props}></ReactForm>
