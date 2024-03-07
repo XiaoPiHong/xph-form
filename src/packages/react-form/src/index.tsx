@@ -8,6 +8,7 @@ import { useForm } from "./hooks";
 
 const ReactApp: React.FC = () => {
   const props: IFormProps = {
+    disabled: true,
     labelCol: {
       span: 6,
     },
@@ -21,6 +22,7 @@ const ReactApp: React.FC = () => {
         component: "Input",
         required: true,
         colProps: { span: 6 },
+        disabled: ({ model }) => false,
       },
       {
         name: "render",
@@ -30,8 +32,8 @@ const ReactApp: React.FC = () => {
             {model.Input === "1" ? <InputNumber disabled={disabled} /> : "失败"}
           </div>
         ),
-        disabled: ({ model }) => true,
         colProps: { span: 6 },
+        disabled: ({ model }) => false,
       },
       {
         name: "InputNumber",

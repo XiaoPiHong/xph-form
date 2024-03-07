@@ -132,7 +132,14 @@ export const useFormItemRules = ({
   };
 };
 
-export const useFormItemDisabled = (item: TFormItemProps, model: any) => {
+export const useFormItemDisabled = (
+  formProps: IFormProps,
+  item: TFormItemProps,
+  model: any
+) => {
+  /** item中的优先级比form中的高 */
+  const { disabled: formDisabled } = formProps;
+
   let _disabled = false;
   const { disabled } = item;
   if (isFunction(disabled)) {
@@ -141,8 +148,9 @@ export const useFormItemDisabled = (item: TFormItemProps, model: any) => {
   if (isBoolean(disabled)) {
     _disabled = disabled;
   }
+
   return {
-    disabled: _disabled,
+    disabled: Reflect.has(item, "disabled") ? _disabled : formDisabled,
   };
 };
 
@@ -182,7 +190,7 @@ const useFormItem = ({ props, model }: { props: IFormProps; model: any }) => {
         isShow,
         componentProps,
       });
-      const { disabled } = useFormItemDisabled(item, model);
+      const { disabled } = useFormItemDisabled(props, item, model);
       return {
         ...item,
         show: isShow,
