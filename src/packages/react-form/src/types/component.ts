@@ -26,4 +26,6 @@ export type TComponentPropsMap = {
   Cascader: CascaderProps;
   TimePicker: TimePickerProps;
   DatePicker: DatePickerProps;
+  InputPassword: InputProps;
+  InputTextArea: InputProps;
 };

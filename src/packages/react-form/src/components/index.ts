@@ -29,5 +29,7 @@ componentMap.set("Checkbox", Checkbox);
 componentMap.set("Cascader", Cascader);
 componentMap.set("TimePicker", TimePicker);
 componentMap.set("DatePicker", DatePicker);
+componentMap.set("InputPassword", Input.Password);
+componentMap.set("InputTextArea", Input.TextArea);
 
 export { componentMap };
