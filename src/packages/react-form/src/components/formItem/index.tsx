@@ -14,21 +14,22 @@ const FormItem: React.FC<{
   itemProps: TFormItemProps;
   model: any;
 }> = ({ itemProps, model }) => {
-  const {
-    name,
-    show,
-    componentProps,
-    dynamicDisabled: disabled,
-    colProps,
-  } = itemProps;
+  const { name, show, componentProps, disabled, colProps } = itemProps;
 
   /**
    * @description 用于绑定给formItemd的属性
    * @description 后续绑定给formItem的属性需在这里扩展一下
    */
   const getFormItemBindProps = () => {
-    const { name, label, rules, wrapperCol, labelCol, valuePropName } =
-      itemProps;
+    const {
+      name,
+      label,
+      rules,
+      wrapperCol,
+      labelCol,
+      valuePropName,
+      initialValue,
+    } = itemProps;
     return {
       name,
       label,
@@ -36,6 +37,7 @@ const FormItem: React.FC<{
       wrapperCol,
       labelCol,
       valuePropName,
+      initialValue,
     };
   };
 

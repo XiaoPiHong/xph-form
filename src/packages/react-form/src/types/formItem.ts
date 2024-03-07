@@ -17,13 +17,14 @@ export interface IBaseFormItemProps {
   show?: TFunction<boolean> /** 是否显示（相当于display:none） */;
   ifShow?: TFunction<boolean> /** 是否显示（会新增或删除节点） */;
   required?: TFunction<boolean> /** 是否必填 */;
-  dynamicDisabled?: TFunction<boolean> /** 是否禁用 */;
+  disabled?: TFunction<boolean> /** 是否禁用 */;
   componentProps?: TFunction<Recordable<any>> /** 组件属性 */;
   rules?: Rule[] /** 校验规则 */;
   wrapperCol?: ColProps /** 表单项组件的布局方式（当和 Form 同时设置时，以 Item 为准） */;
   labelCol?: ColProps /** 表单项label标签布局方式（当和 Form 同时设置时，以 Item 为准） */;
   colProps?: ColProps /** 表单项的栅格配置（当和 Form 同时设置时，以 Item 为准） */;
   forceRow?: boolean /** 是否强制换一行显示该表单项（强制换行后续会跟随换行表单项） */;
+  initialValue?: any /** 初始值 */;
 }
 
 /** render props */

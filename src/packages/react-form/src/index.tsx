@@ -30,7 +30,7 @@ const ReactApp: React.FC = () => {
             {model.Input === "1" ? <InputNumber disabled={disabled} /> : "失败"}
           </div>
         ),
-        dynamicDisabled: true,
+        disabled: ({ model }) => true,
         colProps: { span: 6 },
       },
       {

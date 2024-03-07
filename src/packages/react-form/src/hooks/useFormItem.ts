@@ -133,16 +133,16 @@ export const useFormItemRules = ({
 };
 
 export const useFormItemDisabled = (item: TFormItemProps, model: any) => {
-  let disabled = false;
-  const { dynamicDisabled } = item;
-  if (isFunction(dynamicDisabled)) {
-    disabled = dynamicDisabled({ model });
+  let _disabled = false;
+  const { disabled } = item;
+  if (isFunction(disabled)) {
+    _disabled = disabled({ model });
   }
-  if (isBoolean(dynamicDisabled)) {
-    disabled = dynamicDisabled;
+  if (isBoolean(disabled)) {
+    _disabled = disabled;
   }
   return {
-    dynamicDisabled: disabled,
+    disabled: _disabled,
   };
 };
 
@@ -182,13 +182,13 @@ const useFormItem = ({ props, model }: { props: IFormProps; model: any }) => {
         isShow,
         componentProps,
       });
-      const { dynamicDisabled } = useFormItemDisabled(item, model);
+      const { disabled } = useFormItemDisabled(item, model);
       return {
         ...item,
         show: isShow,
         ifShow: isIfShow,
         rules,
-        dynamicDisabled,
+        disabled,
         componentProps,
         colProps,
       };
