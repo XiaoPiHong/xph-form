@@ -11,6 +11,7 @@ import {
   CascaderProps,
   TimePickerProps,
   DatePickerProps,
+  AutoCompleteProps,
 } from "antd";
 
 export type TComponentPropsMap = {
@@ -22,10 +23,16 @@ export type TComponentPropsMap = {
   Switch: SwitchProps;
   Button: ButtonProps;
   Radio: RadioProps;
+  RadioGroup: RadioProps;
   Checkbox: CheckboxProps;
+  CheckboxGroup: CheckboxProps;
   Cascader: CascaderProps;
   TimePicker: TimePickerProps;
   DatePicker: DatePickerProps;
+  MonthPicker: DatePickerProps;
+  WeekPicker: DatePickerProps;
+  RangePicker: DatePickerProps;
   InputPassword: InputProps;
   InputTextArea: InputProps;
+  AutoComplete: AutoCompleteProps;
 };
