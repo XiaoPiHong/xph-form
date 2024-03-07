@@ -18,16 +18,22 @@ export const useFormModel = (instance: FormInstance<any>) => {
 };
 
 /**
- * form组件会先于parent组件挂载，挂载完后调用register方法，将methods注册到useForm中
+ *
+ * @description 用于注册form的方法
+ * @description form组件会先于parent组件挂载，挂载完后调用register方法，将methods注册到useForm中
+ *
  */
 const useForm = (): [IRegister, IFormActionType] => {
+  console.log("ParentComponent render");
   let methods: IFormActionType | null = null;
 
   async function getMethods(): Promise<IFormActionType> {
     return new Promise((resolve, reject) => {
       if (methods) {
+        console.log("resolve");
         resolve(methods);
       } else {
+        console.log("reject");
         reject();
       }
     });
@@ -37,14 +43,14 @@ const useForm = (): [IRegister, IFormActionType] => {
     methods = mets;
   }
 
-  const myMethods: IFormActionType = {
+  const _methods: IFormActionType = {
     setFieldsValue: async (...args) => {
       const methods = await getMethods();
       return methods.setFieldsValue(...args);
     },
     getFieldsValue: async (...args) => {
       const methods = await getMethods();
-      return methods.getFieldsValue(...args);
+      return methods.getFieldsValue(args[0]);
     },
     resetFields: async (...args) => {
       const methods = await getMethods();
@@ -64,10 +70,11 @@ const useForm = (): [IRegister, IFormActionType] => {
     console.log("ParentComponent is mounted");
     return () => {
       console.log("ParentComponent is unmounted");
+      methods = null;
     };
   }, []);
 
-  return [register, myMethods];
+  return [register, _methods];
 };
 
 export default useForm;

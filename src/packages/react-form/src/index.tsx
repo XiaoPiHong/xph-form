@@ -1,5 +1,5 @@
 /** 这个是react-form表单项目启动入口文件 */
-import React from "react";
+import React, { useEffect } from "react";
 import ReactForm from "./form";
 import { IFormProps, IFormActionType } from "./types";
 import ReactDOM from "react-dom/client";
@@ -165,7 +165,7 @@ const ReactApp: React.FC = () => {
    *=============================================
    *  */
   const [register, { setFieldsValue, getFieldsValue }] = useForm();
-
+  console.log(setFieldsValue, getFieldsValue);
   return (
     <section>
       <ReactForm register={register} ref={reactFormRef} {...props}></ReactForm>
