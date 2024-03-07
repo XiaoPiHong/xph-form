@@ -37,7 +37,9 @@ export interface IFRenderProps {
 
 /** render props */
 export interface IRenderFormItemProps extends IBaseFormItemProps {
-  render: (props: IFRenderProps) => React.ReactNode /** 自定义渲染组件 */;
+  render: (
+    props: IFRenderProps
+  ) => React.ReactNode /** 自定义渲染组件（自定义渲染组件不会与form表单有任何关联，需根据实际业务做成受控组件或者非受控组件） */;
 }
 /** component props */
 export interface IComponentFormItemProps extends IBaseFormItemProps {
