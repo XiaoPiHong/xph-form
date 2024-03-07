@@ -1,5 +1,5 @@
 /** 这个是react-form表单项目启动入口文件 */
-import React from "react";
+import React, { useState } from "react";
 import ReactForm from "./form";
 import { IFormProps, IFormActionType } from "./types";
 import ReactDOM from "react-dom/client";
@@ -20,12 +20,12 @@ const ReactApp: React.FC = () => {
       {
         name: "render",
         label: "render",
-        render: ({ model, disabled, name, methods: { setFieldsValue } }) => (
+        render: ({ model, disabled, name, methods }) => (
           <div>
             <InputNumber
               disabled={disabled}
               value={model[name]}
-              onChange={(e) => setFieldsValue({ [name]: e })}
+              onChange={(e) => methods.setFieldsValue({ [name]: e })}
             />
           </div>
         ),
@@ -77,16 +77,73 @@ const ReactApp: React.FC = () => {
         label: "Transfer",
         component: "Transfer",
         componentProps: ({ model }) => {
-          return {};
+          //=================================写法1
+          const [targetKeys, setTargetKeys] = useState<string[]>([]);
+          return {
+            targetKeys,
+            onChange: (targetKeys) => {
+              setTargetKeys([...targetKeys]);
+            },
+
+            //=================================写法2
+            // targetKeys: model["Transfer"],
+            // onChange: (targetKeys) => {
+            //   setFieldsValue({ Transfer: targetKeys });
+            // },
+
+            dataSource: [
+              {
+                key: "1",
+                title: "标题1",
+              },
+              {
+                key: "2",
+                title: "标题2",
+              },
+            ],
+            render: (item) => item.title,
+          };
         },
-        colProps: { span: 6 },
       },
       {
         name: "TreeSelect",
         label: "TreeSelect",
         component: "TreeSelect",
         componentProps: ({ model }) => {
-          return {};
+          return {
+            treeData: [
+              {
+                value: "parent 1",
+                title: "parent 1",
+                children: [
+                  {
+                    value: "parent 1-0",
+                    title: "parent 1-0",
+                    children: [
+                      {
+                        value: "leaf1",
+                        title: "leaf1",
+                      },
+                      {
+                        value: "leaf2",
+                        title: "leaf2",
+                      },
+                    ],
+                  },
+                  {
+                    value: "parent 1-1",
+                    title: "parent 1-1",
+                    children: [
+                      {
+                        value: "leaf3",
+                        title: <b style={{ color: "#08c" }}>leaf3</b>,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          };
         },
         colProps: { span: 6 },
       },
@@ -95,6 +152,7 @@ const ReactApp: React.FC = () => {
         label: "Switch",
         component: "Switch",
         componentProps: {},
+        initialValue: true,
         colProps: { span: 6 },
       },
       {
