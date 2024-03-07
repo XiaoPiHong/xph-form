@@ -1,5 +1,5 @@
 /** 这个是react-form表单项目启动入口文件 */
-import React, { useEffect } from "react";
+import React from "react";
 import ReactForm from "./form";
 import { IFormProps, IFormActionType } from "./types";
 import ReactDOM from "react-dom/client";
@@ -8,15 +8,19 @@ import { useForm } from "./hooks";
 
 const ReactApp: React.FC = () => {
   const props: IFormProps = {
-    labelCol: { span: 12 },
-    wrapperCol: { span: 12 },
+    labelCol: {
+      span: 6,
+    },
+    wrapperCol: {
+      span: 18,
+    },
     items: [
       {
         name: "Input",
         label: "Input",
         component: "Input",
-        colProps: { span: 6 },
         required: true,
+        colProps: { span: 6 },
       },
       {
         name: "render",

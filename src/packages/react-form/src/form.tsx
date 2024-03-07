@@ -16,8 +16,28 @@ const Form = forwardRef((props: IFormProps, ref) => {
    * @description 后续绑定给form的属性需在这里扩展一下
    */
   const getFormBindProps = () => {
-    const { layout, wrapperCol, labelCol } = props;
-    return { layout, wrapperCol, labelCol };
+    const {
+      layout,
+      wrapperCol,
+      labelCol,
+      colon = false,
+      disabled,
+      labelWrap = true,
+      labelAlign,
+      scrollToFirstError,
+      size,
+    } = props;
+    return {
+      layout,
+      wrapperCol,
+      labelCol,
+      colon,
+      disabled,
+      labelWrap,
+      labelAlign,
+      scrollToFirstError,
+      size,
+    };
   };
 
   const methods: IFormActionType = {

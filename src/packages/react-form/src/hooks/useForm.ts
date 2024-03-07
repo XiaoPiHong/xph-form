@@ -20,7 +20,7 @@ export const useFormModel = (instance: FormInstance<any>) => {
 /**
  *
  * @description 用于注册form的方法
- * @description form组件会先于parent组件挂载，挂载完后调用register方法，将methods注册到useForm中
+ * @description form组件会先于parent组件挂载，挂载完后调用register方法，将methods注册到useForm中给parent使用
  *
  */
 const useForm = (): [IRegister, IFormActionType] => {
