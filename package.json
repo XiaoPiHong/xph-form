@@ -11,7 +11,7 @@
     "react": "cd ./src/packages/react-form && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "XiaoPiHong",
   "license": "ISC",
   "dependencies": {
     "lodash-es": "^4.17.21",

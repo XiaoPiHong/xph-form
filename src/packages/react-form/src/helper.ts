@@ -42,3 +42,12 @@ export function setComponentRuleType(
     rule.type = "number";
   }
 }
+
+/** 时间类型组件集合 */
+export const dateComponents = [
+  "DatePicker",
+  "MonthPicker",
+  "RangePicker",
+  "WeekPicker",
+  "TimePicker",
+];

@@ -335,10 +335,11 @@ const ReactApp: React.FC = () => {
           children: "Button",
           onClick: async () => {
             // console.log(reactFormRef.current?.setFieldsValue({ Input: "123" }));
-            console.log(await reactFormRef.current?.validator());
-            console.log(await setFieldsValue({ Input: "123" }));
-            console.log(await getFieldsValue(true));
-            console.log(await getFieldsValue(["Input"]));
+            // console.log(await reactFormRef.current?.validator());
+            // console.log(await setFieldsValue({ Input: "123" }));
+            // console.log(await getFieldsValue(true));
+            // console.log(await getFieldsValue(["Input"]));
+            resetFields();
           },
         },
         colProps: { span: 8 },
@@ -362,7 +363,8 @@ const ReactApp: React.FC = () => {
    * 第二种调用form组件api的方式，通过封装的useForm方法
    *=============================================
    *  */
-  const [register, { setFieldsValue, getFieldsValue }] = useForm();
+  const [register, { setFieldsValue, getFieldsValue, resetFields, validator }] =
+    useForm();
   return (
     <section>
       <ReactForm register={register} ref={reactFormRef} {...props}></ReactForm>
