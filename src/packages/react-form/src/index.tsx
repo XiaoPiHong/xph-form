@@ -5,6 +5,7 @@ import { IFormProps, IFormActionType } from "./types";
 import ReactDOM from "react-dom/client";
 import { InputNumber } from "antd";
 import { useForm } from "./hooks";
+import dayjs from "dayjs";
 
 const ReactApp: React.FC = () => {
   const props: IFormProps = {
@@ -248,15 +249,21 @@ const ReactApp: React.FC = () => {
         name: "TimePicker",
         label: "TimePicker",
         component: "TimePicker",
-        componentProps: {},
+        componentProps: {
+          format: "HH:mm",
+        },
+        initialValue: dayjs("12:08", "HH:mm"),
         colProps: { span: 6 },
       },
       {
         name: "DatePicker",
         label: "DatePicker",
         component: "DatePicker",
-        componentProps: {},
+        componentProps: {
+          format: "YYYY-MM-DD",
+        },
         colProps: { span: 6 },
+        initialValue: dayjs("2021-08-08", "YYYY-MM-DD"),
       },
       {
         name: "MonthPicker",
@@ -264,6 +271,7 @@ const ReactApp: React.FC = () => {
         component: "MonthPicker",
         componentProps: {},
         colProps: { span: 6 },
+        initialValue: dayjs("2021-08", "YYYY-MM"),
       },
       {
         name: "WeekPicker",
@@ -271,13 +279,20 @@ const ReactApp: React.FC = () => {
         component: "WeekPicker",
         componentProps: {},
         colProps: { span: 6 },
+        initialValue: dayjs("2021-08-01", "YYYY-MM-DD"), // 2021-08-01是21年第32周
       },
       {
         name: "RangePicker",
         label: "RangePicker",
         component: "RangePicker",
-        componentProps: {},
+        componentProps: {
+          format: "YYYY-MM-DD HH:mm:ss",
+        },
         colProps: { span: 6 },
+        initialValue: [
+          dayjs("2021-08-01 00:00:00", "YYYY-MM-DD HH:mm:ss"),
+          dayjs("2021-08-08 23:59:59", "YYYY-MM-DD HH:mm:ss"),
+        ],
       },
       {
         name: "InputPassword",
