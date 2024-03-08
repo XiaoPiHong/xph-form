@@ -1,5 +1,5 @@
 {
-  "name": "form",
+  "name": "react-form",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -14,7 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "react-form": "file:src/packages/react-form",
+    "vue-form": "file:src/packages/vue-form"
   },
   "devDependencies": {
     "@types/gulp": "^4.0.17",
