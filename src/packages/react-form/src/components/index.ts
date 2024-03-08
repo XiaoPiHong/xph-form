@@ -41,6 +41,7 @@ componentMap.set("WeekPicker", DatePicker.WeekPicker);
 componentMap.set("RangePicker", DatePicker.RangePicker);
 componentMap.set("InputPassword", Input.Password);
 componentMap.set("InputTextArea", Input.TextArea);
+// 需要封装一个ApiAutoComplete
 componentMap.set("AutoComplete", AutoComplete);
 
 export { componentMap };

@@ -221,7 +221,27 @@ const ReactApp: React.FC = () => {
         name: "Cascader",
         label: "Cascader",
         component: "Cascader",
-        componentProps: {},
+        componentProps: {
+          options: [
+            {
+              value: "zhejiang",
+              label: "Zhejiang",
+              children: [
+                {
+                  value: "hangzhou",
+                  label: "Hangzhou",
+                  children: [
+                    {
+                      value: "xihu",
+                      label: "West Lake",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        initialValue: ["zhejiang", "hangzhou", "xihu"],
         colProps: { span: 6 },
       },
       {
@@ -236,6 +256,57 @@ const ReactApp: React.FC = () => {
         label: "DatePicker",
         component: "DatePicker",
         componentProps: {},
+        colProps: { span: 6 },
+      },
+      {
+        name: "MonthPicker",
+        label: "MonthPicker",
+        component: "MonthPicker",
+        componentProps: {},
+        colProps: { span: 6 },
+      },
+      {
+        name: "WeekPicker",
+        label: "WeekPicker",
+        component: "WeekPicker",
+        componentProps: {},
+        colProps: { span: 6 },
+      },
+      {
+        name: "RangePicker",
+        label: "RangePicker",
+        component: "RangePicker",
+        componentProps: {},
+        colProps: { span: 6 },
+      },
+      {
+        name: "InputPassword",
+        label: "InputPassword",
+        component: "InputPassword",
+        componentProps: {},
+        colProps: { span: 6 },
+        initialValue: "123456",
+      },
+      {
+        name: "InputTextArea",
+        label: "InputTextArea",
+        component: "InputTextArea",
+        componentProps: {},
+        colProps: { span: 6 },
+        initialValue: "123456",
+      },
+      {
+        name: "AutoComplete",
+        label: "AutoComplete",
+        component: "AutoComplete",
+        componentProps: {
+          options: [
+            { value: "Burns Bay Road" },
+            { value: "Downing Street" },
+            { value: "Wall Street" },
+          ],
+        },
+        initialValue: "Burns Bay Road",
         colProps: { span: 6 },
       },
       {
