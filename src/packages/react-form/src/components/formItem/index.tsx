@@ -6,7 +6,7 @@ import {
   IFormActionType,
   IFRenderProps,
 } from "../../types";
-import { componentMap } from "../../components";
+import { componentMap } from "..";
 import { Form, Col } from "antd";
 import style from "./index.module.css";
 import React from "react";
@@ -58,6 +58,7 @@ const FormItem: React.FC<{
         name,
         disabled,
         methods,
+        componentProps,
       } as IFRenderProps);
     }
     return null;

@@ -19,14 +19,18 @@ import { TComponentPropsMap } from "../types";
 const componentMap = new Map<keyof TComponentPropsMap, React.FC<any>>();
 
 componentMap.set("Input", Input);
+// 需封装一个ApiSelect
 componentMap.set("Select", Select);
 componentMap.set("InputNumber", InputNumber);
+// 需封装一个ApiTreeSelect
 componentMap.set("TreeSelect", TreeSelect);
+// 需封装一个ApiTransfer
 componentMap.set("Transfer", Transfer);
 componentMap.set("Switch", Switch);
 componentMap.set("Button", Button);
 componentMap.set("Radio", Radio);
 componentMap.set("RadioGroup", Radio.Group);
+// 需封装一个RadioButtonGroup
 componentMap.set("Checkbox", Checkbox);
 componentMap.set("CheckboxGroup", Checkbox.Group);
 componentMap.set("Cascader", Cascader);

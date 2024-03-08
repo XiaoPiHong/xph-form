@@ -33,6 +33,7 @@ export interface IFRenderProps {
   model: any;
   disabled: boolean;
   methods: IFormActionType;
+  componentProps: Recordable<any>;
 }
 
 /** render props */

@@ -1,6 +1,6 @@
 import { Form as AForm, Row } from "antd";
 import { IFormProps, IFormActionType } from "./types";
-import FormItem from "./components/formItem";
+import FormItem from "./components/FormItem";
 import React, { forwardRef, useImperativeHandle, useEffect } from "react";
 import { useFormModel, useFormItem, useFormRow } from "./hooks";
 

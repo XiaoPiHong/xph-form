@@ -1,5 +1,5 @@
 /** 这个是react-form表单项目启动入口文件 */
-import React, { useState } from "react";
+import React from "react";
 import ReactForm from "./form";
 import { IFormProps, IFormActionType } from "./types";
 import ReactDOM from "react-dom/client";
@@ -20,17 +20,27 @@ const ReactApp: React.FC = () => {
       {
         name: "render",
         label: "render",
-        render: ({ model, disabled, name, methods }) => (
+        render: ({ model, disabled, name, methods, componentProps }) => (
           <div>
             <InputNumber
               disabled={disabled}
               value={model[name]}
               onChange={(e) => methods.setFieldsValue({ [name]: e })}
+              {...componentProps}
             />
           </div>
         ),
+        componentProps: {
+          placeholder: "render",
+        },
         colProps: { span: 6 },
         initialValue: 2,
+        rules: [
+          {
+            required: true,
+            message: "render必填",
+          },
+        ],
       },
       {
         name: "InputNumber",
@@ -70,27 +80,17 @@ const ReactApp: React.FC = () => {
             },
           };
         },
+        initialValue: "1",
         colProps: { span: 6 },
       },
       {
         name: "Transfer",
         label: "Transfer",
         component: "Transfer",
+        valuePropName: "targetKeys",
+        initialValue: ["1"],
         componentProps: ({ model }) => {
-          //=================================写法1
-          const [targetKeys, setTargetKeys] = useState<string[]>([]);
           return {
-            targetKeys,
-            onChange: (targetKeys) => {
-              setTargetKeys([...targetKeys]);
-            },
-
-            //=================================写法2
-            // targetKeys: model["Transfer"],
-            // onChange: (targetKeys) => {
-            //   setFieldsValue({ Transfer: targetKeys });
-            // },
-
             dataSource: [
               {
                 key: "1",
@@ -104,6 +104,13 @@ const ReactApp: React.FC = () => {
             render: (item) => item.title,
           };
         },
+        rules: [
+          {
+            required: true,
+            type: "array",
+            message: "Transfer必填",
+          },
+        ],
       },
       {
         name: "TreeSelect",
@@ -145,7 +152,14 @@ const ReactApp: React.FC = () => {
             ],
           };
         },
+        initialValue: "leaf3",
         colProps: { span: 6 },
+        rules: [
+          {
+            required: true,
+            message: "TreeSelect必填",
+          },
+        ],
       },
       {
         name: "Switch",
@@ -153,6 +167,7 @@ const ReactApp: React.FC = () => {
         component: "Switch",
         componentProps: {},
         initialValue: true,
+        valuePropName: "checked",
         colProps: { span: 6 },
       },
       {
@@ -160,6 +175,22 @@ const ReactApp: React.FC = () => {
         label: "Radio",
         component: "Radio",
         componentProps: {},
+        valuePropName: "checked",
+        colProps: { span: 6 },
+      },
+      {
+        name: "RadioGroup",
+        label: "RadioGroup",
+        component: "RadioGroup",
+        componentProps: {
+          options: [
+            { label: "A", value: "a" },
+            { label: "B", value: "b" },
+            { label: "C", value: "c" },
+            { label: "D", value: "d" },
+          ],
+        },
+        initialValue: "a",
         colProps: { span: 6 },
       },
       {
@@ -168,6 +199,22 @@ const ReactApp: React.FC = () => {
         component: "Checkbox",
         componentProps: {},
         valuePropName: "checked",
+        colProps: { span: 6 },
+        initialValue: true,
+      },
+      {
+        name: "CheckboxGroup",
+        label: "CheckboxGroup",
+        component: "CheckboxGroup",
+        componentProps: {
+          options: [
+            { label: "A", value: "a" },
+            { label: "B", value: "b" },
+            { label: "C", value: "c" },
+            { label: "D", value: "d" },
+          ],
+        },
+        initialValue: ["a"],
         colProps: { span: 6 },
       },
       {
