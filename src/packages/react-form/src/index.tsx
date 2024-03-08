@@ -74,6 +74,7 @@ const ReactApp: React.FC = () => {
         },
         componentProps: ({ model }) => {
           return {
+            placeholder: "Select",
             options: [
               { label: "测试", value: "1" },
               { label: "测试2", value: "2" },
@@ -339,7 +340,6 @@ const ReactApp: React.FC = () => {
             // console.log(await setFieldsValue({ Input: "123" }));
             // console.log(await getFieldsValue(true));
             // console.log(await getFieldsValue(["Input"]));
-            resetFields();
           },
         },
         colProps: { span: 8 },

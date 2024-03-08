@@ -69,10 +69,9 @@ const Form = forwardRef((props: IFormProps, ref) => {
             {row.map((item, itemIndex) => (
               <FormItem
                 key={itemIndex}
+                itemProps={item}
                 model={rewritingModel}
                 methods={methods}
-                itemProps={item}
-                formProps={props}
               />
             ))}
           </Row>

@@ -28,12 +28,13 @@ export interface IBaseFormItemProps {
   initialValue?: any /** 默认值 */;
 }
 
+/** 自定义渲染函数的props */
 export interface IFRenderProps {
   name: string;
-  model: any;
   disabled: boolean;
-  methods: IFormActionType;
   componentProps: Recordable<any>;
+  model: any;
+  methods: IFormActionType;
 }
 
 /** render props */
