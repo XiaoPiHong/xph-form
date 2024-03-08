@@ -9,13 +9,15 @@ import dayjs from "dayjs";
 
 const ReactApp: React.FC = () => {
   const props: IFormProps = {
+    labelCol: { span: 6 },
+    wrapperCol: { span: 18 },
     items: [
       {
         name: "Input",
         label: "Input",
         component: "Input",
         required: true,
-        colProps: { span: 6 },
+        colProps: { span: 8 },
         initialValue: "Input",
       },
       {
@@ -34,7 +36,7 @@ const ReactApp: React.FC = () => {
         componentProps: {
           placeholder: "render",
         },
-        colProps: { span: 6 },
+        colProps: { span: 8 },
         initialValue: 2,
         rules: [
           {
@@ -58,7 +60,7 @@ const ReactApp: React.FC = () => {
           };
         },
         initialValue: 2,
-        colProps: { span: 6 },
+        colProps: { span: 8 },
       },
       {
         name: "Select",
@@ -82,7 +84,7 @@ const ReactApp: React.FC = () => {
           };
         },
         initialValue: "1",
-        colProps: { span: 6 },
+        colProps: { span: 8 },
       },
       {
         name: "Transfer",
@@ -105,6 +107,7 @@ const ReactApp: React.FC = () => {
             render: (item) => item.title,
           };
         },
+        colProps: { span: 8 },
         rules: [
           {
             required: true,
@@ -154,7 +157,7 @@ const ReactApp: React.FC = () => {
           };
         },
         initialValue: "leaf3",
-        colProps: { span: 6 },
+        colProps: { span: 8 },
         rules: [
           {
             required: true,
@@ -169,7 +172,7 @@ const ReactApp: React.FC = () => {
         componentProps: {},
         initialValue: true,
         valuePropName: "checked",
-        colProps: { span: 6 },
+        colProps: { span: 8 },
       },
       {
         name: "Radio",
@@ -177,7 +180,7 @@ const ReactApp: React.FC = () => {
         component: "Radio",
         componentProps: {},
         valuePropName: "checked",
-        colProps: { span: 6 },
+        colProps: { span: 8 },
       },
       {
         name: "RadioGroup",
@@ -192,7 +195,7 @@ const ReactApp: React.FC = () => {
           ],
         },
         initialValue: "a",
-        colProps: { span: 6 },
+        colProps: { span: 8 },
       },
       {
         name: "Checkbox",
@@ -200,7 +203,7 @@ const ReactApp: React.FC = () => {
         component: "Checkbox",
         componentProps: {},
         valuePropName: "checked",
-        colProps: { span: 6 },
+        colProps: { span: 8 },
         initialValue: true,
       },
       {
@@ -216,7 +219,7 @@ const ReactApp: React.FC = () => {
           ],
         },
         initialValue: ["a"],
-        colProps: { span: 6 },
+        colProps: { span: 8 },
       },
       {
         name: "Cascader",
@@ -243,7 +246,7 @@ const ReactApp: React.FC = () => {
           ],
         },
         initialValue: ["zhejiang", "hangzhou", "xihu"],
-        colProps: { span: 6 },
+        colProps: { span: 8 },
       },
       {
         name: "TimePicker",
@@ -253,7 +256,7 @@ const ReactApp: React.FC = () => {
           format: "HH:mm",
         },
         initialValue: dayjs("12:08", "HH:mm"),
-        colProps: { span: 6 },
+        colProps: { span: 8 },
       },
       {
         name: "DatePicker",
@@ -262,7 +265,7 @@ const ReactApp: React.FC = () => {
         componentProps: {
           format: "YYYY-MM-DD",
         },
-        colProps: { span: 6 },
+        colProps: { span: 8 },
         initialValue: dayjs("2021-08-08", "YYYY-MM-DD"),
       },
       {
@@ -270,7 +273,7 @@ const ReactApp: React.FC = () => {
         label: "MonthPicker",
         component: "MonthPicker",
         componentProps: {},
-        colProps: { span: 6 },
+        colProps: { span: 8 },
         initialValue: dayjs("2021-08", "YYYY-MM"),
       },
       {
@@ -278,7 +281,7 @@ const ReactApp: React.FC = () => {
         label: "WeekPicker",
         component: "WeekPicker",
         componentProps: {},
-        colProps: { span: 6 },
+        colProps: { span: 8 },
         initialValue: dayjs("2021-08-01", "YYYY-MM-DD"), // 2021-08-01是21年第32周
       },
       {
@@ -288,7 +291,7 @@ const ReactApp: React.FC = () => {
         componentProps: {
           format: "YYYY-MM-DD HH:mm:ss",
         },
-        colProps: { span: 6 },
+        colProps: { span: 8 },
         initialValue: [
           dayjs("2021-08-01 00:00:00", "YYYY-MM-DD HH:mm:ss"),
           dayjs("2021-08-08 23:59:59", "YYYY-MM-DD HH:mm:ss"),
@@ -299,7 +302,7 @@ const ReactApp: React.FC = () => {
         label: "InputPassword",
         component: "InputPassword",
         componentProps: {},
-        colProps: { span: 6 },
+        colProps: { span: 8 },
         initialValue: "123456",
       },
       {
@@ -307,7 +310,7 @@ const ReactApp: React.FC = () => {
         label: "InputTextArea",
         component: "InputTextArea",
         componentProps: {},
-        colProps: { span: 6 },
+        colProps: { span: 8 },
         initialValue: "123456",
       },
       {
@@ -322,7 +325,7 @@ const ReactApp: React.FC = () => {
           ],
         },
         initialValue: "Burns Bay Road",
-        colProps: { span: 6 },
+        colProps: { span: 8 },
       },
       {
         name: "Button",
@@ -338,7 +341,7 @@ const ReactApp: React.FC = () => {
             console.log(await getFieldsValue(["Input"]));
           },
         },
-        colProps: { span: 6 },
+        colProps: { span: 8 },
       },
     ],
   };
