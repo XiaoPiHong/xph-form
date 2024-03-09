@@ -1,5 +1,6 @@
-import { TFormItemProps } from "./formItem";
-import { ColProps, FormInstance } from "antd";
+import { TFormItemProps, Recordable } from "./formItem";
+import { ColProps } from "antd";
+import { NamePath } from "antd/lib/form/interface";
 
 export interface IRegister {
   (methods: IFormActionType): void;
@@ -35,9 +36,9 @@ export interface IFormProps {
 }
 
 export interface IFormActionType {
-  setFieldsValue: FormInstance["setFieldsValue"];
-  getFieldsValue: FormInstance["getFieldsValue"];
-  resetFields: FormInstance["resetFields"];
-  validator: FormInstance["validateFields"];
-  scrollToField: FormInstance["scrollToField"];
+  getFieldsValue: <T>(...values: T[]) => Recordable<any>;
+  setFieldsValue: (values: Recordable<any>) => Promise<void>;
+  resetFields: () => Promise<void>;
+  validator: (nameList?: NamePath[]) => Promise<any>;
+  scrollToField: (name: NamePath, options?: ScrollOptions) => Promise<void>;
 }

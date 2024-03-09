@@ -2,13 +2,20 @@ import { Form as AForm, Row } from "antd";
 import { IFormProps, IFormActionType } from "./types";
 import FormItem from "./components/FormItem";
 import React, { forwardRef, useImperativeHandle, useEffect } from "react";
-import { useFormModel, useFormItem, useFormRow } from "./hooks";
+import { useFormModel, useFormItem, useFormRow, useFormAction } from "./hooks";
 
 const Form = forwardRef((props: IFormProps, ref) => {
   // console.log("Form render=============================");
   const [formInstance] = AForm.useForm();
   const { rewritingModel } = useFormModel(formInstance);
   const { formItems } = useFormItem({ props, model: rewritingModel });
+  const {
+    setFieldsValue,
+    getFieldsValue,
+    resetFields,
+    validator,
+    scrollToField,
+  } = useFormAction(formInstance);
   const { formItemRows } = useFormRow(formItems);
 
   /**
@@ -41,11 +48,11 @@ const Form = forwardRef((props: IFormProps, ref) => {
   };
 
   const methods: IFormActionType = {
-    setFieldsValue: formInstance.setFieldsValue,
-    getFieldsValue: formInstance.getFieldsValue,
-    resetFields: formInstance.resetFields,
-    validator: formInstance.validateFields,
-    scrollToField: formInstance.scrollToField,
+    setFieldsValue,
+    getFieldsValue,
+    resetFields,
+    validator,
+    scrollToField,
   };
 
   // 使用 useImperativeHandle 暴露指定的属性或方法

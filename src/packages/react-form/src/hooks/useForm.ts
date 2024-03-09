@@ -27,42 +27,26 @@ const useForm = (): [IRegister, IFormActionType] => {
   // console.log("ParentComponent render=========================================");
   let methods: IFormActionType | null = null;
 
-  async function getMethods(): Promise<IFormActionType> {
-    return new Promise((resolve, reject) => {
-      if (methods) {
-        // console.log("resolve===========================================");
-        resolve(methods);
-      } else {
-        // console.log("reject===========================================");
-        reject();
-      }
-    });
-  }
-
   function register(mets: IFormActionType) {
     methods = mets;
   }
 
+  /** 重新声明一个obj存储是防止parent在初始化的时候使用useForm解构报错问题 */
   const _methods: IFormActionType = {
-    setFieldsValue: async (...args) => {
-      const methods = await getMethods();
-      return methods.setFieldsValue(...args);
+    getFieldsValue: (...args) => {
+      return methods!.getFieldsValue(...args);
     },
-    getFieldsValue: async (...args) => {
-      const methods = await getMethods();
-      return methods.getFieldsValue(args[0]);
+    setFieldsValue: (...args) => {
+      return methods!.setFieldsValue(...args);
     },
-    resetFields: async (...args) => {
-      const methods = await getMethods();
-      return methods.resetFields(...args);
+    resetFields: (...args) => {
+      return methods!.resetFields(...args);
     },
-    validator: async (...args) => {
-      const methods = await getMethods();
-      return methods.validator(...args);
+    validator: (...args) => {
+      return methods!.validator(...args);
     },
-    scrollToField: async (...args) => {
-      const methods = await getMethods();
-      return methods.scrollToField(...args);
+    scrollToField: (...args) => {
+      return methods!.scrollToField(...args);
     },
   };
 
