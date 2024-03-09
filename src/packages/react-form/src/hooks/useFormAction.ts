@@ -4,10 +4,12 @@ import { Recordable } from "../types";
 
 const useFormAction = (instance: FormInstance) => {
   const getFieldsValue = <T>(...values: T[]): Recordable<any> => {
+    /** 返回的时候处理time */
     return (instance.getFieldsValue as (...args) => {})(...values);
   };
 
   const setFieldsValue = async (values: Recordable<any>) => {
+    /** 成功设置的时候处理time */
     return instance.setFieldsValue(values);
   };
 
@@ -16,6 +18,7 @@ const useFormAction = (instance: FormInstance) => {
   };
 
   const validator = async (nameList?: NamePath[]) => {
+    /** 成功返回的时候处理time */
     return instance.validateFields(nameList);
   };
 

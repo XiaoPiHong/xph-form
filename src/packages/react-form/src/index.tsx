@@ -258,6 +258,16 @@ const ReactApp: React.FC = () => {
         },
         initialValue: dayjs("12:08", "HH:mm"),
         colProps: { span: 8 },
+        rules: [
+          {
+            validator: async (rule, value) => {
+              if (!value) {
+                return Promise.reject("TimePicker必填");
+              }
+              return Promise.resolve();
+            },
+          },
+        ],
       },
       {
         name: "DatePicker",

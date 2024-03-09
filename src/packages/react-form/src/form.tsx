@@ -46,7 +46,6 @@ const Form = forwardRef((props: IFormProps, ref) => {
       size,
     };
   };
-
   const methods: IFormActionType = {
     setFieldsValue,
     getFieldsValue,
