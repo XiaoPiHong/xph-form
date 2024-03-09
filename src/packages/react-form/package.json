@@ -1,14 +1,9 @@
 {
-  "name": "react-form",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "name": "@xph-form/react",
   "scripts": {
-    "start": "react-scripts start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/react": "^18.2.59",
     "@types/react-dom": "^18.2.19",
@@ -20,17 +15,5 @@
     "antd": "^5.14.2",
     "dayjs": "^1.11.10",
     "react": "^18.2.0"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }

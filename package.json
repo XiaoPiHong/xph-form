@@ -1,18 +1,14 @@
 {
-  "name": "react-form",
+  "name": "xph-form",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a configurable form component that supports Vue and React",
+  "keywords": ["vue", "react", "form", "component"],
+  "files": ["dist"],
   "main": "dist/index.js",
-  "workspaces": [
-    "./src/packages/*"
-  ],
   "scripts": {
     "build": "npx rimraf ./dist && gulp",
-    "react": "cd ./src/packages/react-form && npm start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "react": "cd ./src/packages/react-form && npm start"
   },
-  "author": "XiaoPiHong",
-  "license": "ISC",
   "dependencies": {
     "lodash-es": "^4.17.21",
     "react-form": "file:src/packages/react-form",
@@ -29,5 +25,22 @@
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^4.9.5"
-  }
+  },
+  "license": "ISC",
+  "author": "XiaoPiHong",
+  "homepage": "https://github.com/XiaoPiHong/my-form",
+  "bugs": {
+    "url" : "https://github.com/XiaoPiHong/my-form/issues",
+    "email" : "project@hostname.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XiaoPiHong/my-form.git"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "workspaces": [
+    "./src/packages/*"
+  ]
 }
