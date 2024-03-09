@@ -7,7 +7,7 @@ const useFormAction = (instance: FormInstance) => {
     return (instance.getFieldsValue as (...args) => {})(...values);
   };
 
-  const setFieldsValue = async (values: Recordable<any>): Promise<void> => {
+  const setFieldsValue = async (values: Recordable<any>) => {
     return instance.setFieldsValue(values);
   };
 
