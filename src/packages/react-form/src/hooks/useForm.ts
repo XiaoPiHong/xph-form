@@ -32,20 +32,36 @@ const useForm = (): [IRegister, IFormActionType] => {
   }
 
   /** 重新声明一个obj存储是防止parent在初始化的时候使用useForm解构报错问题 */
+  /** 如果在初始化完成前使用了api会抛出错误提示 */
   const _methods: IFormActionType = {
     getFieldsValue: (...args) => {
+      if (!methods) {
+        throw new Error("表单还没初始化完成");
+      }
       return methods!.getFieldsValue(...args);
     },
     setFieldsValue: (...args) => {
+      if (!methods) {
+        throw new Error("表单还没初始化完成");
+      }
       return methods!.setFieldsValue(...args);
     },
     resetFields: (...args) => {
+      if (!methods) {
+        throw new Error("表单还没初始化完成");
+      }
       return methods!.resetFields(...args);
     },
     validator: (...args) => {
+      if (!methods) {
+        throw new Error("表单还没初始化完成");
+      }
       return methods!.validator(...args);
     },
     scrollToField: (...args) => {
+      if (!methods) {
+        throw new Error("表单还没初始化完成");
+      }
       return methods!.scrollToField(...args);
     },
   };
