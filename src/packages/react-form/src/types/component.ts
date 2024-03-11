@@ -12,6 +12,7 @@ import {
   TimePickerProps,
   DatePickerProps,
   AutoCompleteProps,
+  UploadProps,
 } from "antd";
 
 export type TComponentPropsMap = {
@@ -35,4 +36,5 @@ export type TComponentPropsMap = {
   InputPassword: InputProps;
   InputTextArea: InputProps;
   AutoComplete: AutoCompleteProps;
+  Upload: UploadProps;
 };

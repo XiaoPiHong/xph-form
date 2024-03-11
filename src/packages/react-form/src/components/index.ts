@@ -13,6 +13,7 @@ import {
   TimePicker,
   DatePicker,
   AutoComplete,
+  Upload,
 } from "antd";
 import { TComponentPropsMap } from "../types";
 
@@ -43,5 +44,7 @@ componentMap.set("InputPassword", Input.Password);
 componentMap.set("InputTextArea", Input.TextArea);
 // 需要封装一个ApiAutoComplete
 componentMap.set("AutoComplete", AutoComplete);
+componentMap.set("Upload", Upload);
+// 需要封装一个自动上传的Upload
 
 export { componentMap };

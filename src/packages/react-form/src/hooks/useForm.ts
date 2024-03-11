@@ -38,31 +38,31 @@ const useForm = (): [IRegister, IFormActionType] => {
       if (!methods) {
         throw new Error("表单还没初始化完成");
       }
-      return methods!.getFieldsValue(...args);
+      return methods.getFieldsValue(...args);
     },
     setFieldsValue: (...args) => {
       if (!methods) {
         throw new Error("表单还没初始化完成");
       }
-      return methods!.setFieldsValue(...args);
+      return methods.setFieldsValue(...args);
     },
     resetFields: (...args) => {
       if (!methods) {
         throw new Error("表单还没初始化完成");
       }
-      return methods!.resetFields(...args);
+      return methods.resetFields(...args);
     },
     validator: (...args) => {
       if (!methods) {
         throw new Error("表单还没初始化完成");
       }
-      return methods!.validator(...args);
+      return methods.validator(...args);
     },
     scrollToField: (...args) => {
       if (!methods) {
         throw new Error("表单还没初始化完成");
       }
-      return methods!.scrollToField(...args);
+      return methods.scrollToField(...args);
     },
   };
 
