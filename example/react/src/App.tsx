@@ -1,10 +1,10 @@
-/** 这个是react-form表单项目启动入口文件 */
 import React from "react";
-import ReactForm from "./form";
-import { IFormProps, IFormActionType } from "./types";
-import ReactDOM from "react-dom/client";
+import Form, {
+  IFormProps,
+  IFormActionType,
+  useForm,
+} from "xph-form/src/packages/react-form";
 import { InputNumber } from "antd";
-import { useForm } from "./hooks";
 import dayjs from "dayjs";
 
 const ReactApp: React.FC = () => {
@@ -385,16 +385,9 @@ const ReactApp: React.FC = () => {
     useForm();
   return (
     <section>
-      <ReactForm register={register} ref={reactFormRef} {...props}></ReactForm>
+      <Form register={register} ref={reactFormRef} {...props}></Form>
     </section>
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  /**
-   * @description 严格模式 用于检测不合理的代码 会导致ReactApp组件渲染两次
-   */
-  <React.StrictMode>
-    <ReactApp />
-  </React.StrictMode>
-);
+export default ReactApp;

@@ -2,17 +2,27 @@
   "name": "xph-form",
   "version": "1.0.0",
   "description": "This is a configurable form component that supports Vue and React",
-  "keywords": ["vue", "react", "form", "component"],
-  "files": ["dist"],
+  "keywords": [
+    "vue",
+    "react",
+    "form",
+    "component"
+  ],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "scripts": {
-    "build": "npx rimraf ./dist && gulp",
-    "react": "cd ./src/packages/react-form && npm start"
+    "build": "npx rimraf ./dist && gulp"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
-    "react-form": "file:src/packages/react-form",
-    "vue-form": "file:src/packages/vue-form"
+    "dayjs": "^1.11.10",
+    "@ant-design/icons": "^5.2.6",
+    "antd": "^5.14.2"
   },
   "devDependencies": {
     "@types/gulp": "^4.0.17",
@@ -28,19 +38,20 @@
   },
   "license": "ISC",
   "author": "XiaoPiHong",
-  "homepage": "https://github.com/XiaoPiHong/my-form",
+  "homepage": "https://github.com/XiaoPiHong/xph-form",
   "bugs": {
-    "url" : "https://github.com/XiaoPiHong/my-form/issues",
-    "email" : "project@hostname.com"
+    "url": "https://github.com/XiaoPiHong/xph-form/issues",
+    "email": "project@hostname.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/XiaoPiHong/my-form.git"
+    "url": "https://github.com/XiaoPiHong/xph-form.git"
   },
   "engines": {
     "node": ">=16"
   },
   "workspaces": [
-    "./src/packages/*"
+    "./src/packages/*",
+    "./example/*"
   ]
 }

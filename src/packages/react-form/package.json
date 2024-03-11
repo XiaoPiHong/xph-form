@@ -1,19 +1,7 @@
 {
   "private": true,
-  "name": "@xph-form/react",
-  "scripts": {
-    "start": "react-scripts start"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.59",
-    "@types/react-dom": "^18.2.19",
-    "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1"
-  },
-  "dependencies": {
-    "@ant-design/icons": "^5.2.6",
-    "antd": "^5.14.2",
-    "dayjs": "^1.11.10",
-    "react": "^18.2.0"
-  }
+  "name": "@xph-form/react-form",
+  "scripts": {},
+  "devDependencies": {},
+  "dependencies": {}
 }

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@xph-form/vue",
+  "name": "@xph-form/vue-form",
   "scripts": {},
   "devDependencies": {},
   "dependencies": {}
