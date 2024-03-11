@@ -1,8 +1,8 @@
 import ReactForm from "./packages/react-form/src/form";
 import {
   IFormProps as IReactFormProps,
-  TFormItemProps as TReactFormItemProps,
   IFormActionType as IReactFormActionType,
+  TFormItemProps as TReactFormItemProps,
 } from "./packages/react-form/src/types";
 import { useForm as useReactForm } from "./packages/react-form/src/hooks";
 
