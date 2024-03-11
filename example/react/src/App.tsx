@@ -1,14 +1,15 @@
 import React from "react";
-import Form, {
-  IFormProps,
-  IFormActionType,
-  useForm,
-} from "xph-form/src/packages/react-form";
+import {
+  ReactForm,
+  useReactForm,
+  IReactFormProps,
+  IReactFormActionType,
+} from "xph-form";
 import { InputNumber } from "antd";
 import dayjs from "dayjs";
 
 const ReactApp: React.FC = () => {
-  const props: IFormProps = {
+  const props: IReactFormProps = {
     labelCol: { span: 6 },
     wrapperCol: { span: 18 },
     items: [
@@ -372,20 +373,20 @@ const ReactApp: React.FC = () => {
    * 第一种调用form组件api的方式，通过useRef
    *=============================================
    *  */
-  const reactFormRef = React.useRef<IFormActionType>();
+  const reactFormRef = React.useRef<IReactFormActionType>();
 
   /**
    * ==========================================
    * 二、
    *
-   * 第二种调用form组件api的方式，通过封装的useForm方法
+   * 第二种调用form组件api的方式，通过封装的useReactForm方法
    *=============================================
    *  */
   const [register, { setFieldsValue, getFieldsValue, resetFields, validator }] =
-    useForm();
+    useReactForm();
   return (
     <section>
-      <Form register={register} ref={reactFormRef} {...props}></Form>
+      <ReactForm register={register} ref={reactFormRef} {...props}></ReactForm>
     </section>
   );
 };
