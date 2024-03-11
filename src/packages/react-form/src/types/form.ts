@@ -36,7 +36,7 @@ export interface IFormProps {
 }
 
 export interface IFormActionType {
-  getFieldsValue: <T>(...values: T[]) => Recordable<any>;
+  getFieldsValue: (...values) => Recordable<any>;
   setFieldsValue: (values: Recordable<any>) => Promise<void>;
   resetFields: () => Promise<void>;
   validator: (nameList?: NamePath[]) => Promise<any>;

@@ -3,7 +3,7 @@ import { NamePath } from "antd/lib/form/interface";
 import { Recordable } from "../types";
 
 const useFormAction = (instance: FormInstance) => {
-  const getFieldsValue = <T>(...values: T[]): Recordable<any> => {
+  const getFieldsValue = (...values): Recordable<any> => {
     /** 返回的时候处理time */
     return (instance.getFieldsValue as (...args) => {})(...values);
   };
