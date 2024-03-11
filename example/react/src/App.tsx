@@ -20,6 +20,11 @@ const ReactApp: React.FC = () => {
         required: true,
         colProps: { span: 8 },
         initialValue: "Input",
+        componentProps: {
+          onChange: (e) => {
+            console.log(e);
+          },
+        },
       },
       {
         name: "render",
@@ -356,9 +361,6 @@ const ReactApp: React.FC = () => {
 
             console.log(getFieldsValue());
             console.log(await setFieldsValue({ Input: "123" }));
-            console.log(await getFieldsValue(["Input"]));
-            console.log(await resetFields());
-            console.log(await validator());
           },
         },
         colProps: { span: 8 },

@@ -31,6 +31,8 @@ export interface IFormProps {
   scrollToFirstError?: boolean;
   /** 设置字段组件的尺寸（仅限 antd 组件） */
   size?: "large" | "middle" | "small";
+  /** 时间返回统一处理函数 */
+  transformDateFunc?: (date: any) => string;
   /** 注册事件（useForm使用，form组件会在挂载后调用） */
   register?: IRegister;
 }

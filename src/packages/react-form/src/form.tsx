@@ -2,20 +2,32 @@ import { Form as AForm, Row } from "antd";
 import { IFormProps, IFormActionType } from "./types";
 import FormItem from "./components/FormItem";
 import React, { forwardRef, useImperativeHandle, useEffect } from "react";
-import { useFormModel, useFormItem, useFormRow, useFormAction } from "./hooks";
+import {
+  useFormModel,
+  useFormItem,
+  useFormRow,
+  useFormAction,
+  useFormValues,
+} from "./hooks";
 
 const Form = forwardRef((props: IFormProps, ref) => {
   // console.log("Form render=============================");
   const [formInstance] = AForm.useForm();
   const { rewritingModel } = useFormModel(formInstance);
   const { formItems } = useFormItem({ props, model: rewritingModel });
+  const { handleFormatRenderValues, handleFormatReturnValues } =
+    useFormValues(formItems);
   const {
     setFieldsValue,
     getFieldsValue,
     resetFields,
     validator,
     scrollToField,
-  } = useFormAction(formInstance);
+  } = useFormAction(
+    formInstance,
+    handleFormatRenderValues,
+    handleFormatReturnValues
+  );
   const { formItemRows } = useFormRow(formItems);
 
   /**
