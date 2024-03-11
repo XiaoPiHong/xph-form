@@ -15,9 +15,6 @@
   "scripts": {
     "build": "npx rimraf ./dist && gulp"
   },
-  "peerDependencies": {
-    "react": "^18.2.0"
-  },
   "dependencies": {
     "lodash-es": "^4.17.21",
     "dayjs": "^1.11.10",
