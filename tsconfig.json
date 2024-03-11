@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
+    /* 设置生成的 JavaScript 的 JavaScript 语言版本并包括兼容的库声明 */
     "target": "ES2018",
+    /* 指定生成的模块代码 */
     "module": "CommonJS",
+    /* 指定用于解析非相对模块名称的基本目录 */
     "baseUrl": "./",
+    /* 从项目中的TypeScript和JavaScript文件生成.d.ts文件 */
     "declaration": true,
+    /* 指定所有生成的文件的输出文件夹 */
     "outDir": "./dist",
-    "jsx": "preserve",
+    /* 指定生成的 JSX 代码 */
+    "jsx": "react",
     /* 生成附加的 JavaScript 以简化对 CommonJS 模块的导入支持。这启用了类型兼容性的 allowSyntheticDefaultImports */
     "esModuleInterop": true,
     /* 确保导入时的大小写正确 */
