@@ -352,15 +352,16 @@ const ReactApp: React.FC = () => {
           children: "Button",
           onClick: async () => {
             // console.log(reactFormRef.current?.getFieldsValue(true));
-            // console.log(
-            //   await reactFormRef.current?.setFieldsValue({ Input: "123" })
-            // );
-            // console.log(await reactFormRef.current?.getFieldsValue(["Input"]));
+            // console.log(reactFormRef.current?.setFieldsValue({ Input: "123" }));
+            // console.log(reactFormRef.current?.getFieldsValue(["Input"]));
             // console.log(await reactFormRef.current?.resetFields());
             // console.log(await reactFormRef.current?.validator());
 
-            console.log(getFieldsValue());
-            console.log(await setFieldsValue({ Input: "123" }));
+            console.log(getFieldsValue(true));
+            console.log(setFieldsValue({ Input: "123" }));
+            console.log(getFieldsValue(["Input"]));
+            console.log(await resetFields());
+            console.log(await validator());
           },
         },
         colProps: { span: 8 },
