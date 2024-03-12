@@ -1,10 +1,16 @@
 import React from "react";
+// import {
+//   ReactForm,
+//   useReactForm,
+//   IReactFormProps,
+//   IReactFormActionType,
+// } from "xph-form";
 import {
   ReactForm,
   useReactForm,
   IReactFormProps,
   IReactFormActionType,
-} from "xph-form";
+} from "@/xph-form";
 import { InputNumber } from "antd";
 import dayjs from "dayjs";
 
