@@ -44,6 +44,29 @@ export interface IFormProps {
    *    // 支持多个字段
    *    ['datetime1', ['startTime1', 'endTime1'], 'YYYY-MM-DD HH:mm:ss'],
    * ]
+   *
+   * // fieldMapToTime没写的时候表单获取到的值
+   * {
+   *   datetime: [Date(),Date()]
+   * }
+   *
+   * //  ['datetime', ['startTime', 'endTime'], 'YYYY-MM-DD'],等同于 dayjs(Date()).format('YYYY-MM-DD'). 之后
+   * {
+   *     startTime: '2020-08-12',
+   *     endTime: '2020-08-15',
+   * }
+   *
+   * // ['datetime', ['startTime', 'endTime'], 'timestamp'],等同于 dayjs(Date()).unix(). 之后
+   * {
+   *     startTime: 1597190400,
+   *     endTime: 1597449600,
+   * }
+   *
+   * // ['datetime', ['startTime', 'endTime'], 'timestampStartDay'],等同于 dayjs(Date()).startOf('day').unix(). 之后
+   * {
+   *     startTime: 1597190400,
+   *     endTime: 1597449600,
+   * }
    */
   fieldMapToTime?: [string, [string, string], (string | [string, string])?][];
   /** 注册事件（useForm使用，form组件会在挂载后调用） */
