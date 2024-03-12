@@ -8,13 +8,18 @@ const useFormAction = (
   formatReturnValues
 ) => {
   const getFieldsValue = (...values): Recordable<any> => {
-    /** 返回的时候处理time */
-    return (instance.getFieldsValue as (...args) => {})(...values);
+    /** 返回的时候处理值 */
+    return formatReturnValues(
+      (instance.getFieldsValue as (...args) => {})(...values)
+    );
   };
 
-  const setFieldsValue = async (values: Recordable<any>) => {
-    /** 成功设置的时候处理time */
-    return instance.setFieldsValue(values);
+  const setFieldsValue = (values: Recordable<any>) => {
+    // 处理一下提供给setFieldsValue的值（因为时间类型传递给setFieldsValue需要dayjs类型）
+    const { renderValues, validKeys } = formatRenderValues(values);
+    instance.setFieldsValue(renderValues);
+    // 设置完之后验证一下赋值的字段
+    instance.validateFields(validKeys);
   };
 
   const resetFields = async () => {
@@ -22,8 +27,10 @@ const useFormAction = (
   };
 
   const validator = async (nameList?: NamePath[]) => {
-    /** 成功返回的时候处理time */
-    return instance.validateFields(nameList);
+    /** 返回的时候处理值 */
+    return instance.validateFields(nameList).then((res) => {
+      return formatReturnValues(res);
+    });
   };
 
   const scrollToField = async (name: NamePath, options?: ScrollOptions) => {

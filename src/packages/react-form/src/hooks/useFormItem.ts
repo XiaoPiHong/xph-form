@@ -177,12 +177,18 @@ export const useFormItemColProps = (
   return { colProps };
 };
 
-const useFormItem = ({ props, model }: { props: IFormProps; model: any }) => {
-  const { items } = props;
+const useFormItem = ({
+  formProps,
+  model,
+}: {
+  formProps: IFormProps;
+  model: any;
+}) => {
+  const { items } = formProps;
   const formItems: TFormItemProps[] = items
     .map((item) => {
       const { isIfShow, isShow } = useFormItemShow(item, model);
-      const { colProps } = useFormItemColProps(item, props);
+      const { colProps } = useFormItemColProps(item, formProps);
       const { componentProps } = useFormItemComponentProps(item, model);
       const { rules } = useFormItemRules({
         item,
@@ -190,7 +196,7 @@ const useFormItem = ({ props, model }: { props: IFormProps; model: any }) => {
         isShow,
         componentProps,
       });
-      const { disabled } = useFormItemDisabled(props, item, model);
+      const { disabled } = useFormItemDisabled(formProps, item, model);
       return {
         ...item,
         show: isShow,

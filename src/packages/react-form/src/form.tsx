@@ -3,6 +3,7 @@ import { IFormProps, IFormActionType } from "./types";
 import FormItem from "./components/FormItem";
 import React, { forwardRef, useImperativeHandle, useEffect } from "react";
 import {
+  useFormProps,
   useFormModel,
   useFormItem,
   useFormRow,
@@ -13,10 +14,13 @@ import {
 const Form = forwardRef((props: IFormProps, ref) => {
   // console.log("Form render=============================");
   const [formInstance] = AForm.useForm();
+  const { formProps } = useFormProps(props);
   const { rewritingModel } = useFormModel(formInstance);
-  const { formItems } = useFormItem({ props, model: rewritingModel });
-  const { handleFormatRenderValues, handleFormatReturnValues } =
-    useFormValues(formItems);
+  const { formItems } = useFormItem({ formProps, model: rewritingModel });
+  const { handleFormatRenderValues, handleFormatReturnValues } = useFormValues(
+    formItems,
+    formProps
+  );
   const {
     setFieldsValue,
     getFieldsValue,
@@ -45,7 +49,7 @@ const Form = forwardRef((props: IFormProps, ref) => {
       labelAlign,
       scrollToFirstError,
       size,
-    } = props;
+    } = formProps;
     return {
       layout,
       wrapperCol,
@@ -73,7 +77,7 @@ const Form = forwardRef((props: IFormProps, ref) => {
 
   useEffect(() => {
     // console.log("Form is mounted=======================");
-    props.register && props.register(methods);
+    formProps.register && formProps.register(methods);
     return () => {
       // console.log("Form is unmounted=========================");
     };

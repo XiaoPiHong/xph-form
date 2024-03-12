@@ -33,13 +33,26 @@ export interface IFormProps {
   size?: "large" | "middle" | "small";
   /** 时间返回统一处理函数 */
   transformDateFunc?: (date: any) => string;
+  /**
+   * @description 用于将表单内时间区域的应设成 2 个字段,见下方说明
+   * @description 如果表单内有时间区间组件，获取到的值是一个数组，但是往往我们传递到后台需要是 2 个字段
+   * @example
+   * fieldMapToTime: [
+   *    // data为时间组件在表单内的字段，startTime，endTime为转化后的开始时间与结束时间
+   *    // 'YYYY-MM-DD'为时间格式，参考moment
+   *    ['datetime', ['startTime', 'endTime'], 'YYYY-MM-DD'],
+   *    // 支持多个字段
+   *    ['datetime1', ['startTime1', 'endTime1'], 'YYYY-MM-DD HH:mm:ss'],
+   * ]
+   */
+  fieldMapToTime?: [string, [string, string], (string | [string, string])?][];
   /** 注册事件（useForm使用，form组件会在挂载后调用） */
   register?: IRegister;
 }
 
 export interface IFormActionType {
   getFieldsValue: (...values) => Recordable<any>;
-  setFieldsValue: (values: Recordable<any>) => Promise<void>;
+  setFieldsValue: (values: Recordable<any>) => void;
   resetFields: () => Promise<void>;
   validator: (nameList?: NamePath[]) => Promise<any>;
   scrollToField: (name: NamePath, options?: ScrollOptions) => Promise<void>;

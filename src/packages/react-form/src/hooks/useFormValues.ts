@@ -1,8 +1,15 @@
-import { Recordable, TFormItemProps } from "../types";
-import { isObject, set, get } from "lodash-es";
+import { IFormProps, Recordable, TFormItemProps } from "../types";
+import { isObject, isArray, isFunction, isString, set } from "lodash-es";
+import dayjs from "dayjs";
 import { dateComponents } from "../helper";
-import { isComponentFormItemProps } from "../types";
+import { isComponentFormItemProps, isRenderFormItemProps } from "../types";
 
+/**
+ * @description 构建值数组
+ * @param field `[key1, key2, key3]`
+ * @param values = { key1: 'value1', key2: 'value2', key3: 'value3' }
+ * @returns ['value1', 'value2', 'value3']
+ */
 function tryConstructArray(
   field: string,
   values: Recordable<any> = {}
@@ -26,6 +33,13 @@ function tryConstructArray(
   }
 }
 
+/**
+ * @description 构建值对象
+ * @param field '{key1, key2, key3}'
+ * @param values = { key1: 'value1', key2: 'value2', key3: 'value3' }
+ * @returns = { key1: 'value1', key2: 'value2', key3: 'value3' }
+ *
+ */
 function tryConstructObject(
   field: string,
   values: Recordable<any> = {}
@@ -88,27 +102,109 @@ function tryDeconstructObject(
   }
 }
 
-const useFormValues = (formItems: TFormItemProps[]) => {
-  const names = formItems.map((item) => item.name).filter(Boolean);
+/**
+ * @description: Processing time interval parameters
+ */
+function handleRangeTimeValue(values: Recordable<any>, formProps: IFormProps) {
+  const fieldMapToTime = formProps.fieldMapToTime;
 
-  // key 支持 a.b.c 的嵌套写法
-  const delimiter = ".";
-  const nestKeyArray = names.filter(
-    (item) => String(item).indexOf(delimiter) >= 0
-  );
+  if (!fieldMapToTime || !Array.isArray(fieldMapToTime)) {
+    return values;
+  }
+
+  for (const [
+    field,
+    [startTimeKey, endTimeKey],
+    format = "YYYY-MM-DD",
+  ] of fieldMapToTime) {
+    if (!field || !startTimeKey || !endTimeKey) {
+      continue;
+    }
+    // If the value to be converted is empty, remove the field
+    if (!values[field]) {
+      Reflect.deleteProperty(values, field);
+      continue;
+    }
+
+    const [startTime, endTime]: string[] = values[field];
+
+    const [startTimeFormat, endTimeFormat] = Array.isArray(format)
+      ? format
+      : [format, format];
+
+    values[startTimeKey] = dayjs(startTime).format(startTimeFormat);
+    values[endTimeKey] = dayjs(endTime).format(endTimeFormat);
+    Reflect.deleteProperty(values, field);
+  }
+
+  return values;
+}
+
+const useFormValues = (formItems: TFormItemProps[], formProps: IFormProps) => {
+  const allItems = formItems.filter((item) => item.name);
 
   /** 处理渲染时的值  */
   const handleFormatRenderValues = (values: Recordable<any>) => {
     const renderValues: Recordable<any> = {};
+    const validKeys: string[] = [];
 
-    names.forEach((name) => {
-      const curFormItem = formItems.find((formItem) => formItem.name === name);
-      let value = get(values, name);
-      const hasKey = Reflect.has(values, name);
+    allItems.forEach((item) => {
+      const hasKey = Reflect.has(values, item.name);
 
+      // 当前name是`{}` || `[]`嵌套写法时，获取其值
       const constructValue =
-        tryConstructArray(name, values) || tryConstructObject(name, values);
+        tryConstructArray(item.name, values) ||
+        tryConstructObject(item.name, values);
+
+      // values中有值 || （当前name是`{}` || `[]`嵌套写法时且有值时）
+      if (hasKey || !!constructValue) {
+        const fieldValue = constructValue || values.get(item.name);
+        if (isComponentFormItemProps(item)) {
+          /** 时间类型组件需处理一下 */
+          if (dateComponents.includes(item.component)) {
+            if (isArray(fieldValue)) {
+              const arr: any[] = [];
+              for (const ele of fieldValue) {
+                arr.push(ele ? dayjs(ele) : null);
+              }
+              renderValues[item.name] = arr;
+            } else {
+              const { componentProps } = item;
+              renderValues[item.name] = fieldValue
+                ? (componentProps as Recordable<any>)?.valueFormat
+                  ? fieldValue
+                  : dayjs(fieldValue)
+                : null;
+            }
+            validKeys.push(item.name);
+          }
+        }
+        if (isRenderFormItemProps(item)) {
+          renderValues[item.name] = fieldValue;
+          validKeys.push(item.name);
+        }
+      } else {
+        try {
+          // a.b.c 的嵌套写法
+          const hasDelimiter = item.name.includes(`.`);
+          if (hasDelimiter) {
+            const value = item.name
+              .split(".")
+              .reduce((out, key) => out[key], values);
+            if (typeof value !== "undefined") {
+              renderValues[item.name] = value;
+              validKeys.push(item.name);
+            }
+          }
+        } catch (e) {
+          // key not exist
+        }
+      }
     });
+    return {
+      renderValues,
+      validKeys,
+    };
   };
 
   /** 处理返回的值 */
@@ -116,6 +212,45 @@ const useFormValues = (formItems: TFormItemProps[]) => {
     if (!isObject(values)) {
       return {};
     }
+    const res: Recordable<any> = {};
+    for (const item of Object.entries(values)) {
+      let [, value] = item;
+      const [key] = item;
+      if (!key || (isArray(value) && value.length === 0) || isFunction(value)) {
+        continue;
+      }
+
+      const {
+        transformDateFunc = (date: any) => {
+          return date?.format?.("YYYY-MM-DD HH:mm:ss") ?? date;
+        },
+      } = formProps;
+      if (isObject(value)) {
+        value = transformDateFunc?.(value);
+      }
+
+      if (isArray(value) && value[0]?.format && value[1]?.format) {
+        value = value.map((item) => transformDateFunc?.(item));
+      }
+      // Remove spaces
+      if (isString(value)) {
+        // remove params from URL
+        if (value === "") {
+          value = undefined;
+        } else {
+          value = value.trim();
+        }
+      }
+      if (
+        !tryDeconstructArray(key, value, res) &&
+        !tryDeconstructObject(key, value, res)
+      ) {
+        // 没有解构成功的，按原样赋值
+        set(res, key, value);
+      }
+    }
+
+    return handleRangeTimeValue(res, formProps);
   };
 
   return {
