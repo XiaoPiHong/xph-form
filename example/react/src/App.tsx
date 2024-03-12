@@ -261,6 +261,7 @@ const ReactApp: React.FC = () => {
         component: "TimePicker",
         componentProps: {
           format: "HH:mm",
+          valueFormat: "HH:mm",
         },
         initialValue: dayjs("12:08", "HH:mm"),
         colProps: { span: 8 },
@@ -281,6 +282,7 @@ const ReactApp: React.FC = () => {
         component: "DatePicker",
         componentProps: {
           format: "YYYY-MM-DD",
+          valueFormat: "YYYY-MM-DD",
         },
         colProps: { span: 8 },
         initialValue: dayjs("2021-08-08", "YYYY-MM-DD"),
@@ -289,7 +291,9 @@ const ReactApp: React.FC = () => {
         name: "MonthPicker",
         label: "MonthPicker",
         component: "MonthPicker",
-        componentProps: {},
+        componentProps: {
+          valueFormat: "YYYY-MM",
+        },
         colProps: { span: 8 },
         initialValue: dayjs("2021-08", "YYYY-MM"),
       },
@@ -297,7 +301,9 @@ const ReactApp: React.FC = () => {
         name: "WeekPicker",
         label: "WeekPicker",
         component: "WeekPicker",
-        componentProps: {},
+        componentProps: {
+          valueFormat: "YYYY-MM-DD",
+        },
         colProps: { span: 8 },
         initialValue: dayjs("2021-08-01", "YYYY-MM-DD"), // 2021-08-01是21年第32周
       },
@@ -307,6 +313,7 @@ const ReactApp: React.FC = () => {
         component: "RangePicker",
         componentProps: {
           format: "YYYY-MM-DD HH:mm:ss",
+          valueFormat: "YYYY-MM-DD HH:mm:ss",
         },
         colProps: { span: 8 },
         initialValue: [
@@ -356,12 +363,11 @@ const ReactApp: React.FC = () => {
             // console.log(reactFormRef.current?.getFieldsValue(["Input"]));
             // console.log(await reactFormRef.current?.resetFields());
             // console.log(await reactFormRef.current?.validator());
-
-            console.log(getFieldsValue(true));
-            console.log(setFieldsValue({ Input: "123" }));
-            console.log(getFieldsValue(["Input"]));
-            console.log(await resetFields());
-            console.log(await validator());
+            getFieldsValue(true);
+            // console.log(setFieldsValue({ Input: "123" }));
+            // console.log(getFieldsValue(["Input"]));
+            // console.log(await resetFields());
+            // console.log(await validator());
           },
         },
         colProps: { span: 8 },

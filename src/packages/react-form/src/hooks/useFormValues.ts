@@ -220,11 +220,7 @@ const useFormValues = (formItems: TFormItemProps[], formProps: IFormProps) => {
         continue;
       }
 
-      const {
-        transformDateFunc = (date: any) => {
-          return date?.format?.("YYYY-MM-DD HH:mm:ss") ?? date;
-        },
-      } = formProps;
+      const { transformDateFunc } = formProps;
       if (isObject(value)) {
         value = transformDateFunc?.(value);
       }
