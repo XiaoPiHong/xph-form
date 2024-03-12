@@ -7,12 +7,12 @@ const useFormPorps = (formProps: IFormProps) => {
     },
     fieldMapToTime: [],
   };
-
+  const newFormProps: IFormProps = {
+    ...baseFormProps,
+    ...formProps,
+  };
   return {
-    formProps: {
-      ...baseFormProps,
-      ...formProps,
-    },
+    formProps: newFormProps,
   };
 };
 
