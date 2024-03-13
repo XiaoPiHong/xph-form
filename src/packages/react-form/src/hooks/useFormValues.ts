@@ -169,13 +169,11 @@ const useFormValues = (formItems: TFormItemProps[], formProps: IFormProps) => {
               }
               renderValues[item.name] = arr;
             } else {
-              const { componentProps } = item;
-              renderValues[item.name] = fieldValue
-                ? (componentProps as Recordable<any>)?.valueFormat
-                  ? fieldValue
-                  : dayjs(fieldValue)
-                : null;
+              renderValues[item.name] = fieldValue ? dayjs(fieldValue) : null;
             }
+            validKeys.push(item.name);
+          } else {
+            renderValues[item.name] = fieldValue;
             validKeys.push(item.name);
           }
         }

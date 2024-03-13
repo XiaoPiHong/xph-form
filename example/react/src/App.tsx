@@ -136,6 +136,7 @@ const ReactApp: React.FC = () => {
         component: "TreeSelect",
         componentProps: ({ model }) => {
           return {
+            placeholder: "请选择TreeSelect",
             treeData: [
               {
                 value: "parent 1",
@@ -241,6 +242,7 @@ const ReactApp: React.FC = () => {
         label: "Cascader",
         component: "Cascader",
         componentProps: {
+          placeholder: "请选择Cascader",
           options: [
             {
               value: "zhejiang",
@@ -371,10 +373,77 @@ const ReactApp: React.FC = () => {
             // console.log(reactFormRef.current?.getFieldsValue(["Input"]));
             // console.log(await reactFormRef.current?.resetFields());
             // console.log(await reactFormRef.current?.validator());
-            console.log(getFieldsValue());
-            // console.log(setFieldsValue({ Input: "123" }));
-            // console.log(getFieldsValue(["Input"]));
+            // console.log(getFieldsValue(true));
+            // console.log(
+            //   setFieldsValue({
+            //     Input: "Input test",
+            //     render: 23,
+            //     InputNumber: 21,
+            //     Select: null,
+            //     Transfer: [],
+            //     TreeSelect: null,
+            //     Switch: false,
+            //     Radio: false,
+            //     RadioGroup: "b",
+            //     Checkbox: false,
+            //     CheckboxGroup: ["a"],
+            //     Cascader: [],
+            //     TimePicker: "2021-08-01 03:59:59",
+            //     DatePicker: "2021-08-01",
+            //     MonthPicker: "2021-09",
+            //     WeekPicker: "2021-09-02 00:00:00",
+            //     RangePicker: ["2021-08-02", "2021-08-07"],
+            //     InputPassword: "12345678",
+            //     InputTextArea: "123456789",
+            //     AutoComplete: "Burns Bay Road Test",
+            //   })
+            // );
+            // console.log(getFieldsValue(["RangePicker"]));
             // console.log(await resetFields());
+            console.log(await validator());
+          },
+        },
+        colProps: { span: 8 },
+      },
+      {
+        name: "ResetButton",
+        label: "ResetButton",
+        component: "Button",
+        componentProps: {
+          children: "ResetButton",
+          onClick: async () => {
+            // console.log(reactFormRef.current?.getFieldsValue(true));
+            // console.log(reactFormRef.current?.setFieldsValue({ Input: "123" }));
+            // console.log(reactFormRef.current?.getFieldsValue(["Input"]));
+            // console.log(await reactFormRef.current?.resetFields());
+            // console.log(await reactFormRef.current?.validator());
+            // console.log(getFieldsValue(true));
+            // console.log(
+            //   setFieldsValue({
+            //     Input: "Input test",
+            //     render: 23,
+            //     InputNumber: 21,
+            //     Select: null,
+            //     Transfer: [],
+            //     TreeSelect: null,
+            //     Switch: false,
+            //     Radio: false,
+            //     RadioGroup: "b",
+            //     Checkbox: false,
+            //     CheckboxGroup: ["a"],
+            //     Cascader: [],
+            //     TimePicker: "2021-08-01 03:59:59",
+            //     DatePicker: "2021-08-01",
+            //     MonthPicker: "2021-09",
+            //     WeekPicker: "2021-09-02 00:00:00",
+            //     RangePicker: ["2021-08-02", "2021-08-07"],
+            //     InputPassword: "12345678",
+            //     InputTextArea: "123456789",
+            //     AutoComplete: "Burns Bay Road Test",
+            //   })
+            // );
+            // console.log(getFieldsValue(["RangePicker"]));
+            console.log(await resetFields());
             // console.log(await validator());
           },
         },
