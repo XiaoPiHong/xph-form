@@ -158,7 +158,7 @@ const useFormValues = (formItems: TFormItemProps[], formProps: IFormProps) => {
 
       // values中有值 || （当前name是`{}` || `[]`嵌套写法时且有值时）
       if (hasKey || !!constructValue) {
-        const fieldValue = constructValue || values.get(item.name);
+        const fieldValue = constructValue || values[item.name];
         if (isComponentFormItemProps(item)) {
           /** 时间类型组件需处理一下 */
           if (dateComponents.includes(item.component)) {
@@ -242,7 +242,7 @@ const useFormValues = (formItems: TFormItemProps[], formProps: IFormProps) => {
         !tryDeconstructObject(key, value, res)
       ) {
         // 没有解构成功的，按原样赋值
-        set(res, key, value);
+        res[key] = value;
       }
     }
 

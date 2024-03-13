@@ -5,12 +5,13 @@ import React from "react";
 //   IReactFormProps,
 //   IReactFormActionType,
 // } from "xph-form";
+import ReactForm from "@xph-form/form";
+import { useForm as useReactForm } from "@xph-form/hooks";
 import {
-  ReactForm,
-  useReactForm,
-  IReactFormProps,
-  IReactFormActionType,
-} from "@/xph-form";
+  IFormProps as IReactFormProps,
+  IFormActionType as IReactFormActionType,
+} from "@xph-form/types";
+
 import { InputNumber } from "antd";
 import dayjs from "dayjs";
 
@@ -193,6 +194,7 @@ const ReactApp: React.FC = () => {
         component: "Radio",
         componentProps: {},
         valuePropName: "checked",
+        initialValue: true,
         colProps: { span: 8 },
       },
       {
@@ -369,8 +371,8 @@ const ReactApp: React.FC = () => {
             // console.log(reactFormRef.current?.getFieldsValue(["Input"]));
             // console.log(await reactFormRef.current?.resetFields());
             // console.log(await reactFormRef.current?.validator());
-            getFieldsValue(true);
-            // console.log(setFieldsValue({ Input: "123" }));
+            // console.log(getFieldsValue());
+            console.log(setFieldsValue({ Input: "123" }));
             // console.log(getFieldsValue(["Input"]));
             // console.log(await resetFields());
             // console.log(await validator());
