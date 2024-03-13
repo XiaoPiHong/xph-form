@@ -32,7 +32,7 @@ export interface IFormProps {
   /** 设置字段组件的尺寸（仅限 antd 组件） */
   size?: "large" | "middle" | "small";
   /** 时间返回统一处理函数 */
-  transformDateFunc?: (date: any) => string;
+  transformDateFunc?: (date: any, format: string) => string;
   /**
    * @description 用于将表单内时间区域的应设成 2 个字段,见下方说明
    * @description 如果表单内有时间区间组件，获取到的值是一个数组，但是往往我们传递到后台需要是 2 个字段

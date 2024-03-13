@@ -310,7 +310,7 @@ const ReactApp: React.FC = () => {
         label: "WeekPicker",
         component: "WeekPicker",
         componentProps: {
-          valueFormat: "YYYY-MM-DD",
+          valueFormat: "YYYY-MM-DD HH:mm:ss",
         },
         colProps: { span: 8 },
         initialValue: dayjs("2021-08-01", "YYYY-MM-DD"), // 2021-08-01是21年第32周
@@ -320,8 +320,8 @@ const ReactApp: React.FC = () => {
         label: "RangePicker",
         component: "RangePicker",
         componentProps: {
-          format: "YYYY-MM-DD HH:mm:ss",
-          valueFormat: "YYYY-MM-DD HH:mm:ss",
+          format: "YYYY-MM-DD",
+          valueFormat: "YYYY-MM-DD",
         },
         colProps: { span: 8 },
         initialValue: [
@@ -371,8 +371,8 @@ const ReactApp: React.FC = () => {
             // console.log(reactFormRef.current?.getFieldsValue(["Input"]));
             // console.log(await reactFormRef.current?.resetFields());
             // console.log(await reactFormRef.current?.validator());
-            // console.log(getFieldsValue());
-            console.log(setFieldsValue({ Input: "123" }));
+            console.log(getFieldsValue());
+            // console.log(setFieldsValue({ Input: "123" }));
             // console.log(getFieldsValue(["Input"]));
             // console.log(await resetFields());
             // console.log(await validator());

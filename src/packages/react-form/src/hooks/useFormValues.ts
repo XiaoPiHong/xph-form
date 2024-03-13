@@ -220,13 +220,23 @@ const useFormValues = (formItems: TFormItemProps[], formProps: IFormProps) => {
         continue;
       }
 
+      const curFormItem = allItems.find((it) => it.name === key)!;
+      // transformDateFunc是全局时间处理函数，formItem的componentProps中的valueFormat优先级最高
       const { transformDateFunc } = formProps;
+      const { valueFormat } = curFormItem.componentProps as Recordable<any>;
+
       if (isObject(value)) {
-        value = transformDateFunc?.(value);
+        const objValue: Recordable<any> = value;
+        // day类型
+        if (objValue.format) {
+          value = transformDateFunc?.(objValue, valueFormat);
+        }
       }
 
       if (isArray(value) && value[0]?.format && value[1]?.format) {
-        value = value.map((item) => transformDateFunc?.(item));
+        value = value.map((valueItem) =>
+          transformDateFunc?.(valueItem, valueFormat)
+        );
       }
       // Remove spaces
       if (isString(value)) {
