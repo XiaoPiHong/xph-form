@@ -1,7 +1,13 @@
 /** api下拉选择组件待完善 */
 import React from "react";
-const ApiSelect: React.FC = () => {
-  return <div>ApiSelect</div>;
+import { Select, SelectProps } from "antd";
+
+export interface IApiSelectProps extends SelectProps {
+  api?: () => Promise<any>;
+}
+
+const ApiSelect: React.FC<IApiSelectProps> = () => {
+  return <Select></Select>;
 };
 
 export default ApiSelect;
