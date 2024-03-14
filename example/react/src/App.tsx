@@ -49,6 +49,9 @@ const ReactApp: React.FC = () => {
         componentProps: {
           placeholder: "render",
         },
+        ifShow: ({ model }) => {
+          return model.Input === "Input";
+        },
         colProps: { span: 8 },
         initialValue: 2,
         rules: [
@@ -387,9 +390,9 @@ const ReactApp: React.FC = () => {
           return {
             placeholder: "ApiSelect",
             allowClear: true,
-            params: { a: model.Input },
+            params: { a: model.Select },
             api: async (params) => {
-              console.log("render ApiSelect");
+              console.log("GET ApiSelect");
               console.log(params);
               return [
                 { label: "测试", value: "1" },
