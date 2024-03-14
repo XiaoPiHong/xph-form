@@ -33,7 +33,6 @@ componentMap.set("Switch", Switch);
 componentMap.set("Button", Button);
 componentMap.set("Radio", Radio);
 componentMap.set("RadioGroup", Radio.Group);
-// 需封装一个RadioButtonGroup
 componentMap.set("Checkbox", Checkbox);
 componentMap.set("CheckboxGroup", Checkbox.Group);
 componentMap.set("Cascader", Cascader);
