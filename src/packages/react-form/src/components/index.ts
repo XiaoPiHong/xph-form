@@ -15,12 +15,14 @@ import {
   AutoComplete,
   Upload,
 } from "antd";
+import ApiSelect from "./ApiSelect";
+
 import { TComponentPropsMap } from "../types";
 
 const componentMap = new Map<keyof TComponentPropsMap, React.FC<any>>();
 
 componentMap.set("Input", Input);
-// 需封装一个ApiSelect
+componentMap.set("ApiSelect", ApiSelect);
 componentMap.set("Select", Select);
 componentMap.set("InputNumber", InputNumber);
 // 需封装一个ApiTreeSelect

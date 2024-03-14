@@ -87,6 +87,7 @@ const ReactApp: React.FC = () => {
         },
         componentProps: ({ model }) => {
           return {
+            allowClear: true,
             placeholder: "Select",
             options: [
               { label: "测试", value: "1" },
@@ -359,6 +360,24 @@ const ReactApp: React.FC = () => {
           ],
         },
         initialValue: "Burns Bay Road",
+        colProps: { span: 8 },
+      },
+      {
+        name: "ApiSelect",
+        label: "ApiSelect",
+        component: "ApiSelect",
+        componentProps: {
+          placeholder: "ApiSelect",
+          allowClear: true,
+          api: async () => {
+            console.log("render ApiSelect");
+            return [
+              { label: "测试", value: "1" },
+              { label: "测试2", value: "2" },
+            ];
+          },
+        },
+        initialValue: "1",
         colProps: { span: 8 },
       },
       {

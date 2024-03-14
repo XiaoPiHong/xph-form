@@ -14,9 +14,11 @@ import {
   AutoCompleteProps,
   UploadProps,
 } from "antd";
+import { IApiSelectProps } from "../components/ApiSelect";
 
 export type TComponentPropsMap = {
   Select: SelectProps;
+  ApiSelect: IApiSelectProps;
   Input: InputProps;
   InputNumber: InputNumberProps;
   TreeSelect: TreeSelectProps;
