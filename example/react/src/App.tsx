@@ -29,7 +29,7 @@ const ReactApp: React.FC = () => {
         initialValue: "Input",
         componentProps: {
           onChange: (e) => {
-            console.log(e);
+            // console.log(e);
           },
         },
       },
@@ -366,16 +366,20 @@ const ReactApp: React.FC = () => {
         name: "ApiSelect",
         label: "ApiSelect",
         component: "ApiSelect",
-        componentProps: {
-          placeholder: "ApiSelect",
-          allowClear: true,
-          api: async () => {
-            console.log("render ApiSelect");
-            return [
-              { label: "测试", value: "1" },
-              { label: "测试2", value: "2" },
-            ];
-          },
+        componentProps: ({ model }) => {
+          return {
+            placeholder: "ApiSelect",
+            allowClear: true,
+            params: { a: model.Input },
+            api: async (params) => {
+              console.log("render ApiSelect");
+              console.log(params);
+              return [
+                { label: "测试", value: "1" },
+                { label: "测试2", value: "2" },
+              ];
+            },
+          };
         },
         initialValue: "1",
         colProps: { span: 8 },
@@ -393,33 +397,33 @@ const ReactApp: React.FC = () => {
             // console.log(await reactFormRef.current?.resetFields());
             // console.log(await reactFormRef.current?.validator());
             // console.log(getFieldsValue(true));
-            // console.log(
-            //   setFieldsValue({
-            //     Input: "Input test",
-            //     render: 23,
-            //     InputNumber: 21,
-            //     Select: null,
-            //     Transfer: [],
-            //     TreeSelect: null,
-            //     Switch: false,
-            //     Radio: false,
-            //     RadioGroup: "b",
-            //     Checkbox: false,
-            //     CheckboxGroup: ["a"],
-            //     Cascader: [],
-            //     TimePicker: "2021-08-01 03:59:59",
-            //     DatePicker: "2021-08-01",
-            //     MonthPicker: "2021-09",
-            //     WeekPicker: "2021-09-02 00:00:00",
-            //     RangePicker: ["2021-08-02", "2021-08-07"],
-            //     InputPassword: "12345678",
-            //     InputTextArea: "123456789",
-            //     AutoComplete: "Burns Bay Road Test",
-            //   })
-            // );
+            console.log(
+              setFieldsValue({
+                Input: "Input test",
+                render: 23,
+                InputNumber: 21,
+                Select: null,
+                Transfer: [],
+                TreeSelect: null,
+                Switch: false,
+                Radio: false,
+                RadioGroup: "b",
+                Checkbox: false,
+                CheckboxGroup: ["a"],
+                Cascader: [],
+                TimePicker: "2021-08-01 03:59:59",
+                DatePicker: "2021-08-01",
+                MonthPicker: "2021-09",
+                WeekPicker: "2021-09-02 00:00:00",
+                RangePicker: ["2021-08-02", "2021-08-07"],
+                InputPassword: "12345678",
+                InputTextArea: "123456789",
+                AutoComplete: "Burns Bay Road Test",
+              })
+            );
             // console.log(getFieldsValue(["RangePicker"]));
             // console.log(await resetFields());
-            console.log(await validator());
+            // console.log(await validator());
           },
         },
         colProps: { span: 8 },
