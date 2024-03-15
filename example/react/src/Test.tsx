@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Form, Input } from "antd";
 
-const Test: React.FC = () => {
-  console.log("render Form");
-  const [formInstance] = Form.useForm();
-  const values = Form.useWatch((values) => values, formInstance);
-  console.log("values", values);
+const FormItem = ({ instance }) => {
+  const values = Form.useWatch((values) => values, instance);
+  const model: any = useMemo(() => {
+    return values || {};
+  }, [values]);
   return (
-    <Form>
+    <div>
       <Form.Item
         label="姓名"
         name="name"
@@ -15,6 +15,18 @@ const Test: React.FC = () => {
       >
         <Input />
       </Form.Item>
+      {model.name}
+    </div>
+  );
+};
+
+const Test: React.FC = () => {
+  console.log("render Form");
+  const [formInstance] = Form.useForm();
+
+  return (
+    <Form form={formInstance}>
+      <FormItem instance={formInstance}></FormItem>
     </Form>
   );
 };

@@ -4,4 +4,4 @@ import App from "./App.tsx";
 import Test from "./Test.tsx";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(<Test />);
+ReactDOM.createRoot(document.getElementById("root")!).render(<App />);
