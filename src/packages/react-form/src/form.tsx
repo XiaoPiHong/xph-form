@@ -12,6 +12,7 @@ import {
 } from "./hooks";
 
 const Form = forwardRef((props: IFormProps, ref) => {
+  console.log("render Form");
   // console.log("Form render=============================");
   const [formInstance] = AForm.useForm();
   const { formProps } = useFormProps(props);

@@ -15,6 +15,7 @@ const FormItem: React.FC<{
   model: any;
   methods: IFormActionType;
 }> = ({ itemProps, model, methods }) => {
+  console.log("render FormItem");
   const { name, show, componentProps, disabled, colProps } = itemProps;
 
   /**

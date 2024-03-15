@@ -21,6 +21,7 @@ const ApiSelect: React.FC<IApiSelectProps> = (
     immediate = true,
     onDropdownVisibleChange: onDropdownVisibleChangeProp,
   } = apiSelectProps;
+  console.log("render ApiSelect");
   const [options, setOptions] = React.useState<Recordable<any>[]>([]);
   const getApiOptions = () => {
     if (api && isFunction(api)) {
