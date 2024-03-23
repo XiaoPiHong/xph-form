@@ -11,13 +11,13 @@ import { isEqual, isFunction } from "lodash-es";
  */
 interface IUseComonentCacheProps {
   api?: (...args) => Promise<any>;
-  immediate: boolean;
+  immediate?: boolean;
   watchSource: any;
   apiCallback: (...args) => void;
 }
 
 const useApiComonentCache = (props: IUseComonentCacheProps) => {
-  const { immediate, watchSource, api, apiCallback } = props;
+  const { immediate = true, watchSource, api, apiCallback } = props;
   /** 只会首次渲染时赋值componentCache，后续渲染时不再赋值，除非使用setComponentCache */
   const [componentCache, setComponentCache] = useState<any>(watchSource);
 

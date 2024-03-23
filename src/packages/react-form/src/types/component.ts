@@ -16,6 +16,7 @@ import {
 } from "antd";
 import { IApiSelectProps } from "../components/ApiSelect";
 import { IApiTreeSelectProps } from "../components/ApiTreeSelect";
+import { IApiTransferProps } from "../components/ApiTransfer";
 
 export type TComponentPropsMap = {
   Select: SelectProps;
@@ -25,6 +26,7 @@ export type TComponentPropsMap = {
   TreeSelect: TreeSelectProps;
   ApiTreeSelect: IApiTreeSelectProps;
   Transfer: TransferProps;
+  ApiTransfer: IApiTransferProps;
   Switch: SwitchProps;
   Button: ButtonProps;
   Radio: RadioProps;

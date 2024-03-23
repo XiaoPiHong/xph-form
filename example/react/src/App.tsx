@@ -414,8 +414,8 @@ const ReactApp: React.FC = () => {
             params: { a: "model.Select" },
             api: async (params) => {
               console.log(
-                params,
-                "GET ApiTreeSelect==========================="
+                params
+                // "GET ApiTreeSelect==========================="
               );
               return [
                 {
@@ -462,6 +462,40 @@ const ReactApp: React.FC = () => {
         ],
       },
       {
+        name: "ApiTransfer",
+        label: "ApiTransfer",
+        component: "ApiTransfer",
+        valuePropName: "targetKeys",
+        initialValue: ["1"],
+        componentProps: ({ model }) => {
+          return {
+            params: { a: model.Select },
+            api: async (params) => {
+              console.log(params, "GET ApiTransfer===========================");
+              return [
+                {
+                  key: "1",
+                  title: "标题1",
+                },
+                {
+                  key: "2",
+                  title: "标题2",
+                },
+              ];
+            },
+            render: (item) => item.title,
+          };
+        },
+        colProps: { span: 8 },
+        rules: [
+          {
+            required: true,
+            type: "array",
+            message: "ApiTransfer必填",
+          },
+        ],
+      },
+      {
         name: "Button",
         label: "Button",
         component: "Button",
@@ -482,6 +516,7 @@ const ReactApp: React.FC = () => {
                 ApiSelect: "2",
                 Select: null,
                 Transfer: [],
+                ApiTransfer: [],
                 ApiTreeSelect: null,
                 TreeSelect: null,
                 Switch: false,
