@@ -18,6 +18,7 @@ import {
 import ApiSelect from "./ApiSelect";
 import ApiTreeSelect from "./ApiTreeSelect";
 import ApiTransfer from "./ApiTransfer";
+import ApiAutoComplete from "./ApiAutoComplete";
 
 import { TComponentPropsMap } from "../types";
 
@@ -45,7 +46,7 @@ componentMap.set("WeekPicker", DatePicker.WeekPicker);
 componentMap.set("RangePicker", DatePicker.RangePicker);
 componentMap.set("InputPassword", Input.Password);
 componentMap.set("InputTextArea", Input.TextArea);
-// 需要封装一个ApiAutoComplete
+componentMap.set("ApiAutoComplete", ApiAutoComplete);
 componentMap.set("AutoComplete", AutoComplete);
 componentMap.set("Upload", Upload);
 // 需要封装一个自动上传的Upload

@@ -390,10 +390,10 @@ const ReactApp: React.FC = () => {
           return {
             placeholder: "ApiSelect",
             allowClear: true,
-            // immediate: true,
+            immediate: false,
             params: { a: model.Select },
             api: async (params) => {
-              // console.log(params, "GET ApiSelect===========================");
+              console.log(params, "GET ApiSelect===========================");
               return [
                 { label: "测试", value: "1" },
                 { label: "测试2", value: "2" },
@@ -412,10 +412,11 @@ const ReactApp: React.FC = () => {
           return {
             placeholder: "请选择ApiTreeSelect",
             params: { a: "model.Select" },
+            immediate: false,
             api: async (params) => {
               console.log(
-                params
-                // "GET ApiTreeSelect==========================="
+                params,
+                "GET ApiTreeSelect==========================="
               );
               return [
                 {
@@ -471,7 +472,7 @@ const ReactApp: React.FC = () => {
           return {
             params: { a: model.Select },
             api: async (params) => {
-              console.log(params, "GET ApiTransfer===========================");
+              // console.log(params, "GET ApiTransfer===========================");
               return [
                 {
                   key: "1",
@@ -494,6 +495,30 @@ const ReactApp: React.FC = () => {
             message: "ApiTransfer必填",
           },
         ],
+      },
+      {
+        name: "ApiAutoComplete",
+        label: "ApiAutoComplete",
+        component: "ApiAutoComplete",
+        componentProps: ({ model }) => {
+          return {
+            params: { a: model.Select },
+            immediate: false,
+            api: async (params) => {
+              console.log(
+                params,
+                "GET ApiAutoComplete==========================="
+              );
+              return [
+                { value: "Burns Bay Road" },
+                { value: "Downing Street" },
+                { value: "Wall Street" },
+              ];
+            },
+          };
+        },
+        initialValue: "Burns Bay Road",
+        colProps: { span: 8 },
       },
       {
         name: "Button",
@@ -534,6 +559,7 @@ const ReactApp: React.FC = () => {
                 InputPassword: "12345678",
                 InputTextArea: "123456789",
                 AutoComplete: "Burns Bay Road Test",
+                ApiAutoComplete: "Burns Bay Road Test",
               })
             );
             // console.log(getFieldsValue(["RangePicker"]));

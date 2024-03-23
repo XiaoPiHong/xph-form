@@ -22,7 +22,7 @@ const useApiComonentCache = (props: IUseComonentCacheProps) => {
   const [componentCache, setComponentCache] = useState<any>(watchSource);
 
   const getApiData = () => {
-    if (api && isFunction(api) && immediate) {
+    if (api && isFunction(api)) {
       watchSource
         ? api(watchSource).then(apiCallback)
         : api().then(apiCallback);
@@ -40,7 +40,7 @@ const useApiComonentCache = (props: IUseComonentCacheProps) => {
   }, [watchSource]);
 
   useEffect(() => {
-    getApiData();
+    immediate ? getApiData() : null;
   }, [componentCache]);
 
   return {

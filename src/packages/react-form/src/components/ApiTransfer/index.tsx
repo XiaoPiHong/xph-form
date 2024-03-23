@@ -11,10 +11,10 @@ export interface IApiTransferProps extends TransferProps {
 }
 
 const ApiTransfer: React.FC<IApiTransferProps> = (
-  apiSelectProps: IApiTransferProps
+  apiTransferProps: IApiTransferProps
 ) => {
   console.log("render ApiTransfer");
-  const { api, params } = apiSelectProps;
+  const { api, params } = apiTransferProps;
   const [dataSource, setDataSource] = React.useState<Recordable<any>[]>([]);
   const { getApiData: getApiDataSource } = useApiComonentCache({
     api,
@@ -24,7 +24,7 @@ const ApiTransfer: React.FC<IApiTransferProps> = (
 
   /** 把扩展的属性排除掉 */
   const getSelectProps = () => {
-    const { api, params, ...rest } = apiSelectProps;
+    const { api, params, ...rest } = apiTransferProps;
     return rest;
   };
 

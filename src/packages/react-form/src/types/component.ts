@@ -17,16 +17,14 @@ import {
 import { IApiSelectProps } from "../components/ApiSelect";
 import { IApiTreeSelectProps } from "../components/ApiTreeSelect";
 import { IApiTransferProps } from "../components/ApiTransfer";
+import { IApiAutoCompleteProps } from "../components/ApiAutoComplete";
 
 export type TComponentPropsMap = {
   Select: SelectProps;
-  ApiSelect: IApiSelectProps;
   Input: InputProps;
   InputNumber: InputNumberProps;
   TreeSelect: TreeSelectProps;
-  ApiTreeSelect: IApiTreeSelectProps;
   Transfer: TransferProps;
-  ApiTransfer: IApiTransferProps;
   Switch: SwitchProps;
   Button: ButtonProps;
   Radio: RadioProps;
@@ -43,4 +41,8 @@ export type TComponentPropsMap = {
   InputTextArea: InputProps;
   AutoComplete: AutoCompleteProps;
   Upload: UploadProps;
+  ApiSelect: IApiSelectProps;
+  ApiTreeSelect: IApiTreeSelectProps;
+  ApiTransfer: IApiTransferProps;
+  ApiAutoComplete: IApiAutoCompleteProps;
 };
