@@ -12,7 +12,7 @@ import {
   IFormActionType as IReactFormActionType,
 } from "@xph-form/types";
 
-import { InputNumber } from "antd";
+import { InputNumber, Button } from "antd";
 import dayjs from "dayjs";
 
 const ReactApp: React.FC = () => {
@@ -518,6 +518,15 @@ const ReactApp: React.FC = () => {
           };
         },
         initialValue: "Burns Bay Road",
+        colProps: { span: 8 },
+      },
+      {
+        name: "Upload",
+        label: "Upload",
+        component: "Upload",
+        componentProps: {
+          children: <Button>上传</Button>,
+        },
         colProps: { span: 8 },
       },
       {
