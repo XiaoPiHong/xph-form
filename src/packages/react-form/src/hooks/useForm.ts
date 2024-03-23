@@ -1,10 +1,11 @@
 import { Form, FormInstance } from "antd";
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { IFormActionType, IRegister } from "../types";
 
-export const useFormModel = (instance: FormInstance<any>) => {
+export const useFormModel = (...args: FormInstance<any>[]) => {
+  const params = [(values) => values, ...args];
   /** 响应式数据源 */
-  const realModel = Form.useWatch((values) => values, instance);
+  const realModel = (Form.useWatch as Function)(...params);
 
   /** 重写model */
   const rewritingModel = useMemo(() => {

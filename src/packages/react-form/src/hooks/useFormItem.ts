@@ -177,40 +177,12 @@ export const useFormItemColProps = (
   return { colProps };
 };
 
-const useFormItem = ({
-  formProps,
-  model,
-}: {
-  formProps: IFormProps;
-  model: any;
-}) => {
+const useFormItem = ({ formProps }: { formProps: IFormProps }) => {
   const { items } = formProps;
-  const formItems: TFormItemProps[] = items
-    .map((item) => {
-      const { isIfShow, isShow } = useFormItemShow(item, model);
-      const { colProps } = useFormItemColProps(item, formProps);
-      const { componentProps } = useFormItemComponentProps(item, model);
-      const { rules } = useFormItemRules({
-        item,
-        model,
-        isShow,
-        componentProps,
-      });
-      const { disabled } = useFormItemDisabled(formProps, item, model);
-      return {
-        ...item,
-        show: isShow,
-        ifShow: isIfShow,
-        rules,
-        disabled,
-        componentProps,
-        colProps,
-      };
-    })
-    .filter((item) => item.ifShow); /** 过滤出要渲染的项 */
-  return {
-    formItems,
-  };
+  const formItems: TFormItemProps[] = items.map((item) => {
+    return { ...item };
+  });
+  return { formItems };
 };
 
 export default useFormItem;

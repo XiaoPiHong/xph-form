@@ -10,3 +10,5 @@ export { default as useFormAction } from "./useFormAction";
 export * from "./useFormAction";
 export { default as useFormProps } from "./useFormProps";
 export * from "./useFormProps";
+export { default as useApiComonentCache } from "./useApiComonentCache";
+export * from "./useApiComonentCache";

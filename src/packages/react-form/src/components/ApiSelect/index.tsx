@@ -1,7 +1,7 @@
 import React from "react";
 import { Select, SelectProps } from "antd";
 import { Recordable } from "../../types";
-import { isFunction } from "lodash-es";
+import { useApiComonentCache } from "../../hooks";
 
 export interface IApiSelectProps extends SelectProps {
   /** 扩展api */
@@ -15,31 +15,28 @@ export interface IApiSelectProps extends SelectProps {
 const ApiSelect: React.FC<IApiSelectProps> = (
   apiSelectProps: IApiSelectProps
 ) => {
+  console.log("render ApiSelect");
   const {
     api,
     params,
     immediate = true,
     onDropdownVisibleChange: onDropdownVisibleChangeProp,
   } = apiSelectProps;
-  console.log("render ApiSelect");
   const [options, setOptions] = React.useState<Recordable<any>[]>([]);
-  const getApiOptions = () => {
-    if (api && isFunction(api)) {
-      params ? api(params).then(setOptions) : api().then(setOptions);
-    }
-  };
+  const { getApiData: getApiOptions } = useApiComonentCache({
+    api,
+    immediate,
+    watchSource: params,
+    apiCallback: setOptions,
+  });
+
   const onDropdownVisibleChange = (visible) => {
     if (visible) {
+      /** 目前每次展开都会请求 */
       !immediate && getApiOptions();
     }
     onDropdownVisibleChangeProp && onDropdownVisibleChangeProp(visible);
   };
-  React.useEffect(() => {
-    immediate ? getApiOptions() : null;
-    () => {
-      setOptions([]);
-    };
-  }, [api, params]);
 
   /** 把扩展的属性排除掉 */
   const getSelectProps = () => {

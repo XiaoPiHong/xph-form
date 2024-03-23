@@ -392,8 +392,7 @@ const ReactApp: React.FC = () => {
             allowClear: true,
             params: { a: model.Select },
             api: async (params) => {
-              console.log("GET ApiSelect");
-              console.log(params);
+              console.log(params, "GET ApiSelect===========================");
               return [
                 { label: "测试", value: "1" },
                 { label: "测试2", value: "2" },

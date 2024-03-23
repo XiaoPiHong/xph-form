@@ -1,11 +1,20 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { Form, Input } from "antd";
 
-const FormItem = ({ instance }) => {
-  const values = Form.useWatch((values) => values, instance);
+const FormItem = React.memo(() => {
+  console.log("render FormItem");
+  const values = Form.useWatch((values) => values);
   const model: any = useMemo(() => {
     return values || {};
   }, [values]);
+
+  useEffect(() => {
+    console.log("FormItem mounted");
+    return () => {
+      console.log("FormItem unmounted");
+    };
+  }, []);
+
   return (
     <div>
       <Form.Item
@@ -18,7 +27,7 @@ const FormItem = ({ instance }) => {
       {model.name}
     </div>
   );
-};
+});
 
 const Test: React.FC = () => {
   console.log("render Form");
@@ -26,8 +35,9 @@ const Test: React.FC = () => {
 
   return (
     <Form form={formInstance}>
-      <FormItem instance={formInstance}></FormItem>
+      <FormItem></FormItem>
     </Form>
   );
 };
+
 export default Test;

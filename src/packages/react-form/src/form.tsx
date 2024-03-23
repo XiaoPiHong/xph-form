@@ -4,7 +4,6 @@ import FormItem from "./components/FormItem";
 import React, { forwardRef, useImperativeHandle, useEffect } from "react";
 import {
   useFormProps,
-  useFormModel,
   useFormItem,
   useFormRow,
   useFormAction,
@@ -16,8 +15,7 @@ const Form = forwardRef((props: IFormProps, ref) => {
   // console.log("Form render=============================");
   const [formInstance] = AForm.useForm();
   const { formProps } = useFormProps(props);
-  const { rewritingModel } = useFormModel(formInstance);
-  const { formItems } = useFormItem({ formProps, model: rewritingModel });
+  const { formItems } = useFormItem({ formProps });
   const { handleFormatRenderValues, handleFormatReturnValues } = useFormValues(
     formItems,
     formProps
@@ -44,9 +42,9 @@ const Form = forwardRef((props: IFormProps, ref) => {
       layout,
       wrapperCol,
       labelCol,
-      colon = false,
+      colon,
       disabled,
-      labelWrap = true,
+      labelWrap,
       labelAlign,
       scrollToFirstError,
       size,
@@ -89,11 +87,11 @@ const Form = forwardRef((props: IFormProps, ref) => {
       {formItemRows.map((row, rowIndex) => {
         return (
           <Row key={rowIndex}>
-            {row.map((item, itemIndex) => (
+            {row.map((itemProps, itemPropsIndex) => (
               <FormItem
-                key={itemIndex}
-                itemProps={item}
-                model={rewritingModel}
+                key={itemPropsIndex}
+                formProps={formProps}
+                itemProps={itemProps}
                 methods={methods}
               />
             ))}
