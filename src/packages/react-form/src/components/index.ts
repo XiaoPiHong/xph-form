@@ -16,6 +16,7 @@ import {
   Upload,
 } from "antd";
 import ApiSelect from "./ApiSelect";
+import ApiTreeSelect from "./ApiTreeSelect";
 
 import { TComponentPropsMap } from "../types";
 
@@ -25,7 +26,7 @@ componentMap.set("Input", Input);
 componentMap.set("ApiSelect", ApiSelect);
 componentMap.set("Select", Select);
 componentMap.set("InputNumber", InputNumber);
-// 需封装一个ApiTreeSelect
+componentMap.set("ApiTreeSelect", ApiTreeSelect);
 componentMap.set("TreeSelect", TreeSelect);
 // 需封装一个ApiTransfer
 componentMap.set("Transfer", Transfer);

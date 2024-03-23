@@ -393,7 +393,7 @@ const ReactApp: React.FC = () => {
             // immediate: true,
             params: { a: model.Select },
             api: async (params) => {
-              console.log(params, "GET ApiSelect===========================");
+              // console.log(params, "GET ApiSelect===========================");
               return [
                 { label: "测试", value: "1" },
                 { label: "测试2", value: "2" },
@@ -403,6 +403,63 @@ const ReactApp: React.FC = () => {
         },
         initialValue: "1",
         colProps: { span: 8 },
+      },
+      {
+        name: "ApiTreeSelect",
+        label: "ApiTreeSelect",
+        component: "ApiTreeSelect",
+        componentProps: ({ model }) => {
+          return {
+            placeholder: "请选择ApiTreeSelect",
+            params: { a: "model.Select" },
+            api: async (params) => {
+              console.log(
+                params,
+                "GET ApiTreeSelect==========================="
+              );
+              return [
+                {
+                  value: "parent 1",
+                  title: "parent 1",
+                  children: [
+                    {
+                      value: "parent 1-0",
+                      title: "parent 1-0",
+                      children: [
+                        {
+                          value: "leaf1",
+                          title: "leaf1",
+                        },
+                        {
+                          value: "leaf2",
+                          title: "leaf2",
+                        },
+                      ],
+                    },
+                    {
+                      value: "parent 1-1",
+                      title: "parent 1-1",
+                      children: [
+                        {
+                          value: "leaf3",
+                          title: <b style={{ color: "#08c" }}>leaf3</b>,
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ];
+            },
+          };
+        },
+        initialValue: "leaf3",
+        colProps: { span: 8 },
+        rules: [
+          {
+            required: true,
+            message: "ApiTreeSelect必填",
+          },
+        ],
       },
       {
         name: "Button",
@@ -425,6 +482,7 @@ const ReactApp: React.FC = () => {
                 ApiSelect: "2",
                 Select: null,
                 Transfer: [],
+                ApiTreeSelect: null,
                 TreeSelect: null,
                 Switch: false,
                 Radio: false,
