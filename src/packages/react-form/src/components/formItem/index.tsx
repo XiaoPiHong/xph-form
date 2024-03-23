@@ -23,10 +23,10 @@ const FormItem: React.FC<{
   formProps: IFormProps;
   itemProps: TFormItemProps;
   methods: IFormActionType;
-  firstrendered: Boolean;
-}> = ({ formProps, itemProps, methods, firstrendered }) => {
+}> = ({ formProps, itemProps, methods }) => {
   console.log("render FormItem");
   const { rewritingModel } = useFormModel();
+  console.log(rewritingModel, "rewritingModel==============");
   const { isIfShow, isShow } = useFormItemShow(itemProps, rewritingModel);
   const { colProps } = useFormItemColProps(itemProps, formProps);
   const { componentProps } = useFormItemComponentProps(
@@ -69,13 +69,7 @@ const FormItem: React.FC<{
   const renderContent = () => {
     if (isComponent) {
       const Component = componentMap.get(itemProps.component)!;
-      return (
-        <Component
-          {...componentProps}
-          disabled={disabled}
-          firstrendered={firstrendered}
-        />
-      );
+      return <Component {...componentProps} disabled={disabled} />;
     }
     if (isRender) {
       return itemProps.render({
@@ -84,7 +78,6 @@ const FormItem: React.FC<{
         disabled,
         methods,
         componentProps,
-        firstrendered,
       } as IFRenderProps);
     }
     return null;

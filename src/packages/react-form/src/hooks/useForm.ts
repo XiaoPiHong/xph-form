@@ -9,12 +9,14 @@ export const useFormModel = (...args: FormInstance<any>[]) => {
 
   /** 重写model */
   const rewritingModel = useMemo(() => {
-    return realModel || {};
+    return realModel;
   }, [realModel]);
+
+  const [rewritingModels] = useState({});
 
   return {
     realModel,
-    rewritingModel,
+    rewritingModel: {},
   };
 };
 
