@@ -40,8 +40,6 @@ const useApiComonentCache = (props: IUseComonentCacheProps) => {
   }, [watchSource]);
 
   useEffect(() => {
-    console.log(watchSource, "========================");
-    console.log(componentCache, "========================");
     getApiData();
   }, [componentCache]);
 

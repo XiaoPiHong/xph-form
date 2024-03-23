@@ -390,6 +390,7 @@ const ReactApp: React.FC = () => {
           return {
             placeholder: "ApiSelect",
             allowClear: true,
+            // immediate: true,
             params: { a: model.Select },
             api: async (params) => {
               console.log(params, "GET ApiSelect===========================");
