@@ -528,6 +528,7 @@ const ReactApp: React.FC = () => {
           children: <Button>上传</Button>,
         },
         colProps: { span: 8 },
+        valuePropName: "fileList",
       },
       {
         name: "Button",
