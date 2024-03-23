@@ -26,7 +26,6 @@ const FormItem: React.FC<{
 }> = ({ formProps, itemProps, methods }) => {
   console.log("render FormItem");
   const { rewritingModel } = useFormModel();
-  console.log(rewritingModel, "rewritingModel==============");
   const { isIfShow, isShow } = useFormItemShow(itemProps, rewritingModel);
   const { colProps } = useFormItemColProps(itemProps, formProps);
   const { componentProps } = useFormItemComponentProps(
