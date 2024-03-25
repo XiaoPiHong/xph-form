@@ -1,16 +1,16 @@
 import React from "react";
-// import {
-//   ReactForm,
-//   useReactForm,
-//   IReactFormProps,
-//   IReactFormActionType,
-// } from "xph-form";
-import ReactForm from "@xph-form/form";
-import { useForm as useReactForm } from "@xph-form/hooks";
 import {
-  IFormProps as IReactFormProps,
-  IFormActionType as IReactFormActionType,
-} from "@xph-form/types";
+  ReactForm,
+  useReactForm,
+  IReactFormProps,
+  IReactFormActionType,
+} from "xph-form";
+// import ReactForm from "@xph-form/form";
+// import { useForm as useReactForm } from "@xph-form/hooks";
+// import {
+//   IFormProps as IReactFormProps,
+//   IFormActionType as IReactFormActionType,
+// } from "@xph-form/types";
 
 import { InputNumber, Button } from "antd";
 import dayjs from "dayjs";
