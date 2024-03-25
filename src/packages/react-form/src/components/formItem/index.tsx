@@ -25,7 +25,7 @@ const FormItem: React.FC<{
   methods: IFormActionType;
 }> = ({ formProps, itemProps, methods }) => {
   console.log("render FormItem");
-  const { rewritingModel } = useFormModel();
+  const { rewritingModel } = useFormModel(formProps);
   const { isIfShow, isShow } = useFormItemShow(itemProps, rewritingModel);
   const { colProps } = useFormItemColProps(itemProps, formProps);
   const { componentProps } = useFormItemComponentProps(

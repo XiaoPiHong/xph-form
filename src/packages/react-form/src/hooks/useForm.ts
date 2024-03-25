@@ -1,15 +1,18 @@
-import { Form, FormInstance } from "antd";
+import { Form } from "antd";
 import { useMemo, useEffect } from "react";
-import { IFormActionType, IRegister } from "../types";
+import { IFormProps, IFormActionType, IRegister } from "../types";
 
-export const useFormModel = (...args: FormInstance<any>[]) => {
-  const params = [(values) => values, ...args];
-  /** 响应式数据源 */
-  const realModel = (Form.useWatch as Function)(...params);
+export const useFormModel = (formProps: IFormProps) => {
+  const baseValues: any = {};
+  formProps.items.forEach((item) => {
+    baseValues[item.name] = item.initialValue;
+  });
+  /** 响应式数据源，Form.useWatch是一个异步函数 */
+  const realModel = Form.useWatch((values) => values);
 
   /** 重写model */
   const rewritingModel = useMemo(() => {
-    return realModel || {};
+    return realModel || baseValues;
   }, [realModel]);
 
   return {
