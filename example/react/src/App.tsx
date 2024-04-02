@@ -49,8 +49,11 @@ const ReactApp: React.FC = () => {
         componentProps: {
           placeholder: "render",
         },
+        show: ({ model }) => {
+          return model.Input !== "Input";
+        },
         ifShow: ({ model }) => {
-          return model.Input === "Input";
+          return model.Input;
         },
         colProps: { span: 8 },
         initialValue: 2,
@@ -65,15 +68,13 @@ const ReactApp: React.FC = () => {
         name: "InputNumber",
         label: "InputNumber",
         component: "InputNumber",
-        componentProps: ({ model }) => {
-          return {
-            onBlur: (e) => {
-              console.log(e);
-            },
-            onChange: (e) => {
-              console.log(e);
-            },
-          };
+        componentProps: {
+          onBlur: (e) => {
+            console.log(e);
+          },
+          onChange: (e) => {
+            console.log(e);
+          },
         },
         initialValue: 2,
         colProps: { span: 8 },
@@ -82,24 +83,16 @@ const ReactApp: React.FC = () => {
         name: "Select",
         label: "Select",
         component: "Select",
-        ifShow: ({ model }) => {
-          return true;
-        },
-        show: ({ model }) => {
-          return true;
-        },
-        componentProps: ({ model }) => {
-          return {
-            allowClear: true,
-            placeholder: "Select",
-            options: [
-              { label: "测试", value: "1" },
-              { label: "测试2", value: "2" },
-            ],
-            onChange: (e) => {
-              console.log(e);
-            },
-          };
+        componentProps: {
+          allowClear: true,
+          placeholder: "Select",
+          options: [
+            { label: "测试", value: "1" },
+            { label: "测试2", value: "2" },
+          ],
+          onChange: (e) => {
+            console.log(e);
+          },
         },
         initialValue: "1",
         colProps: { span: 8 },
@@ -110,20 +103,18 @@ const ReactApp: React.FC = () => {
         component: "Transfer",
         valuePropName: "targetKeys",
         initialValue: ["1"],
-        componentProps: ({ model }) => {
-          return {
-            dataSource: [
-              {
-                key: "1",
-                title: "标题1",
-              },
-              {
-                key: "2",
-                title: "标题2",
-              },
-            ],
-            render: (item) => item.title,
-          };
+        componentProps: {
+          dataSource: [
+            {
+              key: "1",
+              title: "标题1",
+            },
+            {
+              key: "2",
+              title: "标题2",
+            },
+          ],
+          render: (item) => item.title,
         },
         colProps: { span: 8 },
         rules: [
@@ -138,42 +129,40 @@ const ReactApp: React.FC = () => {
         name: "TreeSelect",
         label: "TreeSelect",
         component: "TreeSelect",
-        componentProps: ({ model }) => {
-          return {
-            placeholder: "请选择TreeSelect",
-            treeData: [
-              {
-                value: "parent 1",
-                title: "parent 1",
-                children: [
-                  {
-                    value: "parent 1-0",
-                    title: "parent 1-0",
-                    children: [
-                      {
-                        value: "leaf1",
-                        title: "leaf1",
-                      },
-                      {
-                        value: "leaf2",
-                        title: "leaf2",
-                      },
-                    ],
-                  },
-                  {
-                    value: "parent 1-1",
-                    title: "parent 1-1",
-                    children: [
-                      {
-                        value: "leaf3",
-                        title: <b style={{ color: "#08c" }}>leaf3</b>,
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          };
+        componentProps: {
+          placeholder: "请选择TreeSelect",
+          treeData: [
+            {
+              value: "parent 1",
+              title: "parent 1",
+              children: [
+                {
+                  value: "parent 1-0",
+                  title: "parent 1-0",
+                  children: [
+                    {
+                      value: "leaf1",
+                      title: "leaf1",
+                    },
+                    {
+                      value: "leaf2",
+                      title: "leaf2",
+                    },
+                  ],
+                },
+                {
+                  value: "parent 1-1",
+                  title: "parent 1-1",
+                  children: [
+                    {
+                      value: "leaf3",
+                      title: <b style={{ color: "#08c" }}>leaf3</b>,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
         initialValue: "leaf3",
         colProps: { span: 8 },
