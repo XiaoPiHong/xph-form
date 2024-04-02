@@ -27,6 +27,13 @@ function buildCssTask(srcFolder: string[], distFolder: string) {
   return gulp.src(srcFolder).pipe(postcss(plugins)).pipe(gulp.dest(distFolder));
 }
 
+/** 复制md文件 */
+function copyMdTask(srcFolder, distFolder) {
+  return gulp.src(srcFolder).pipe(gulp.dest(distFolder));
+}
+
+gulp.task("copy-md", () => copyMdTask(["src/**/*.md"], "dist"));
+
 gulp.task("compile-ts", () =>
   buildTsTask("tsconfig.gulp.json", ["src/**/*.{ts,tsx,vue}"], "dist")
 );
@@ -35,4 +42,6 @@ gulp.task("compile-css", () =>
   buildCssTask(["src/**/*.css", "!**/node_modules/**"], "dist")
 );
 
-gulp.task("default", gulp.parallel("compile-ts", "compile-css"));
+gulp.task("copy-md", () => copyMdTask(["*.md"], "dist"));
+
+gulp.task("default", gulp.parallel("compile-ts", "compile-css", "copy-md"));

@@ -2,6 +2,18 @@
 
 This is a configurable form component that supports Vue and React
 
+## Using npm or yarn
+
+```bash
+npm install xph-form --save
+```
+
+```bash
+yarn add xph-form
+```
+
+If you are in a bad network environment, you can try other registries and tools like cnpm.
+
 ## React example
 
 ```javascript
@@ -621,3 +633,11 @@ const ReactApp: React.FC = () => {
 
 export default ReactApp;
 ```
+
+## Keywords
+
+- React
+- Vue
+- component
+- form
+- configurable-form

@@ -6,7 +6,8 @@
     "vue",
     "react",
     "form",
-    "component"
+    "component",
+    "configurable-form"
   ],
   "files": [
     "dist"
