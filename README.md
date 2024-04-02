@@ -61,8 +61,11 @@ const ReactApp: React.FC = () => {
         componentProps: {
           placeholder: "render",
         },
+        show: ({ model }) => {
+          return model.Input !== "Input";
+        },
         ifShow: ({ model }) => {
-          return model.Input === "Input";
+          return model.Input;
         },
         colProps: { span: 8 },
         initialValue: 2,
@@ -77,15 +80,13 @@ const ReactApp: React.FC = () => {
         name: "InputNumber",
         label: "InputNumber",
         component: "InputNumber",
-        componentProps: ({ model }) => {
-          return {
-            onBlur: (e) => {
-              console.log(e);
-            },
-            onChange: (e) => {
-              console.log(e);
-            },
-          };
+        componentProps: {
+          onBlur: (e) => {
+            console.log(e);
+          },
+          onChange: (e) => {
+            console.log(e);
+          },
         },
         initialValue: 2,
         colProps: { span: 8 },
@@ -94,24 +95,16 @@ const ReactApp: React.FC = () => {
         name: "Select",
         label: "Select",
         component: "Select",
-        ifShow: ({ model }) => {
-          return true;
-        },
-        show: ({ model }) => {
-          return true;
-        },
-        componentProps: ({ model }) => {
-          return {
-            allowClear: true,
-            placeholder: "Select",
-            options: [
-              { label: "测试", value: "1" },
-              { label: "测试2", value: "2" },
-            ],
-            onChange: (e) => {
-              console.log(e);
-            },
-          };
+        componentProps: {
+          allowClear: true,
+          placeholder: "Select",
+          options: [
+            { label: "测试", value: "1" },
+            { label: "测试2", value: "2" },
+          ],
+          onChange: (e) => {
+            console.log(e);
+          },
         },
         initialValue: "1",
         colProps: { span: 8 },
@@ -122,20 +115,18 @@ const ReactApp: React.FC = () => {
         component: "Transfer",
         valuePropName: "targetKeys",
         initialValue: ["1"],
-        componentProps: ({ model }) => {
-          return {
-            dataSource: [
-              {
-                key: "1",
-                title: "标题1",
-              },
-              {
-                key: "2",
-                title: "标题2",
-              },
-            ],
-            render: (item) => item.title,
-          };
+        componentProps: {
+          dataSource: [
+            {
+              key: "1",
+              title: "标题1",
+            },
+            {
+              key: "2",
+              title: "标题2",
+            },
+          ],
+          render: (item) => item.title,
         },
         colProps: { span: 8 },
         rules: [
@@ -150,42 +141,40 @@ const ReactApp: React.FC = () => {
         name: "TreeSelect",
         label: "TreeSelect",
         component: "TreeSelect",
-        componentProps: ({ model }) => {
-          return {
-            placeholder: "请选择TreeSelect",
-            treeData: [
-              {
-                value: "parent 1",
-                title: "parent 1",
-                children: [
-                  {
-                    value: "parent 1-0",
-                    title: "parent 1-0",
-                    children: [
-                      {
-                        value: "leaf1",
-                        title: "leaf1",
-                      },
-                      {
-                        value: "leaf2",
-                        title: "leaf2",
-                      },
-                    ],
-                  },
-                  {
-                    value: "parent 1-1",
-                    title: "parent 1-1",
-                    children: [
-                      {
-                        value: "leaf3",
-                        title: <b style={{ color: "#08c" }}>leaf3</b>,
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          };
+        componentProps: {
+          placeholder: "请选择TreeSelect",
+          treeData: [
+            {
+              value: "parent 1",
+              title: "parent 1",
+              children: [
+                {
+                  value: "parent 1-0",
+                  title: "parent 1-0",
+                  children: [
+                    {
+                      value: "leaf1",
+                      title: "leaf1",
+                    },
+                    {
+                      value: "leaf2",
+                      title: "leaf2",
+                    },
+                  ],
+                },
+                {
+                  value: "parent 1-1",
+                  title: "parent 1-1",
+                  children: [
+                    {
+                      value: "leaf3",
+                      title: <b style={{ color: "#08c" }}>leaf3</b>,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
         initialValue: "leaf3",
         colProps: { span: 8 },
@@ -537,10 +526,52 @@ const ReactApp: React.FC = () => {
         label: "Upload",
         component: "Upload",
         componentProps: {
-          children: <Button>上传</Button>,
+          children: "上传",
+          showUploadList: {},
+          listType: "picture-card",
+          beforeUpload(file) {
+            return false;
+          },
+          onChange(info) {
+            const { file, fileList } = info;
+            const { status } = file;
+            switch (status) {
+              case "removed": {
+                setFieldsValue({
+                  Upload: fileList,
+                });
+                break;
+              }
+              default: {
+                // 上传（此处由于没有上传服务器，默认是假上传，默认都是成功）
+                setFieldsValue({
+                  Upload: [
+                    {
+                      uid: "-1",
+                      name: "image.png",
+                      status: "done",
+                      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+                    },
+                  ],
+                });
+              }
+            }
+          },
         },
         colProps: { span: 8 },
         valuePropName: "fileList",
+        initialValue: [],
+        rules: [
+          {
+            validator: async (rule, value) => {
+              console.log("validate=================", value);
+              if (value && value.length === 0) {
+                return Promise.reject("请上传文件");
+              }
+              return Promise.resolve();
+            },
+          },
+        ],
       },
       {
         name: "Button",
@@ -582,6 +613,7 @@ const ReactApp: React.FC = () => {
                 InputTextArea: "123456789",
                 AutoComplete: "Burns Bay Road Test",
                 ApiAutoComplete: "Burns Bay Road Test",
+                Upload: [],
               })
             );
             // console.log(getFieldsValue(["RangePicker"]));
@@ -599,6 +631,18 @@ const ReactApp: React.FC = () => {
           children: "ResetButton",
           onClick: async () => {
             console.log(await resetFields());
+          },
+        },
+        colProps: { span: 8 },
+      },
+      {
+        name: "ValidateButton",
+        label: "ValidateButton",
+        component: "Button",
+        componentProps: {
+          children: "ValidateButton",
+          onClick: async () => {
+            console.log(await validator());
           },
         },
         colProps: { span: 8 },

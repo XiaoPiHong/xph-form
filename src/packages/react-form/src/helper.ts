@@ -1,5 +1,10 @@
 import { RuleObject } from "antd/es/form";
-import { TComponentPropsMap } from "./types";
+import {
+  TComponentPropsMap,
+  TFormItemProps,
+  isRenderFormItemProps,
+} from "./types";
+import { isFunction } from "lodash-es";
 
 /**
  * @description: 生成placeholder
@@ -51,3 +56,19 @@ export const dateComponents = [
   "WeekPicker",
   "TimePicker",
 ];
+
+/** 判断当前项是否需要监听表单的model值 */
+export const isNeedWatchModel = (itemProps: TFormItemProps) => {
+  const { show, ifShow, required, disabled, componentProps } = itemProps;
+  if (
+    isFunction(show) ||
+    isFunction(ifShow) ||
+    isFunction(required) ||
+    isFunction(disabled) ||
+    isFunction(componentProps) ||
+    isRenderFormItemProps(itemProps)
+  ) {
+    return true;
+  }
+  return false;
+};

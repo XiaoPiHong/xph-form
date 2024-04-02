@@ -1,8 +1,23 @@
 import { Form } from "antd";
 import { useMemo, useEffect } from "react";
-import { IFormProps, IFormActionType, IRegister } from "../types";
+import { isNeedWatchModel } from "../helper";
+import {
+  IFormProps,
+  IFormActionType,
+  IRegister,
+  TFormItemProps,
+} from "../types";
 
-export const useFormModel = (formProps: IFormProps) => {
+/**
+ * 注意：
+ * useWatch会监听整个表单值得变化，导致重新渲染formItem，所以要根据实际情况来判断到底是否需要监听表单得值，
+ * 何时需要监听：只有使用model的formItem属性才需要监听，即当show、ifShow、required、disabled、componentProps、render有其中之一为函数时才需要监听
+ * 所以当没有使用model的表单项尽量使用值写法，使用函数写法对表单性能开销很大
+ */
+export const useFormModel = (
+  formProps: IFormProps,
+  itemProps: TFormItemProps
+) => {
   const defineFunction = (obj: any) => {
     Object.keys(obj).forEach((key) => {
       Object.defineProperty(obj, key, {
@@ -20,7 +35,9 @@ export const useFormModel = (formProps: IFormProps) => {
     baseValues[item.name] = item.initialValue;
   });
   /** 响应式数据源，Form.useWatch是一个异步函数 */
-  const realModel = Form.useWatch((values) => defineFunction(values));
+  const realModel = isNeedWatchModel(itemProps)
+    ? Form.useWatch((values) => defineFunction(values))
+    : null;
 
   /** 重写model */
   const rewritingModel = useMemo(() => {
