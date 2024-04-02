@@ -12,7 +12,7 @@ import {
   IFormActionType as IReactFormActionType,
 } from "@xph-form/types";
 
-import { InputNumber, Button } from "antd";
+import { InputNumber } from "antd";
 import dayjs from "dayjs";
 
 const ReactApp: React.FC = () => {
@@ -525,10 +525,52 @@ const ReactApp: React.FC = () => {
         label: "Upload",
         component: "Upload",
         componentProps: {
-          children: <Button>上传</Button>,
+          children: "上传",
+          showUploadList: {},
+          listType: "picture-card",
+          beforeUpload(file) {
+            return false;
+          },
+          onChange(info) {
+            const { file, fileList } = info;
+            const { status } = file;
+            switch (status) {
+              case "removed": {
+                setFieldsValue({
+                  Upload: fileList,
+                });
+                break;
+              }
+              default: {
+                // 上传（此处由于没有上传服务器，默认是假上传，默认都是成功）
+                setFieldsValue({
+                  Upload: [
+                    {
+                      uid: "-1",
+                      name: "image.png",
+                      status: "done",
+                      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+                    },
+                  ],
+                });
+              }
+            }
+          },
         },
         colProps: { span: 8 },
         valuePropName: "fileList",
+        initialValue: [],
+        rules: [
+          {
+            validator: async (rule, value) => {
+              console.log("validate=================", value);
+              if (value && value.length === 0) {
+                return Promise.reject("请上传文件");
+              }
+              return Promise.resolve();
+            },
+          },
+        ],
       },
       {
         name: "Button",
@@ -570,6 +612,7 @@ const ReactApp: React.FC = () => {
                 InputTextArea: "123456789",
                 AutoComplete: "Burns Bay Road Test",
                 ApiAutoComplete: "Burns Bay Road Test",
+                Upload: [],
               })
             );
             // console.log(getFieldsValue(["RangePicker"]));
@@ -587,6 +630,18 @@ const ReactApp: React.FC = () => {
           children: "ResetButton",
           onClick: async () => {
             console.log(await resetFields());
+          },
+        },
+        colProps: { span: 8 },
+      },
+      {
+        name: "ValidateButton",
+        label: "ValidateButton",
+        component: "Button",
+        componentProps: {
+          children: "ValidateButton",
+          onClick: async () => {
+            console.log(await validator());
           },
         },
         colProps: { span: 8 },
