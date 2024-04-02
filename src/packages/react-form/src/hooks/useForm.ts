@@ -3,16 +3,28 @@ import { useMemo, useEffect } from "react";
 import { IFormProps, IFormActionType, IRegister } from "../types";
 
 export const useFormModel = (formProps: IFormProps) => {
+  const defineFunction = (obj: any) => {
+    Object.keys(obj).forEach((key) => {
+      Object.defineProperty(obj, key, {
+        value: obj[key], // 保留原始值
+        writable: false, // 设置为不可写
+        enumerable: true, // 可枚举
+        configurable: false, // 可配置
+      });
+    });
+    return obj;
+  };
+
   const baseValues: any = {};
   formProps.items.forEach((item) => {
     baseValues[item.name] = item.initialValue;
   });
   /** 响应式数据源，Form.useWatch是一个异步函数 */
-  const realModel = Form.useWatch((values) => values);
+  const realModel = Form.useWatch((values) => defineFunction(values));
 
   /** 重写model */
   const rewritingModel = useMemo(() => {
-    return realModel || baseValues;
+    return realModel || defineFunction(baseValues);
   }, [realModel]);
 
   return {
