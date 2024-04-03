@@ -379,7 +379,7 @@ const ReactApp: React.FC = () => {
           return {
             placeholder: "ApiSelect",
             allowClear: true,
-            immediate: false,
+            immediate: true,
             params: { a: model.Select },
             api: async (params) => {
               console.log(params, "GET ApiSelect===========================");
@@ -400,8 +400,8 @@ const ReactApp: React.FC = () => {
         componentProps: ({ model }) => {
           return {
             placeholder: "请选择ApiTreeSelect",
-            params: { a: "model.Select" },
-            immediate: false,
+            params: { a: model.Select },
+            immediate: true,
             api: async (params) => {
               console.log(
                 params,
@@ -492,7 +492,7 @@ const ReactApp: React.FC = () => {
         componentProps: ({ model }) => {
           return {
             params: { a: model.Select },
-            immediate: false,
+            immediate: true,
             api: async (params) => {
               console.log(
                 params,
@@ -653,7 +653,7 @@ const ReactApp: React.FC = () => {
    *
    * 第二种调用form组件api的方式，通过封装的useReactForm方法
    *=============================================
-   *  */
+   * */
   const [register, { setFieldsValue, getFieldsValue, resetFields, validator }] =
     useReactForm();
   return (

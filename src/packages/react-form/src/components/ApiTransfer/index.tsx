@@ -23,12 +23,12 @@ const ApiTransfer: React.FC<IApiTransferProps> = (
   });
 
   /** 把扩展的属性排除掉 */
-  const getSelectProps = () => {
+  const getTransferProps = () => {
     const { api, params, ...rest } = apiTransferProps;
     return rest;
   };
 
-  return <Transfer {...getSelectProps()} dataSource={dataSource}></Transfer>;
+  return <Transfer {...getTransferProps()} dataSource={dataSource}></Transfer>;
 };
 
 export default ApiTransfer;

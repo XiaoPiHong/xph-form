@@ -39,14 +39,14 @@ const ApiAutoComplete: React.FC<IApiAutoCompleteProps> = (
   };
 
   /** 把扩展的属性排除掉 */
-  const getSelectProps = () => {
+  const getAutoCompleteProps = () => {
     const { api, params, immediate, ...rest } = apiAutoCompleteProps;
     return rest;
   };
 
   return (
     <AutoComplete
-      {...getSelectProps()}
+      {...getAutoCompleteProps()}
       options={options}
       onDropdownVisibleChange={onDropdownVisibleChange}
     ></AutoComplete>
