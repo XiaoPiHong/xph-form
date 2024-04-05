@@ -2,6 +2,10 @@
   "private": true,
   "name": "@xph-form/vue-form",
   "scripts": {},
-  "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "ant-design-vue": "4.x",
+    "vue": "^3.4.21",
+    "lodash-es": "^4.17.21",
+    "dayjs": "^1.11.10"
+  }
 }
