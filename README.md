@@ -14,7 +14,7 @@ yarn add xph-form
 
 If you are in a bad network environment, you can try other registries and tools like cnpm.
 
-## example
+## Example
 
 ```javascript
 import React from "react";
