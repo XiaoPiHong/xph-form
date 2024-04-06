@@ -1,6 +1,6 @@
 # xph-form
 
-This is a configurable form component that supports Vue and React
+This is a configurable form component that supports React
 
 ## Using npm or yarn
 
@@ -14,7 +14,7 @@ yarn add xph-form
 
 If you are in a bad network environment, you can try other registries and tools like cnpm.
 
-## React example
+## example
 
 ```javascript
 import React from "react";
@@ -680,8 +680,8 @@ export default ReactApp;
 
 ## Keywords
 
-- React
-- Vue
+- react
+- ant-design
 - component
 - form
 - configurable-form
