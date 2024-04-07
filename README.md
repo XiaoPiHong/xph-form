@@ -1,6 +1,6 @@
 # xph-form
 
-This is a configurable form component that supports React
+This is a configurable form component that supports React.
 
 ## Using npm or yarn
 
