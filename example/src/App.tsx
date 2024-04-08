@@ -562,6 +562,36 @@ const ReactApp: React.FC = () => {
         ],
       },
       {
+        name: "AutoUpload",
+        label: "AutoUpload",
+        component: "AutoUpload",
+        componentProps: {
+          maxSize: 1, // 文件最大限制
+          maxCount: 2, // 文件最大数量
+          openCrop: false, // 是否开启裁剪
+          /**
+           * @description 表单获取到的类型(如果多文件默认","拼接)
+           * @type "String" | "String[]" | "File[]" | "FileList"
+           */
+          returnType: "String",
+        },
+        colProps: { span: 8 },
+        valuePropName: "fileList",
+        initialValue:
+          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+        rules: [
+          {
+            validator: async (rule, value) => {
+              console.log("validate=================", value);
+              if (!value) {
+                return Promise.reject("请上传文件");
+              }
+              return Promise.resolve();
+            },
+          },
+        ],
+      },
+      {
         name: "Button",
         label: "Button",
         component: "Button",
@@ -602,6 +632,7 @@ const ReactApp: React.FC = () => {
                 AutoComplete: "Burns Bay Road Test",
                 ApiAutoComplete: "Burns Bay Road Test",
                 Upload: [],
+                AutoUpload: [],
               })
             );
             // console.log(getFieldsValue(["RangePicker"]));

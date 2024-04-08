@@ -19,6 +19,7 @@ import ApiSelect from "./ApiSelect";
 import ApiTreeSelect from "./ApiTreeSelect";
 import ApiTransfer from "./ApiTransfer";
 import ApiAutoComplete from "./ApiAutoComplete";
+import AutoUpload from "./AutoUpload";
 
 import { TComponentPropsMap } from "../types";
 
@@ -49,6 +50,6 @@ componentMap.set("InputTextArea", Input.TextArea);
 componentMap.set("ApiAutoComplete", ApiAutoComplete);
 componentMap.set("AutoComplete", AutoComplete);
 componentMap.set("Upload", Upload);
-// 需要封装一个自动上传的Upload
+componentMap.set("AutoUpload", AutoUpload);
 
 export { componentMap };

@@ -18,6 +18,7 @@ import { IApiSelectProps } from "../components/ApiSelect";
 import { IApiTreeSelectProps } from "../components/ApiTreeSelect";
 import { IApiTransferProps } from "../components/ApiTransfer";
 import { IApiAutoCompleteProps } from "../components/ApiAutoComplete";
+import { IAutoUploadProps } from "../components/AutoUpload";
 
 export type TComponentPropsMap = {
   Select: SelectProps;
@@ -45,4 +46,5 @@ export type TComponentPropsMap = {
   ApiTreeSelect: IApiTreeSelectProps;
   ApiTransfer: IApiTransferProps;
   ApiAutoComplete: IApiAutoCompleteProps;
+  AutoUpload: IAutoUploadProps;
 };
