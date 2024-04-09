@@ -197,7 +197,7 @@ const AutoUpload: React.FC<IAutoUploadProps> = forwardRef(
             break;
           }
           case returnTypeMap["String[]"]: {
-            setEmitData([...fileList.map((item) => item.url)]);
+            setEmitData(fileList.map((item) => item.url));
             break;
           }
           case returnTypeMap["File[]"]: {
