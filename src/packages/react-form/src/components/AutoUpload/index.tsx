@@ -32,10 +32,13 @@ export interface IAutoUploadProps extends UploadProps {
   returnType?: keyof typeof returnTypeMap;
   /** 是否开启裁剪 */
   openCrop?: boolean;
+  /** 改变表单值事件 */
+  onChange?: (...args) => void;
 }
 
 const AutoUpload: React.FC<IAutoUploadProps> = forwardRef(
   (autoUploadProps: IAutoUploadProps, ref) => {
+    const [canOnChange, setCanOnChange] = useState<boolean>(false);
     const baseDefaultFileList: any = ""; // 用于覆盖defaultFileList的类型
     const {
       api,
@@ -46,6 +49,7 @@ const AutoUpload: React.FC<IAutoUploadProps> = forwardRef(
       data, // 默认带上的参数
       returnType = returnTypeMap["String"], // 默认返回String(如果多文件默认","拼接)
       fileList: defaultFileList = baseDefaultFileList, // 默认文件列表
+      onChange = undefined /** onChange事件调用后会改变Form的值 */,
     } = autoUploadProps;
 
     let uploadQty = 0; // 记录每次本地上传的数量（注意这个不能使用state，state赋值是异步赋值）
@@ -85,7 +89,7 @@ const AutoUpload: React.FC<IAutoUploadProps> = forwardRef(
       // 此处如果需要开启裁剪需要判断 result
       result && handleCrop(file);
 
-      return false;
+      return Upload.LIST_IGNORE;
     };
 
     // 处理裁剪
@@ -104,11 +108,9 @@ const AutoUpload: React.FC<IAutoUploadProps> = forwardRef(
       if (api) {
         api({ file: config.file, ...data })
           .then((res: IFileList) => {
-            setFileList([...fileList, ...res], () => {
-              uploadQty--;
-            });
+            setFileList([...fileList, ...res]);
           })
-          .catch(() => {
+          .finally(() => {
             uploadQty--;
           });
       } else {
@@ -117,9 +119,8 @@ const AutoUpload: React.FC<IAutoUploadProps> = forwardRef(
           status: "done",
           url: URL.createObjectURL(config.file),
         });
-        setFileList([...fileList, config.file], () => {
-          uploadQty--;
-        });
+        setFileList([...fileList, config.file]);
+        uploadQty--;
       }
     };
 
@@ -128,7 +129,7 @@ const AutoUpload: React.FC<IAutoUploadProps> = forwardRef(
       const { status } = file;
       switch (status) {
         case "removed": {
-          setFileList(newFileList);
+          setFileList([...newFileList]);
           break;
         }
       }
@@ -144,7 +145,7 @@ const AutoUpload: React.FC<IAutoUploadProps> = forwardRef(
       };
       // url存在fileList中的uid无需重新生成
       const getUid = (url) => {
-        const lastItem = fileList.value.find((item) => item.url === url);
+        const lastItem = fileList.find((item) => item.url === url);
         if (lastItem) return lastItem.uid;
         return buildUUID();
       };
@@ -155,64 +156,61 @@ const AutoUpload: React.FC<IAutoUploadProps> = forwardRef(
      * 监听初始值变化，赋值fileList
      */
     useEffect(() => {
-      if (api) {
-        switch (returnType) {
-          case returnTypeMap["String"]: {
-            const list = (defaultFileList || "")
-              .split(",")
-              .filter((url) => url)
-              .map((url) => handleUrlToFile(url));
-            setFileList(list);
-            break;
-          }
-          case returnTypeMap["String[]"]: {
-            const list = (defaultFileList || []).map((url) =>
-              handleUrlToFile(url)
-            );
-            setFileList(list);
-            break;
-          }
-          case returnTypeMap["File[]"]: {
-            setFileList((defaultFileList || []).map((item) => item));
-            break;
-          }
-          case returnTypeMap["FileList"]: {
-            setFileList((defaultFileList || []).map((item) => item));
-            break;
-          }
+      let list: IFileList[] = [];
+      switch (returnType) {
+        case returnTypeMap["String"]: {
+          list = (defaultFileList || "")
+            .split(",")
+            .filter((url) => url)
+            .map((url) => handleUrlToFile(url));
+          break;
         }
-      } else {
-        setFileList((defaultFileList || []).map((item) => item));
+        case returnTypeMap["String[]"]: {
+          list = (defaultFileList || []).map((url) => handleUrlToFile(url));
+          break;
+        }
+        case returnTypeMap["File[]"]: {
+          list = (defaultFileList || []).map((item) => item);
+          break;
+        }
+        case returnTypeMap["FileList"]: {
+          list = (defaultFileList || []).map((item) => item);
+          break;
+        }
       }
+      setFileList(list);
+      setCanOnChange(true);
     }, [defaultFileList]);
 
     /**
-     * 监听fileList变化，赋值emitData
+     * 监听fileList变化，赋值emitData（canOnChange是排除useEffect首次触发的情况）
      */
     useEffect(() => {
-      if (api) {
+      if (canOnChange) {
         switch (returnType) {
           case returnTypeMap["String"]: {
             setEmitData(fileList.map((item) => item.url).join(","));
+            onChange?.(fileList.map((item) => item.url).join(","));
             break;
           }
           case returnTypeMap["String[]"]: {
             setEmitData(fileList.map((item) => item.url));
+            onChange?.(fileList.map((item) => item.url));
             break;
           }
           case returnTypeMap["File[]"]: {
             setEmitData([...fileList]);
+            onChange?.([...fileList]);
             break;
           }
           case returnTypeMap["FileList"]: {
             setEmitData([...fileList]);
+            onChange?.([...fileList]);
             break;
           }
         }
-      } else {
-        setEmitData([...fileList]);
       }
-    }, [fileList]);
+    }, [fileList, canOnChange]);
 
     useImperativeHandle(ref, () => ({
       fileList: emitData,

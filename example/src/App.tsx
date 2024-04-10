@@ -574,6 +574,9 @@ const ReactApp: React.FC = () => {
            * @type "String" | "String[]" | "File[]" | "FileList"
            */
           returnType: "String",
+          onChange(val) {
+            console.log("AutoUpload onChange========================", val);
+          },
         },
         colProps: { span: 8 },
         valuePropName: "fileList",
