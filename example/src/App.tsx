@@ -566,35 +566,43 @@ const ReactApp: React.FC = () => {
         label: "AutoUpload",
         component: "AutoUpload",
         componentProps: {
-          /** 上传服务器接口，需要返回IFileList[] */
-          /*
+          /**
+           * @description 上传服务器接口，需要返回：
+           * type IFileList = Array<{
+           *   uid: string;
+           *   url: string;
+           *   status: string;
+           *   name: string;
+           * }>
+           */
           api: async (params) => {
+            /** 此处只是模拟上传服务器的操作 */
             return [
               {
-                uid: "-1",
+                uid: `${+new Date()}${Math.random()}`,
                 name: "image.png",
                 status: "done",
                 url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
               },
             ];
           },
-          */
           maxSize: 1, // 文件最大限制
           maxCount: 2, // 文件最大数量
-          openCrop: false, // 是否开启裁剪
           /**
-           * @description 表单获取到的类型(如果多文件默认","拼接)
-           * @type "String" | "String[]" | "File[]" | "FileList"
+           * @description 表单获取到的类型
+           * @type "String"（默认，配合api使用） | "String[]"（配合api使用） | "File[]" | "FileList"（配合api使用）
+           * @description
+           * String时如果上传多文件，则返回字符串,拼接   initialValue：字符串
+           * String[]时如果上传多文件，则返回数组        initialValue：数组
+           * File[]时如果上传多文件，则返回数组          initialValue：数组
+           * FileList时如果上传多文件，则返回数组        initialValue：数组
            */
-          returnType: "String",
           onChange(val) {
             console.log("AutoUpload onChange========================", val);
           },
         },
         colProps: { span: 8 },
         valuePropName: "fileList",
-        initialValue:
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
         rules: [
           {
             validator: async (rule, value) => {

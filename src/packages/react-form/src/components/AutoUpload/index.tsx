@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Upload, UploadProps, message } from "antd";
 import { buildUUID } from "../../helper";
+import { isEqual } from "lodash-es";
 
 type IFileList = Array<{
   uid: string;
@@ -45,13 +46,12 @@ const AutoUpload: React.FC<IAutoUploadProps> = (
     data, // 默认带上的参数
     returnType = returnTypeMap["String"], // 默认返回String(如果多文件默认","拼接)
     fileList: defaultFileList = baseDefaultFileList, // 默认文件列表
-    onChange = undefined /** onChange事件调用后会改变Form的值 */,
+    onChange /** onChange事件调用后会改变Form的值 */,
   } = autoUploadProps;
-
-  const uploadQty = useRef<number>(0); // 记录每次本地上传的数量（这个一定要是useRef，不能使用useState，因为setState是异步的，useRef也会缓存）
-  const realFileList = useRef<IFileList>([]);
-  const [fileList, setFileList] = useState<IFileList>([]);
-
+  const firstChange = useRef<boolean>(true); // 是否是第一次fileList改变，用于第一次不触发onChange
+  const uploadQty = useRef<number>(0); // useRef缓存记录每次本地上传的数量（这个一定要是useRef，不能使用useState，因为setState是异步的）
+  const realFileList = useRef<IFileList>([]); // 实时的fileList
+  const [fileList, setFileList] = useState<IFileList>([]); // 用于渲染的fileList
   /** 需要存储一份实时的fileList在realFileList */
   const updateFileList = (list) => {
     realFileList.current = list;
@@ -99,7 +99,7 @@ const AutoUpload: React.FC<IAutoUploadProps> = (
     if (!openCrop) {
       customRequest({ file });
     } else {
-      message.success("暂时不支持裁剪功能，后续兼容。。。。");
+      message.error("暂时不支持裁剪功能，后续兼容。。。。");
       customRequest({ file });
     }
   };
@@ -153,11 +153,30 @@ const AutoUpload: React.FC<IAutoUploadProps> = (
     return { uid: getUid(url), name: getName(url), url: url, status: "done" };
   };
 
+  const getOnChangeFileList = () => {
+    switch (returnType) {
+      case returnTypeMap["String"]: {
+        return fileList.map((item) => item.url).join(",");
+      }
+      case returnTypeMap["String[]"]: {
+        return fileList.map((item) => item.url);
+      }
+      case returnTypeMap["File[]"]: {
+        return [...fileList];
+      }
+      case returnTypeMap["FileList"]: {
+        return [...fileList];
+      }
+    }
+  };
+
   /**
    * 监听初始值变化，赋值fileList
    */
   useEffect(() => {
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    /** 排除AutoUpload的onChange赋值之后又触发defaultFileList改变导致fileList又被赋值 */
+    const curDefaultFileList = getOnChangeFileList();
+    if (isEqual(curDefaultFileList, defaultFileList)) return;
     let list: IFileList[] = [];
     switch (returnType) {
       case returnTypeMap["String"]: {
@@ -181,30 +200,18 @@ const AutoUpload: React.FC<IAutoUploadProps> = (
       }
     }
     updateFileList(list);
-  }, []);
+  }, [defaultFileList]);
 
   /**
    * 监听fileList变化，change表单值
    */
   useEffect(() => {
-    switch (returnType) {
-      case returnTypeMap["String"]: {
-        onChange?.(fileList.map((item) => item.url).join(","));
-        break;
-      }
-      case returnTypeMap["String[]"]: {
-        onChange?.(fileList.map((item) => item.url));
-        break;
-      }
-      case returnTypeMap["File[]"]: {
-        onChange?.([...fileList]);
-        break;
-      }
-      case returnTypeMap["FileList"]: {
-        onChange?.([...fileList]);
-        break;
-      }
+    if (firstChange.current) {
+      firstChange.current = false;
+      return;
     }
+    const onChangeFileList = getOnChangeFileList();
+    onChange?.(onChangeFileList);
   }, [fileList]);
 
   return (
