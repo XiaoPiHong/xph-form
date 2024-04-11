@@ -566,6 +566,19 @@ const ReactApp: React.FC = () => {
         label: "AutoUpload",
         component: "AutoUpload",
         componentProps: {
+          /** 上传服务器接口，需要返回IFileList[] */
+          /*
+          api: async (params) => {
+            return [
+              {
+                uid: "-1",
+                name: "image.png",
+                status: "done",
+                url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+              },
+            ];
+          },
+          */
           maxSize: 1, // 文件最大限制
           maxCount: 2, // 文件最大数量
           openCrop: false, // 是否开启裁剪

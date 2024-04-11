@@ -49,7 +49,6 @@ const AutoUpload: React.FC<IAutoUploadProps> = (
   } = autoUploadProps;
 
   const uploadQty = useRef<number>(0); // 记录每次本地上传的数量（这个一定要是useRef，不能使用useState，因为setState是异步的，useRef也会缓存）
-
   const realFileList = useRef<IFileList>([]);
   const [fileList, setFileList] = useState<IFileList>([]);
 
@@ -158,6 +157,7 @@ const AutoUpload: React.FC<IAutoUploadProps> = (
    * 监听初始值变化，赋值fileList
    */
   useEffect(() => {
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     let list: IFileList[] = [];
     switch (returnType) {
       case returnTypeMap["String"]: {
