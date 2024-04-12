@@ -604,11 +604,12 @@ const ReactApp: React.FC = () => {
         },
         colProps: { span: 8 },
         valuePropName: "fileList",
+        initialValue: [],
         rules: [
           {
             validator: async (rule, value) => {
               console.log("validate=================", value);
-              if (!value) {
+              if (!value.length) {
                 return Promise.reject("请上传文件");
               }
               return Promise.resolve();
