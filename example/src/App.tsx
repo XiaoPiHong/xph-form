@@ -575,17 +575,17 @@ const ReactApp: React.FC = () => {
            *   name: string;
            * }>
            */
-          api: async (params) => {
-            /** 此处只是模拟上传服务器的操作 */
-            return [
-              {
-                uid: `${+new Date()}${Math.random()}`,
-                name: "image.png",
-                status: "done",
-                url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-              },
-            ];
-          },
+          // api: async (params) => {
+          //   /** 此处只是模拟上传服务器的操作 */
+          //   return [
+          //     {
+          //       uid: `${+new Date()}${Math.random()}`,
+          //       name: "image.png",
+          //       status: "done",
+          //       url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          //     },
+          //   ];
+          // },
           maxSize: 1, // 文件最大限制
           maxCount: 2, // 文件最大数量
           /**
@@ -597,6 +597,7 @@ const ReactApp: React.FC = () => {
            * File[]时如果上传多文件，则返回数组          initialValue：数组
            * FileList时如果上传多文件，则返回数组        initialValue：数组
            */
+          returnType: "File[]",
           onChange(val) {
             console.log("AutoUpload onChange========================", val);
           },

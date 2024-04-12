@@ -118,7 +118,11 @@ const AutoUpload: React.FC<IAutoUploadProps> = (
       // 创建本地url用于下载/预览
       Object.assign(config.file, {
         status: "done",
-        url: URL.createObjectURL(config.file),
+        url: URL.createObjectURL(
+          new Blob([config.file], {
+            type: `${config.file.type}; charset=utf-8`,
+          })
+        ),
       });
       updateFileList([...realFileList.current, config.file]);
       uploadQty.current--;
