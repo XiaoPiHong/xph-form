@@ -94,3 +94,17 @@ export function buildUUID(): string {
   }
   return uuid.replace(/-/g, "");
 }
+
+/** 有些文件本地创建预览地址后由于编码问题会出现乱码，所以这里需对这些乱码的文件进行编码配置，让浏览器以正确的编码读文件 */
+export const getFileEncodingType = (type) => {
+  /** 需要加上utf8的文件类型 */
+  const utf8TypeArr = [
+    "application/json",
+    "application/javascript",
+    "text/plain",
+    "text/html",
+    "text/css",
+  ];
+  if (utf8TypeArr.includes(type)) return `${type}; charset=utf-8`;
+  return type;
+};

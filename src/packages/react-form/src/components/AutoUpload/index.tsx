@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Upload, UploadProps, message } from "antd";
-import { buildUUID } from "../../helper";
+import { buildUUID, getFileEncodingType } from "../../helper";
 import { isEqual } from "lodash-es";
 
 type IFileList = Array<{
@@ -120,7 +120,7 @@ const AutoUpload: React.FC<IAutoUploadProps> = (
         status: "done",
         url: URL.createObjectURL(
           new Blob([config.file], {
-            type: `${config.file.type}; charset=utf-8`,
+            type: getFileEncodingType(config.file.type),
           })
         ),
       });
