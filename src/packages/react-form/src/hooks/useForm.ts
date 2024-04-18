@@ -1,5 +1,5 @@
 import { Form } from "antd";
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useRef } from "react";
 import { isNeedWatchModel } from "../helper";
 import {
   IFormProps,
@@ -58,52 +58,56 @@ export const useFormModel = (
  */
 const useForm = (): [IRegister, IFormActionType] => {
   // console.log("ParentComponent render=========================================");
-  let methods: IFormActionType | null = null;
+  const methods = useRef<IFormActionType | null>(null);
 
   function register(mets: IFormActionType) {
-    methods = mets;
+    methods.current = mets;
   }
 
   /** 重新声明一个obj存储是防止parent在初始化的时候使用useForm解构报错问题 */
   /** 如果在初始化完成前使用了api会抛出错误提示 */
   const _methods: IFormActionType = {
     getFieldsValue: (...args) => {
-      if (!methods) {
+      if (!methods.current) {
         throw new Error("表单还没初始化完成");
       }
-      return methods.getFieldsValue(...args);
+      return methods.current.getFieldsValue(...args);
     },
     setFieldsValue: (...args) => {
-      if (!methods) {
+      if (!methods.current) {
         throw new Error("表单还没初始化完成");
       }
-      return methods.setFieldsValue(...args);
+      return methods.current.setFieldsValue(...args);
     },
     resetFields: (...args) => {
-      if (!methods) {
+      if (!methods.current) {
         throw new Error("表单还没初始化完成");
       }
-      return methods.resetFields(...args);
+      return methods.current.resetFields(...args);
     },
     validator: (...args) => {
-      if (!methods) {
+      if (!methods.current) {
         throw new Error("表单还没初始化完成");
       }
-      return methods.validator(...args);
+      return methods.current.validator(...args);
     },
     scrollToField: (...args) => {
-      if (!methods) {
+      if (!methods.current) {
         throw new Error("表单还没初始化完成");
       }
-      return methods.scrollToField(...args);
+      return methods.current.scrollToField(...args);
     },
   };
 
   useEffect(() => {
-    // console.log("ParentComponent is mounted=====================================");
+    console.log(
+      "ParentComponent is mounted====================================="
+    );
     return () => {
-      // console.log("ParentComponent is unmounted====================================");
-      methods = null;
+      console.log(
+        "ParentComponent is unmounted===================================="
+      );
+      methods.current = null;
     };
   }, []);
 

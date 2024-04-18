@@ -221,7 +221,8 @@ const useFormValues = (formItems: TFormItemProps[], formProps: IFormProps) => {
       const curFormItem = allItems.find((it) => it.name === key)!;
       // transformDateFunc是全局时间处理函数，formItem的componentProps中的valueFormat优先级最高
       const { transformDateFunc } = formProps;
-      const { valueFormat } = curFormItem.componentProps as Recordable<any>;
+      const valueFormat = (curFormItem?.componentProps as Recordable<any>)
+        ?.valueFormat;
 
       if (isObject(value)) {
         const objValue: Recordable<any> = value;

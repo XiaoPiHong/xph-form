@@ -75,10 +75,10 @@ const Form = forwardRef((props: IFormProps, ref) => {
   }));
 
   useEffect(() => {
-    // console.log("Form is mounted=======================");
+    console.log("Form is mounted=======================");
     formProps.register && formProps.register(methods);
     return () => {
-      // console.log("Form is unmounted=========================");
+      console.log("Form is unmounted=========================");
     };
   }, []);
 
