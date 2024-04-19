@@ -1,6 +1,6 @@
 {
   "name": "xph-form",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "This is a configurable form component that supports React",
   "keywords": [
     "react",
@@ -17,13 +17,7 @@
     "build": "npx rimraf ./dist && gulp",
     "dev": "cd example && npm run dev"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "@ant-design/icons": "^5.2.6",
-    "antd": "^5.14.2",
-    "dayjs": "^1.11.10",
-    "lodash-es": "^4.17.21"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/gulp": "^4.0.17",
     "@types/gulp-typescript": "^2.13.0",
