@@ -1,4 +1,4 @@
-import { Form as AForm, Row } from "antd";
+import { Form as AForm, Row, ConfigProvider } from "antd";
 import { IFormProps, IFormActionType } from "./types";
 import FormItem from "./components/FormItem";
 import React, { forwardRef, useImperativeHandle, useEffect } from "react";
@@ -83,22 +83,27 @@ const Form = forwardRef((props: IFormProps, ref) => {
   }, []);
 
   return (
-    <AForm form={formInstance} {...getFormBindProps()}>
-      {formItemRows.map((row, rowIndex) => {
-        return (
-          <Row key={rowIndex}>
-            {row.map((itemProps, itemPropsIndex) => (
-              <FormItem
-                key={itemPropsIndex}
-                formProps={formProps}
-                itemProps={itemProps}
-                methods={methods}
-              />
-            ))}
-          </Row>
-        );
-      })}
-    </AForm>
+    /**
+     * 继承父的主题
+     */
+    <ConfigProvider>
+      <AForm form={formInstance} {...getFormBindProps()}>
+        {formItemRows.map((row, rowIndex) => {
+          return (
+            <Row key={rowIndex}>
+              {row.map((itemProps, itemPropsIndex) => (
+                <FormItem
+                  key={itemPropsIndex}
+                  formProps={formProps}
+                  itemProps={itemProps}
+                  methods={methods}
+                />
+              ))}
+            </Row>
+          );
+        })}
+      </AForm>
+    </ConfigProvider>
   );
 });
 
