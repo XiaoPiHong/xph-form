@@ -34,8 +34,12 @@ export const useFormModel = (
   formProps.items.forEach((item) => {
     baseValues[item.name] = item.initialValue;
   });
-  /** 响应式数据源，Form.useWatch是一个异步函数 */
-  const realModel = isNeedWatchModel(itemProps)
+  /** 响应式数据源，只要使用了useWatch监听所有项时，都会触发重新渲染，因为其返回的是一个state，且首次是undefined
+   *
+   * 所以使用了Form.useWatch的FormItem，至少都会触发两次组件更新
+   */
+  const flag = isNeedWatchModel(itemProps);
+  const realModel = flag
     ? Form.useWatch((values) => defineFunction(values))
     : null;
 
@@ -43,10 +47,10 @@ export const useFormModel = (
   const rewritingModel = useMemo(() => {
     return realModel || defineFunction(baseValues);
   }, [realModel]);
-
+  // console.log("使用了useFormModel", JSON.stringify(rewritingModel));
   return {
-    realModel,
     rewritingModel,
+    isusewatch: flag,
   };
 };
 

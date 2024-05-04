@@ -10,6 +10,8 @@ export interface IApiSelectProps extends SelectProps {
   params?: any;
   /** 是否立即触发（默认立即触发,否者展开选项时触发） */
   immediate?: boolean;
+  /** 是否启用了Form.useWatch监听（'true' | 'false'） */
+  isusewatch?: string;
 }
 
 const ApiSelect: React.FC<IApiSelectProps> = (
@@ -20,14 +22,17 @@ const ApiSelect: React.FC<IApiSelectProps> = (
     api,
     params,
     immediate = true,
+    isusewatch,
     onDropdownVisibleChange: onDropdownVisibleChangeProp,
   } = apiSelectProps;
+  const isUseWatch = isusewatch === "true";
   const [options, setOptions] = React.useState<Recordable<any>[]>([]);
   const { getApiData: getApiOptions } = useApiComonentCache({
     api,
     immediate,
-    watchSource: params,
+    params,
     apiCallback: setOptions,
+    isUseWatch,
   });
 
   const onDropdownVisibleChange = (visible) => {
@@ -40,7 +45,7 @@ const ApiSelect: React.FC<IApiSelectProps> = (
 
   /** 把扩展的属性排除掉 */
   const getSelectProps = () => {
-    const { api, params, immediate, ...rest } = apiSelectProps;
+    const { api, params, immediate, isusewatch, ...rest } = apiSelectProps;
     return rest;
   };
 

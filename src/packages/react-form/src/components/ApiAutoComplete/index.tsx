@@ -10,6 +10,8 @@ export interface IApiAutoCompleteProps extends AutoCompleteProps {
   params?: any;
   /** 是否立即触发（默认立即触发,否者展开选项时触发） */
   immediate?: boolean;
+  /** 是否启用了Form.useWatch监听（'true' | 'false'） */
+  isusewatch?: string;
 }
 
 const ApiAutoComplete: React.FC<IApiAutoCompleteProps> = (
@@ -20,14 +22,17 @@ const ApiAutoComplete: React.FC<IApiAutoCompleteProps> = (
     api,
     params,
     immediate = true,
+    isusewatch,
     onDropdownVisibleChange: onDropdownVisibleChangeProp,
   } = apiAutoCompleteProps;
+  const isUseWatch = isusewatch === "true";
   const [options, setOptions] = React.useState<Recordable<any>[]>([]);
   const { getApiData: getApiOptions } = useApiComonentCache({
     api,
     immediate,
-    watchSource: params,
+    params,
     apiCallback: setOptions,
+    isUseWatch,
   });
 
   const onDropdownVisibleChange = (visible) => {
@@ -40,7 +45,8 @@ const ApiAutoComplete: React.FC<IApiAutoCompleteProps> = (
 
   /** 把扩展的属性排除掉 */
   const getAutoCompleteProps = () => {
-    const { api, params, immediate, ...rest } = apiAutoCompleteProps;
+    const { api, params, immediate, isusewatch, ...rest } =
+      apiAutoCompleteProps;
     return rest;
   };
 

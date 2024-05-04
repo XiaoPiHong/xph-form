@@ -33,7 +33,7 @@ const FormItem = forwardRef(
     ref
   ) => {
     console.log("render FormItem");
-    const { rewritingModel } = useFormModel(formProps, itemProps);
+    const { rewritingModel, isusewatch } = useFormModel(formProps, itemProps);
     const { isIfShow, isShow } = useFormItemShow(itemProps, rewritingModel);
     const { colProps } = useFormItemColProps(itemProps, formProps);
     const { componentProps } = useFormItemComponentProps(
@@ -81,7 +81,14 @@ const FormItem = forwardRef(
     const renderContent = () => {
       if (isComponent) {
         const Component = componentMap.get(itemProps.component)!;
-        return <Component {...componentProps} disabled={disabled} />;
+        return (
+          <Component
+            {...componentProps}
+            disabled={disabled}
+            /** 这个值是用来判断当前项是否开启了useWatch监听 */
+            isusewatch={isusewatch.toString()}
+          />
+        );
       }
       if (isRender) {
         return itemProps.render({
