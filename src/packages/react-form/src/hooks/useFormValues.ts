@@ -1,3 +1,4 @@
+import { Ref } from "react";
 import { IFormProps, Recordable, TFormItemProps } from "../types";
 import { isObject, isArray, isFunction, isString, set } from "lodash-es";
 import dayjs from "dayjs";
@@ -140,7 +141,11 @@ function handleRangeTimeValue(values: Recordable<any>, formProps: IFormProps) {
   return values;
 }
 
-const useFormValues = (formItems: TFormItemProps[], formProps: IFormProps) => {
+const useFormValues = (
+  formItems: TFormItemProps[],
+  formProps: IFormProps,
+  formItemRefs: Ref<Map<string, Ref>>
+) => {
   const allItems = formItems.filter((item) => item.name);
 
   /** 处理渲染时的值  */
@@ -218,11 +223,11 @@ const useFormValues = (formItems: TFormItemProps[], formProps: IFormProps) => {
         continue;
       }
 
-      const curFormItem = allItems.find((it) => it.name === key)!;
       // transformDateFunc是全局时间处理函数，formItem的componentProps中的valueFormat优先级最高
       const { transformDateFunc } = formProps;
-      const valueFormat = (curFormItem?.componentProps as Recordable<any>)
-        ?.valueFormat;
+      const componentProps =
+        formItemRefs.current.get(key)?.current?.componentProps;
+      const valueFormat = componentProps?.valueFormat;
 
       if (isObject(value)) {
         const objValue: Recordable<any> = value;

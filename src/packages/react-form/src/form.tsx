@@ -1,7 +1,13 @@
 import { Form as AForm, Row } from "antd";
 import { IFormProps, IFormActionType } from "./types";
 import FormItem from "./components/FormItem";
-import React, { forwardRef, useImperativeHandle, useEffect } from "react";
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useEffect,
+  useRef,
+  Ref,
+} from "react";
 import {
   useFormProps,
   useFormItem,
@@ -16,9 +22,11 @@ const Form = forwardRef((props: IFormProps, ref) => {
   const [formInstance] = AForm.useForm();
   const { formProps } = useFormProps(props);
   const { formItems } = useFormItem({ formProps });
+  const formItemRefs = useRef<Map<string, Ref>>(new Map());
   const { handleFormatRenderValues, handleFormatReturnValues } = useFormValues(
     formItems,
-    formProps
+    formProps,
+    formItemRefs
   );
   const {
     setFieldsValue,
@@ -79,22 +87,29 @@ const Form = forwardRef((props: IFormProps, ref) => {
     formProps.register && formProps.register(methods);
     return () => {
       console.log("Form is unmounted=========================");
+      formItemRefs.current.clear();
     };
   }, []);
-
   return (
     <AForm form={formInstance} {...getFormBindProps()}>
       {formItemRows.map((row, rowIndex) => {
         return (
           <Row key={rowIndex}>
-            {row.map((itemProps, itemPropsIndex) => (
-              <FormItem
-                key={itemPropsIndex}
-                formProps={formProps}
-                itemProps={itemProps}
-                methods={methods}
-              />
-            ))}
+            {row.map((itemProps, itemPropsIndex) => {
+              // 在Map中为每个项目创建一个新的ref
+              if (!formItemRefs.current.has(itemProps.name)) {
+                formItemRefs.current.set(itemProps.name, React.createRef());
+              }
+              return (
+                <FormItem
+                  ref={formItemRefs.current.get(itemProps.name)}
+                  key={itemPropsIndex}
+                  formProps={formProps}
+                  itemProps={itemProps}
+                  methods={methods}
+                />
+              );
+            })}
           </Row>
         );
       })}
