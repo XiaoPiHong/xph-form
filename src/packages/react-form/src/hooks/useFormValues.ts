@@ -186,23 +186,24 @@ const useFormValues = (
           renderValues[item.name] = fieldValue;
           validKeys.push(item.name);
         }
-      } else {
-        try {
-          // a.b.c 的嵌套写法
-          const hasDelimiter = item.name.includes(`.`);
-          if (hasDelimiter) {
-            const value = item.name
-              .split(".")
-              .reduce((out, key) => out[key], values);
-            if (typeof value !== "undefined") {
-              renderValues[item.name] = value;
-              validKeys.push(item.name);
-            }
-          }
-        } catch (e) {
-          // key not exist
-        }
       }
+      // else {
+      //   try {
+      //     // a.b.c 的嵌套写法
+      //     const hasDelimiter = item.name.includes(`.`);
+      //     if (hasDelimiter) {
+      //       const value = item.name
+      //         .split(".")
+      //         .reduce((out, key) => out[key], values);
+      //       if (typeof value !== "undefined") {
+      //         renderValues[item.name] = value;
+      //         validKeys.push(item.name);
+      //       }
+      //     }
+      //   } catch (e) {
+      //     // key not exist
+      //   }
+      // }
     });
     return {
       renderValues,
@@ -251,13 +252,14 @@ const useFormValues = (
           value = value.trim();
         }
       }
-      if (
-        !tryDeconstructArray(key, value, res) &&
-        !tryDeconstructObject(key, value, res)
-      ) {
-        // 没有解构成功的，按原样赋值
-        res[key] = value;
-      }
+      // if (
+      //   !tryDeconstructArray(key, value, res) &&
+      //   !tryDeconstructObject(key, value, res)
+      // ) {
+      //   // 没有解构成功的，按原样赋值
+      //   res[key] = value;
+      // }
+      res[key] = value;
     }
 
     return handleRangeTimeValue(res, formProps);
