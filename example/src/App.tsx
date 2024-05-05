@@ -603,7 +603,6 @@ const ReactApp: React.FC = () => {
           },
         },
         colProps: { span: 8 },
-        valuePropName: "fileList",
         initialValue: [],
         rules: [
           {

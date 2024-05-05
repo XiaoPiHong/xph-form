@@ -30,6 +30,8 @@ export interface IAutoUploadProps extends UploadProps {
   openCrop?: boolean;
   /** 改变表单值事件 */
   onChange?: (...args) => void;
+  /** 默认文件列表（默认都是value字段） */
+  value: any;
 }
 
 const AutoUpload: React.FC<IAutoUploadProps> = (
@@ -45,7 +47,7 @@ const AutoUpload: React.FC<IAutoUploadProps> = (
     openCrop = false, // 默认不开启裁剪
     data, // 默认带上的参数
     returnType = returnTypeMap["String"], // 默认返回String(如果多文件默认","拼接)
-    fileList: defaultFileList = baseDefaultFileList, // 默认文件列表
+    value: defaultFileList = baseDefaultFileList, // 默认文件列表
     onChange /** onChange事件调用后会改变Form的值 */,
   } = autoUploadProps;
   const firstChange = useRef<boolean>(true); // 是否是第一次fileList改变，用于第一次不触发onChange
