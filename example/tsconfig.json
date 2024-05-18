@@ -22,7 +22,7 @@
     "noImplicitAny": false,
 
     "paths": {
-      "@xph-form/*": ["../src/packages/react-form/src/*"]
+      "@xph-form/*": ["../src/packages/form/src/*"]
     }
   },
   "include": ["src"],

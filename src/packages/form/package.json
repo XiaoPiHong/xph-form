@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@xph-form/react-form",
+  "name": "@xph-form/form",
   "scripts": {},
   "devDependencies": {},
   "dependencies": {
