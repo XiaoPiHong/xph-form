@@ -173,6 +173,7 @@ const columns: ProColumns<GithubIssueItem>[] = [
     title: "状态",
     dataIndex: "state",
     filters: true,
+    search: false,
     onFilter: true,
     ellipsis: true,
     valueType: "select",
@@ -360,8 +361,6 @@ const TableApp = () => {
  *   rowKey: string;
  *   // 操作项配置
  *   toolbarConfig: IToolbarConfig;
- *   // 搜索表单配置
- *   searchFormConfig: IFormConfig;
  *
  * }
  *
@@ -374,16 +373,10 @@ const TableApp = () => {
  * 注意事项：
  * 1、（toolBarRender）同级的（headerTitle）可以配置表格的标题
  * 2、（toolBarRender）只是中间的操作按钮，如果想要自定义整个表格顶部，得使用（toolbar）这个属性
- * 3、（options）表格配置按钮和（toolBarRender）会同一行显示，（options）设置为false时候不显示表格配置按钮
+ * 3、（options）表格配置按钮和（toolBarRender）、（toolbar）会同一行显示，（options）设置为false时候不显示表格配置按钮
+ * 4、（tableAlertRender）和（tableAlertOptionRender）是（toolBarRender）下方的一个提示区域，可以获取到选中的值做一些操作
  *
  *
- * 二、搜索表单
- * 1、搜索功能（支持搜索校验）
- * 2、重置功能
- *
- * 注意事项：
- * 1、搜索和重置功能需显示到右侧
- * 2、支持折叠（做一个收起展开和搜索重置的按钮在一起）
  */
 
 export default TableApp;
