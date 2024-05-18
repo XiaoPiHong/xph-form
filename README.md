@@ -24,7 +24,7 @@ import {
   IReactFormProps,
   IReactFormActionType,
 } from "xph-form";
-import { InputNumber, Button } from "antd";
+import { InputNumber } from "antd";
 import dayjs from "dayjs";
 
 const ReactApp: React.FC = () => {
