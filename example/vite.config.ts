@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@xph-form": path.resolve(__dirname, "../src/packages/form/src"),
+      "@xph-form": path.resolve(__dirname, "../src/packages"),
     },
   },
 });

@@ -22,7 +22,7 @@
     "noImplicitAny": false,
 
     "paths": {
-      "@xph-form/*": ["../src/packages/form/src/*"]
+      "@xph-form/*": ["../src/packages/*"]
     }
   },
   "include": ["src"],
