@@ -1,8 +1,8 @@
 import XphForm from "./src/form";
-import {
+import type {
   IFormProps as IXphFormProps,
-  TFormItemProps as TXphFormItemProps,
   IFormActionType as IXphFormActionType,
+  TFormItemProps as TXphFormItemProps,
 } from "./src/types";
 import { useForm as useXphForm } from "./src/hooks";
 
