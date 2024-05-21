@@ -1,30 +1,21 @@
 import React, { forwardRef } from "react";
 import { Table as ATable } from "antd";
-import type { ColumnsType } from "antd/es/table";
 import { TTableProps } from "./types";
-
-interface User {
-  key: number;
-  name: string;
-}
-
-const columns: ColumnsType<User> = [
-  {
-    key: "name",
-    title: "Name",
-    dataIndex: "name",
-  },
-];
-
-const data: User[] = [
-  {
-    key: 0,
-    name: "Jack",
-  },
-];
+import SearchForm from "./components/searchForm";
+import { useSearchForm } from "./hooks";
 
 const Table = forwardRef(<T extends unknown>(props: TTableProps<T>) => {
-  return <div></div>;
+  const { searchFormRef, searchFormProps } = useSearchForm(props);
+  return (
+    <div>
+      <div>
+        <SearchForm ref={searchFormRef} {...searchFormProps} />
+      </div>
+      <div>
+        <ATable />
+      </div>
+    </div>
+  );
 });
 
 export default Table;
