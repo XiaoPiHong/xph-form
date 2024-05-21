@@ -1,29 +1,13 @@
 import React from "react";
-import { Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
 
-interface User {
-  key: number;
-  name: string;
-}
+import XphTable from "@xph-form/table/src/table";
+import { TTableProps as TXphTableProps } from "@xph-form/table/src/types";
 
-const columns: ColumnsType<User> = [
-  {
-    key: "name",
-    title: "Name",
-    dataIndex: "name",
-  },
-];
+const ReactApp: React.FC = () => {
+  const props: TXphTableProps = {
+    columns: [],
+  };
+  return <XphTable {...props} />;
+};
 
-const data: User[] = [
-  {
-    key: 0,
-    name: "Jack",
-  },
-];
-
-const TableApp: React.FC = () => (
-  <Table<User> columns={columns} dataSource={data} />
-);
-
-export default TableApp;
+export default ReactApp;
