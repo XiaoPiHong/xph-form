@@ -1,8 +1,8 @@
 import React, { memo, forwardRef } from "react";
 import { XphForm } from "../../../../form";
-import { TTableSearchFormProps } from "../../types";
+import { TSearchFormProps } from "../../types";
 
-const SearchForm = forwardRef((props: TTableSearchFormProps, ref) => {
+const SearchForm = forwardRef((props: TSearchFormProps, ref) => {
   const getBindProps = () => {
     const { ...rest } = props;
     return rest;

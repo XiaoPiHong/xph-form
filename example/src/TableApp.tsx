@@ -11,7 +11,9 @@ interface DataType {
 
 const ReactApp: React.FC = () => {
   const props: TXphTableProps<DataType> = {
-    columns: [],
+    table: {
+      columns: [],
+    },
     crudForm: {
       items: [],
     },
