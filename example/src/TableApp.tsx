@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import XphTable from "@xph-form/table/src/table";
 import { TTableProps as TXphTableProps } from "@xph-form/table/src/types";
 
@@ -16,7 +16,10 @@ const ReactApp: React.FC = () => {
       items: [],
     },
   };
-  return <XphTable<DataType> {...props} />;
+
+  const xphTableRef = useRef();
+
+  return <XphTable<DataType> ref={xphTableRef} {...props} />;
 };
 
 export default ReactApp;

@@ -1,5 +1,5 @@
 import { Form as AForm, Row } from "antd";
-import { IFormProps, IFormActionType } from "./types";
+import { IFormProps, IFormActionType, TRefForm } from "./types";
 import FormItem from "./components/FormItem";
 import React, {
   forwardRef,
@@ -16,7 +16,7 @@ import {
   useFormValues,
 } from "./hooks";
 
-const Form = forwardRef((props: IFormProps, ref) => {
+const Form: TRefForm = forwardRef((props: IFormProps, ref) => {
   console.log("render Form");
   // console.log("Form render=============================");
   const [formInstance] = AForm.useForm();

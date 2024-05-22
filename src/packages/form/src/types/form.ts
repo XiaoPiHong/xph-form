@@ -80,3 +80,8 @@ export interface IFormActionType {
   validator: (nameList?: NamePath[]) => Promise<any>;
   scrollToField: (name: NamePath, options?: ScrollOptions) => Promise<void>;
 }
+
+export type TRefForm = (
+  props: React.PropsWithChildren<IFormProps> &
+    React.RefAttributes<IFormActionType | undefined>
+) => React.ReactElement;

@@ -29,5 +29,5 @@ export type TRefTable = <
   RecordType extends Record<PropertyKey, any> = Record<PropertyKey, any>
 >(
   props: React.PropsWithChildren<TTableProps<RecordType>> &
-    React.RefAttributes<TableRef>
+    React.RefAttributes<TableRef | undefined>
 ) => React.ReactElement;
