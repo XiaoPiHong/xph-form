@@ -1,11 +1,13 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import { Table as ATable } from "antd";
-import { TTableProps } from "./types";
+import { TTableProps, TRefTable } from "./types";
 import SearchForm from "./components/searchForm";
 import { useSearchForm } from "./hooks";
 
-const Table = forwardRef(<T extends unknown>(props: TTableProps<T>) => {
+const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
   const { searchFormRef, searchFormProps } = useSearchForm(props);
+
+  useImperativeHandle(ref, () => ({}));
   return (
     <div>
       <div>
