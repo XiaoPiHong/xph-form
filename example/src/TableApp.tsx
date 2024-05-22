@@ -14,8 +14,39 @@ const ReactApp: React.FC = () => {
     table: {
       columns: [],
     },
+    searchForm: {
+      items: [
+        {
+          name: "Input",
+          label: "Input",
+          component: "Input",
+          required: true,
+          colProps: { span: 6 },
+          initialValue: "Input",
+          componentProps: {
+            onChange: (e) => {
+              console.log(e);
+            },
+          },
+        },
+      ],
+    },
     crudForm: {
-      items: [],
+      items: [
+        {
+          name: "Input",
+          label: "Input",
+          component: "Input",
+          required: true,
+          colProps: { span: 6 },
+          initialValue: "Input",
+          componentProps: {
+            onChange: (e) => {
+              console.log(e);
+            },
+          },
+        },
+      ],
     },
   };
 

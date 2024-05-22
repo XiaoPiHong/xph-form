@@ -1,10 +1,8 @@
-import { TTableProps } from "../types";
+import { TTableProps, TColumnsType } from "../types";
+import type { ColumnsType } from "antd/es/table";
 
 const useTableColumns = (props: TTableProps) => {
-  const { columns } = props.table || {};
-  return {
-    columns,
-  };
+  return {};
 };
 
 export default useTableColumns;

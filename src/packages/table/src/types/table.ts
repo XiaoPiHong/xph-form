@@ -20,6 +20,10 @@ export type TApiTableProps<RecordType = TDataSourceItem> =
     columns?: TColumnsType<RecordType>;
     /** 首次是否自动请求 */
     autoRequest?: boolean;
+    /** 获取datasource的api */
+    api?: (params: any) => Promise<any>;
+    /** 格式化返回的datasource */
+    formatDataSource?: (data: any) => any[];
   };
 
 /** 整个组件的配置 */

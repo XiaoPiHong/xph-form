@@ -6,7 +6,7 @@ import { useSearchForm, useTableColumns } from "./hooks";
 
 const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
   const { searchFormRef, searchFormProps } = useSearchForm(props);
-  const { columns } = useTableColumns(props);
+  const {} = useTableColumns(props);
 
   const getTableBindProps = () => {
     const { autoRequest, columns, ...rest } = props.table || {};
@@ -20,7 +20,7 @@ const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
         <SearchForm ref={searchFormRef} {...searchFormProps} />
       </div>
       <div>
-        <ATable {...getTableBindProps()} columns={columns} />
+        <ATable {...getTableBindProps()} />
       </div>
     </div>
   );
