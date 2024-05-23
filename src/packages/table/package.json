@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@xph-form/table",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {},
   "devDependencies": {},
   "dependencies": {
