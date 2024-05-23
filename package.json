@@ -1,6 +1,6 @@
 {
   "name": "xph-form",
-  "version": "1.2.7",
+  "version": "1.3.3",
   "description": "This is a configurable form component that supports React",
   "keywords": [
     "react",
@@ -10,18 +10,15 @@
     "configurable-form"
   ],
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "main": "dist/index.js",
   "scripts": {
     "build": "npx rimraf ./dist && gulp",
     "dev": "cd example && npm run dev"
   },
-  "dependencies": {
-    "@xph-form/common": "workspace:*",
-    "@xph-form/form": "workspace:*",
-    "@xph-form/table": "workspace:*"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/gulp": "^4.0.17",
     "@types/gulp-typescript": "^2.13.0",
@@ -56,8 +53,5 @@
   },
   "engines": {
     "node": ">=16"
-  },
-  "workspaces": [
-    "./src/packages/*"
-  ]
+  }
 }

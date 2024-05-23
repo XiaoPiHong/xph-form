@@ -1,3 +1,3 @@
-export * from "@xph-form/common";
-export * from "@xph-form/form";
-export * from "@xph-form/table";
+export * from "./packages/common/dist";
+export * from "./packages/form/dist";
+export * from "./packages/table/dist";

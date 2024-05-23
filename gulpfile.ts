@@ -115,18 +115,12 @@ task(
   )
 );
 
-task("copy-md", () => copyTask(["*.md"], "dist"));
+// task("copy-md", () => copyTask(["*.md"], "dist"));
 
 task(
   "default",
   series(
     "clean-dist",
-    parallel(
-      "compile-common",
-      "compile-table",
-      "compile-form",
-      "compile-all",
-      "copy-md"
-    )
+    parallel("compile-common", "compile-table", "compile-form", "compile-all")
   )
 );
