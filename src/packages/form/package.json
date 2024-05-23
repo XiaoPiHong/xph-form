@@ -13,5 +13,8 @@
     "dayjs": "^1.11.10",
     "@ant-design/icons": "^5.2.6",
     "antd": "^5.14.2"
-  }
+  },
+  "workspaces": [
+    "../../packages/*"
+  ]
 }

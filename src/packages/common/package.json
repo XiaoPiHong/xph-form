@@ -4,5 +4,8 @@
   "main": "dist/index.js",
   "scripts": {},
   "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {},
+  "workspaces": [
+    "../../packages/*"
+  ]
 }

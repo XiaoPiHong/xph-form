@@ -12,15 +12,15 @@
   "files": [
     "dist"
   ],
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "npx rimraf ./dist && gulp",
     "dev": "cd example && npm run dev"
   },
   "dependencies": {
-    "@xph-form/common": "file:./src/packages/common",
-    "@xph-form/form": "file:./src/packages/form",
-    "@xph-form/table": "file:./src/packages/table"
+    "@xph-form/common": "workspace:*",
+    "@xph-form/form": "workspace:*",
+    "@xph-form/table": "workspace:*"
   },
   "devDependencies": {
     "@types/gulp": "^4.0.17",
@@ -58,7 +58,6 @@
     "node": ">=16"
   },
   "workspaces": [
-    "./src/packages/*",
-    "./example"
+    "./src/packages/*"
   ]
 }
