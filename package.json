@@ -17,13 +17,19 @@
     "build": "npx rimraf ./dist && gulp",
     "dev": "cd example && npm run dev"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@xph-form/common": "workspace:*",
+    "@xph-form/form": "workspace:*",
+    "@xph-form/table": "workspace:*"
+  },
   "devDependencies": {
     "@types/gulp": "^4.0.17",
     "@types/gulp-typescript": "^2.13.0",
     "@types/lodash-es": "^4.17.12",
+    "del": "6.1.1",
     "gulp": "^4.0.2",
     "gulp-postcss": "^10.0.0",
+    "gulp-rename": "^2.0.0",
     "gulp-typescript": "6.0.0-alpha.1",
     "postcss": "^8.4.35",
     "rimraf": "^5.0.5",

@@ -1,9 +1,13 @@
 {
   "private": true,
   "name": "@xph-form/table",
+  "main": "dist/index.js",
   "scripts": {},
   "devDependencies": {},
   "dependencies": {
+    "@xph-form/form": "workspace:*"
+  },
+  "peerDependencies": {
     "react": "^18.2.0",
     "lodash-es": "^4.17.21",
     "dayjs": "^1.11.10",

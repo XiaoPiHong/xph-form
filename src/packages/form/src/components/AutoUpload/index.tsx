@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Upload, UploadProps, message } from "antd";
-import { buildUUID, getFileEncodingType } from "../../helper";
+import { getFileEncodingType } from "../../helper";
 import { isEqual } from "lodash-es";
+import { buildUUID } from "@xph-form/common";
 
 type IFileList = Array<{
   uid: string;

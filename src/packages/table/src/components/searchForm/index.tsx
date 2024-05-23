@@ -1,5 +1,5 @@
 import React, { memo, forwardRef } from "react";
-import { XphForm } from "../../../../form";
+import { XphForm } from "@xph-form/form";
 import { TSearchFormProps } from "../../types";
 
 const SearchForm = forwardRef((props: TSearchFormProps, ref) => {

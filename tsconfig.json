@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    /* 指定源文件中的根文件夹 */
+    "rootDir": "./src",
     /* 设置生成的 JavaScript 的 JavaScript 语言版本并包括兼容的库声明 */
     "target": "ES2018",
     /* 指定生成的模块代码 */

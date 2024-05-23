@@ -73,28 +73,6 @@ export const isNeedWatchModel = (itemProps: TFormItemProps) => {
   return false;
 };
 
-// 生成随机数
-const hexList: string[] = [];
-for (let i = 0; i <= 15; i++) {
-  hexList[i] = i.toString(16);
-}
-
-export function buildUUID(): string {
-  let uuid = "";
-  for (let i = 1; i <= 36; i++) {
-    if (i === 9 || i === 14 || i === 19 || i === 24) {
-      uuid += "-";
-    } else if (i === 15) {
-      uuid += 4;
-    } else if (i === 20) {
-      uuid += hexList[(Math.random() * 4) | 8];
-    } else {
-      uuid += hexList[(Math.random() * 16) | 0];
-    }
-  }
-  return uuid.replace(/-/g, "");
-}
-
 /** 有些文件本地创建预览地址后由于编码问题会出现乱码，所以这里需对这些乱码的文件进行编码配置，让浏览器以正确的编码读文件 */
 export const getFileEncodingType = (type) => {
   /** 需要加上utf8的文件类型 */
