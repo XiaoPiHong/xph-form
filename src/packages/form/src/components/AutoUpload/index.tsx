@@ -39,6 +39,7 @@ const AutoUpload: React.FC<IAutoUploadProps> = (
   autoUploadProps: IAutoUploadProps
 ) => {
   console.log("render AutoUpload");
+  console.log(buildUUID());
   const baseDefaultFileList: any = ""; // 用于覆盖defaultFileList的类型
   const {
     api,
