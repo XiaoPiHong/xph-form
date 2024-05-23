@@ -1,6 +1,6 @@
 {
   "name": "xph-form",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "This is a configurable form component that supports React",
   "keywords": [
     "react",
@@ -18,9 +18,9 @@
     "dev": "cd example && npm run dev"
   },
   "dependencies": {
-    "@xph-form/common": "workspace:*",
-    "@xph-form/form": "workspace:*",
-    "@xph-form/table": "workspace:*"
+    "@xph-form/common": "file:./src/packages/common",
+    "@xph-form/form": "file:./src/packages/form",
+    "@xph-form/table": "file:./src/packages/table"
   },
   "devDependencies": {
     "@types/gulp": "^4.0.17",
