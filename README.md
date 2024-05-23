@@ -19,16 +19,16 @@ If you are in a bad network environment, you can try other registries and tools 
 ```javascript
 import React from "react";
 import {
-  ReactForm,
-  useReactForm,
-  IReactFormProps,
-  IReactFormActionType,
+  XphForm,
+  useXphForm,
+  IXphFormProps,
+  IXphFormActionType,
 } from "xph-form";
 import { InputNumber } from "antd";
 import dayjs from "dayjs";
 
 const ReactApp: React.FC = () => {
-  const props: IReactFormProps = {
+  const props: IXphFormProps = {
     labelCol: { span: 6 },
     wrapperCol: { span: 18 },
     items: [
@@ -713,7 +713,7 @@ const ReactApp: React.FC = () => {
    * 第一种调用form组件api的方式，通过useRef
    *=============================================
    *  */
-  const reactFormRef = React.useRef<IReactFormActionType>();
+  const reactFormRef = React.useRef<IXphFormActionType>();
 
   /**
    * ==========================================
@@ -723,10 +723,10 @@ const ReactApp: React.FC = () => {
    *=============================================
    * */
   const [register, { setFieldsValue, getFieldsValue, resetFields, validator }] =
-    useReactForm();
+    useXphForm();
   return (
     <section>
-      <ReactForm register={register} ref={reactFormRef} {...props}></ReactForm>
+      <XphForm register={register} ref={reactFormRef} {...props}></XphForm>
     </section>
   );
 };
