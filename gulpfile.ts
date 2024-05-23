@@ -106,6 +106,11 @@ task(
       buildCssTask(
         ["./src/packages/*/dist/**/*.css", "!**/node_modules/**"],
         "dist/packages"
+      ),
+    () =>
+      copyTask(
+        ["./src/packages/*/package.json", "!**/node_modules/**"],
+        "dist/packages"
       )
   )
 );
