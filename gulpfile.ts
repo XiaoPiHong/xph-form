@@ -103,10 +103,7 @@ task(
         "dist"
       ),
     () =>
-      buildCssTask(
-        ["./src/packages/*/dist/**/*.css", "!**/node_modules/**"],
-        "dist/packages"
-      ),
+      buildCssTask(["./src/packages/**/*.css", "!**/node_modules/**"], "dist/packages"),
     () =>
       copyTask(
         ["./src/packages/*/package.json", "!**/node_modules/**"],
@@ -117,10 +114,4 @@ task(
 
 // task("copy-md", () => copyTask(["*.md"], "dist"));
 
-task(
-  "default",
-  series(
-    "clean-dist",
-    parallel("compile-common", "compile-table", "compile-form", "compile-all")
-  )
-);
+task("default", series("clean-dist", parallel("compile-all")));
