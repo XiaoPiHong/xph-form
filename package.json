@@ -1,6 +1,6 @@
 {
   "name": "xph-form",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "This is a configurable form component that supports React",
   "keywords": [
     "react",
@@ -12,7 +12,7 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "build": "npx rimraf ./dist && gulp",
     "dev": "cd example && npm run dev"

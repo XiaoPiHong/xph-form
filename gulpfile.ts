@@ -100,17 +100,17 @@ task(
       buildTsTask(
         "tsconfig.gulp.json",
         ["./src/**/*.{ts,tsx}", "!**/node_modules/**"],
-        "dist"
+        "dist/src"
       ),
     () =>
       buildCssTask(
         ["./src/packages/*/dist/**/*.css", "!**/node_modules/**"],
-        "dist/packages"
+        "dist/src/packages"
       ),
     () =>
       copyTask(
         ["./src/packages/*/package.json", "!**/node_modules/**"],
-        "dist/packages"
+        "dist/src/packages"
       )
   )
 );
