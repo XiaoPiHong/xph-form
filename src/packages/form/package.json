@@ -4,17 +4,12 @@
   "main": "index.js",
   "scripts": {},
   "devDependencies": {},
-  "dependencies": {
-    "@xph-form/common": "workspace:*"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "^18.2.0",
     "lodash-es": "^4.17.21",
     "dayjs": "^1.11.10",
     "@ant-design/icons": "^5.2.6",
     "antd": "^5.14.2"
-  },
-  "workspaces": [
-    "../../packages/*"
-  ]
+  }
 }
