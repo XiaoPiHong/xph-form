@@ -18,10 +18,8 @@
     "build": "npx rimraf ./dist && gulp",
     "dev": "cd example && npm run dev"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/gulp": "^4.0.17",
-    "@types/gulp-typescript": "^2.13.0",
     "@types/lodash-es": "^4.17.12",
     "del": "6.1.1",
     "gulp": "^4.0.2",

@@ -34,9 +34,9 @@ function buildCssTask(srcFolder, distFolder) {
 }
 
 /** 复制文件 */
-function copyTask(srcFolder, distFolder) {
-  return src(srcFolder).pipe(dest(distFolder));
-}
+// function copyTask(srcFolder, distFolder) {
+//   return src(srcFolder).pipe(dest(distFolder));
+// }
 
 task("clean-dist", async () => {
   await del(["./src/packages/**/dist/**", "!**/node_modules/**"]);
@@ -103,10 +103,8 @@ task(
         "dist"
       ),
     () =>
-      buildCssTask(["./src/packages/**/*.css", "!**/node_modules/**"], "dist/packages"),
-    () =>
-      copyTask(
-        ["./src/packages/*/package.json", "!**/node_modules/**"],
+      buildCssTask(
+        ["./src/packages/**/*.css", "!**/node_modules/**"],
         "dist/packages"
       )
   )
