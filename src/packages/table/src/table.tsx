@@ -2,14 +2,16 @@ import React, { forwardRef, useImperativeHandle } from "react";
 import { Table as ATable } from "antd";
 import { TTableProps, TRefTable } from "./types";
 import SearchForm from "./components/searchForm";
-import { useSearchForm, useTableColumns } from "./hooks";
+import { useSearchForm, useTableColumns, useTableProps } from "./hooks";
 
 const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
-  const { searchFormRef, searchFormProps } = useSearchForm(props);
-  const {} = useTableColumns(props);
+  const { tableProps } = useTableProps(props);
+  const { searchFormRef, searchFormProps } = useSearchForm(tableProps);
+  const { columns } = useTableColumns(tableProps);
 
   const getTableBindProps = () => {
-    const { autoRequest, columns, ...rest } = props.table || {};
+    const { autoRequest, api, formatDataSource, columns, ...rest } =
+      tableProps.table!;
     return rest;
   };
 
@@ -20,7 +22,7 @@ const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
         <SearchForm ref={searchFormRef} {...searchFormProps} />
       </div>
       <div>
-        <ATable {...getTableBindProps()} />
+        <ATable {...getTableBindProps()} columns={columns} />
       </div>
     </div>
   );

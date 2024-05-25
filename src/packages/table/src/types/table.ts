@@ -1,5 +1,5 @@
 import { TableProps } from "antd";
-import type { ColumnsType, TableRef } from "antd/es/table";
+import type { ColumnType, ColumnGroupType, TableRef } from "antd/es/table";
 import { TSearchFormProps } from "./searchForm";
 import { TCrudFormProps } from "./crudForm";
 
@@ -7,24 +7,25 @@ import { TCrudFormProps } from "./crudForm";
 export type TDataSourceItem = Record<PropertyKey, any>;
 
 /** 扩展一下antd column的属性 */
-export type TColumnsType<RecordType = TDataSourceItem> =
-  ColumnsType<RecordType> & {
-    /** 单元格映射的组件 */
-    component?: string;
-  };
+type TBaseColumnType = {
+  /** 单元格映射的组件 */
+  component?: string;
+};
+export type TColumnType<RecordType = TDataSourceItem> =
+  | (ColumnType<RecordType> & TBaseColumnType)
+  | (ColumnGroupType<RecordType> & TBaseColumnType);
 
 /** 扩展antd table的属性 */
-export type TApiTableProps<RecordType = TDataSourceItem> =
-  TableProps<RecordType> & {
-    /** 列配置项 */
-    columns?: TColumnsType<RecordType>;
-    /** 首次是否自动请求 */
-    autoRequest?: boolean;
-    /** 获取datasource的api */
-    api?: (params: any) => Promise<any>;
-    /** 格式化返回的datasource */
-    formatDataSource?: (data: any) => any[];
-  };
+export type TApiTableProps<RecordType = TDataSourceItem> = {
+  /** 列配置项 */
+  columns?: TColumnType<RecordType>[];
+  /** 首次是否自动请求 */
+  autoRequest?: boolean;
+  /** 获取datasource的api */
+  api?: (params: any) => Promise<any>;
+  /** 格式化返回的datasource */
+  formatDataSource?: (data: any) => any[];
+} & TableProps<RecordType>;
 
 /** 整个组件的配置 */
 export type TTableProps<RecordType = TDataSourceItem> = {

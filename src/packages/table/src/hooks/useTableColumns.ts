@@ -1,8 +1,17 @@
-import { TTableProps, TColumnsType } from "../types";
-import type { ColumnsType } from "antd/es/table";
+import { TTableProps, TColumnType, TDataSourceItem } from "../types";
+import { ColumnsType } from "antd/es/table";
 
-const useTableColumns = (props: TTableProps) => {
-  return {};
-};
+export default function useTableColumns(props: TTableProps): {
+  columns: ColumnsType<TDataSourceItem>;
+} {
+  const { columns } = props.table!;
 
-export default useTableColumns;
+  const newColumns = columns!.map((item) => {
+    /** 去除掉component映射属性 */
+    const { component, ...reset } = item;
+    return reset;
+  }) as ColumnsType<TDataSourceItem>;
+  return {
+    columns: newColumns,
+  };
+}

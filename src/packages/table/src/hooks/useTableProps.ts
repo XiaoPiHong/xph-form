@@ -1,8 +1,11 @@
 import { TTableProps } from "../types";
+import { merge } from "lodash-es";
 
 const useTableProps = (props: TTableProps) => {
   const baseTableProps: Partial<TTableProps> = {
-    table: {},
+    table: {
+      columns: [],
+    },
     crudForm: {
       items: [],
     },
@@ -11,7 +14,9 @@ const useTableProps = (props: TTableProps) => {
     },
   };
 
-  const newTableProps: TTableProps = {};
+  const newTableProps: TTableProps = {
+    ...merge(baseTableProps, props),
+  };
 
   return {
     tableProps: newTableProps,
