@@ -25,6 +25,8 @@ export type TApiTableProps<RecordType = TDataSourceItem> = {
   api?: (params: any) => Promise<any>;
   /** 格式化返回的datasource */
   formatDataSource?: (data: any) => any[];
+  /** 是否接口支持分页 */
+  apiPagination?: boolean;
 } & TableProps<RecordType>;
 
 /** 整个组件的配置 */

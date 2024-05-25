@@ -12,7 +12,14 @@ interface DataType {
 const ReactApp: React.FC = () => {
   const props: TXphTableProps<DataType> = {
     table: {
-      columns: [],
+      columns: [
+        {
+          title: "姓名",
+          dataIndex: "name",
+          key: "name",
+        },
+      ],
+      pagination: { position: ["bottomRight"] },
     },
     searchForm: {
       items: [

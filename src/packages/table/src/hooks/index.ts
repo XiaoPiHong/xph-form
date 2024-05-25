@@ -4,3 +4,7 @@ export { default as useTableColumns } from "./useTableColumns";
 export * from "./useTableColumns";
 export { default as useTableProps } from "./useTableProps";
 export * from "./useTableProps";
+export { default as usePagination } from "./usePagination";
+export * from "./usePagination";
+export { default as useTable } from "./useTable";
+export * from "./useTable";
