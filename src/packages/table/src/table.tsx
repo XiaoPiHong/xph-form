@@ -15,10 +15,13 @@ const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
   const { tableProps } = useTableProps(props);
   const { searchFormRef, searchFormProps } = useSearchForm(tableProps);
   const { columns } = useTableColumns(tableProps);
-  const { pagination } = usePagination(tableProps);
-  const { table, firstGetTableData, getTableData } = useTable(
+  const { pagination, lastPaginationState } = usePagination(tableProps);
+  const { table, firstGetTableData, getTableData, onAllChange } = useTable(
     tableProps,
-    pagination,
+    {
+      pagination,
+      lastPaginationState,
+    },
     searchFormRef
   );
 
@@ -35,7 +38,7 @@ const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
   };
 
   /** 首次请求 */
-  firstGetTableData()
+  firstGetTableData();
 
   useImperativeHandle(ref, () => ({}));
   return (
@@ -55,6 +58,8 @@ const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
           }
           loading={table.model.loading}
           dataSource={table.model.dataSource}
+          /** 分页、排序、筛选变化时触发 */
+          onChange={onAllChange}
         />
       </div>
     </div>

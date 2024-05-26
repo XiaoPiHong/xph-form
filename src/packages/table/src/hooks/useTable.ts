@@ -2,6 +2,7 @@ import { TTableProps, TDataSourceItem } from "../types";
 import { useState, useRef, Ref, useEffect } from "react";
 import { IPagination, IReturnPagination } from "./usePagination";
 import { IXphFormActionType } from "@xph-form/form";
+import { isEqual } from "lodash-es";
 
 export interface ITable {
   loading: boolean;
@@ -11,10 +12,14 @@ export interface ITable {
 
 export default function useTable(
   props: TTableProps,
-  pagination: IReturnPagination,
+  pager: {
+    pagination: IReturnPagination;
+    lastPaginationState: React.MutableRefObject<IPagination | boolean>;
+  },
   searchFormRef: Ref<IXphFormActionType>
 ) {
-  const { api, formatDataSource, apiPagination } = props.table!;
+  const { api, formatDataSource, apiPagination, onChange } = props.table!;
+  const { pagination } = pager;
 
   const [tableState, setTableState] = useState<ITable>({
     loading: false,
@@ -118,9 +123,44 @@ export default function useTable(
     return table.update({ loading: false });
   };
 
+  /** 分页改变 */
+  const onPaginationChange = ({ current, pageSize }) => {
+    const { validator } = searchFormRef.current;
+    return new Promise((resolve, reject) => {
+      if (!lastTableState.current) resolve(true);
+      if (
+        !isEqual(
+          { current, pageSize },
+          {
+            current: lastTableState.current.current,
+            pageSize: lastTableState.current.pageSize,
+          }
+        )
+      ) {
+        reject(false);
+        validator().then((res) => {
+          getTableData({
+            searchFormParams: res,
+            paginationParams: { current, pageSize },
+          });
+        });
+      }
+      resolve(true);
+    });
+  };
+
+  const onAllChange = (...args) => {
+    const [pagination, filters, sorter, extra] = args;
+
+    onPaginationChange(pagination).finally(() => {
+      if (onChange) onChange(pagination, filters, sorter, extra);
+    });
+  };
+
   return {
     table,
     firstGetTableData,
     getTableData,
+    onAllChange,
   };
 }

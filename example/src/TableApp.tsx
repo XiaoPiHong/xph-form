@@ -19,6 +19,7 @@ const ReactApp: React.FC = () => {
           key: "name",
         },
       ],
+      pagination: {},
       apiPagination: false,
       api: async (params) => {
         console.log(params);
