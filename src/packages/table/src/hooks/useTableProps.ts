@@ -6,6 +6,7 @@ const useTableProps = (props: TTableProps) => {
     table: {
       columns: [],
       apiPagination: true,
+      autoRequest: true,
       pagination: {
         pageSize: 20,
         total: 0,

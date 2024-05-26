@@ -1,5 +1,5 @@
 import { TTableProps } from "../types";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export interface IPagination {
   pageSize: number;
@@ -21,11 +21,17 @@ export default function usePagination(props: TTableProps): {
   const [paginationState, setPaginationState] =
     useState<IPagination>(propsPagination);
 
+  /** 上一次update的数据，解决state异步问题 */
+  const lastPaginationState = useRef<IPagination>(propsPagination);
+
   const pagination = {
     model: paginationState,
     update: (props: Partial<IPagination>) => {
-      const newModel = { ...props, ...paginationState };
+      /** 兼容propsPagination为false的情况 */
+      if (!propsPagination) return;
+      const newModel = { ...lastPaginationState.current, ...props };
       setPaginationState(newModel);
+      lastPaginationState.current = newModel;
     },
   };
 

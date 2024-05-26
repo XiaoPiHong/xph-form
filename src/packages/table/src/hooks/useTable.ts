@@ -1,5 +1,5 @@
 import { TTableProps, TDataSourceItem } from "../types";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { IPagination, IReturnPagination } from "./usePagination";
 
 export interface ITable {
@@ -19,12 +19,19 @@ export default function useTable(
     dataSource: [],
     selection: [],
   });
+  /** 上一次update的数据，解决state异步问题 */
+  const lastTableState = useRef<ITable>({
+    loading: false,
+    dataSource: [],
+    selection: [],
+  });
 
   const table = {
     model: tableState,
     update: (props: Partial<ITable>) => {
-      const newModel = { ...props, ...tableState };
+      const newModel = { ...lastTableState.current, ...props };
       setTableState(newModel);
+      lastTableState.current = newModel;
     },
   };
 
@@ -79,8 +86,7 @@ export default function useTable(
         return table.update({ loading: false });
       } else {
         return api(params)
-          .then((res) => {
-            const { data } = res;
+          .then((data) => {
             table.update({
               dataSource: formatDataSource ? formatDataSource(data) : data,
             });

@@ -30,8 +30,6 @@ const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
     return rest;
   };
 
-  console.log(pagination);
-  console.log(table);
 
   /** 首次是否自动请求 */
   useEffect(() => {
