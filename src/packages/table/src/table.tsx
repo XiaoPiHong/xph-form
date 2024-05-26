@@ -19,8 +19,14 @@ const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
   const { table, getTableData } = useTable(tableProps, pagination);
 
   const getTableBindProps = () => {
-    const { autoRequest, api, formatDataSource, columns, ...rest } =
-      tableProps.table!;
+    const {
+      autoRequest,
+      api,
+      formatDataSource,
+      apiPagination,
+      columns,
+      ...rest
+    } = tableProps.table!;
     return rest;
   };
 
@@ -46,11 +52,14 @@ const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
         <ATable
           {...getTableBindProps()}
           columns={columns}
+          /** pagination可以是个boolean */
           pagination={
             isObject(pagination.model)
               ? { ...pagination.model, disabled: table.model.loading }
               : pagination.model
           }
+          loading={table.model.loading}
+          dataSource={table.model.dataSource}
         />
       </div>
     </div>

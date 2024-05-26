@@ -4,8 +4,8 @@ import { useState } from "react";
 export interface IPagination {
   pageSize: number;
   current: number;
-  total?: number;
-  pageSizeOptions?: number[];
+  total: number;
+  pageSizeOptions: number[];
 }
 
 export interface IReturnPagination {

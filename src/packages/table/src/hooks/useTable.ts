@@ -12,9 +12,13 @@ export default function useTable(
   props: TTableProps,
   pagination: IReturnPagination
 ) {
-  const { api, formatDataSource, apiPagination, autoRequest } = props.table!;
+  const { api, formatDataSource, apiPagination } = props.table!;
 
-  const [tableState, setTableState] = useState<ITable>({});
+  const [tableState, setTableState] = useState<ITable>({
+    loading: false,
+    dataSource: [],
+    selection: [],
+  });
 
   const table = {
     model: tableState,
@@ -24,15 +28,12 @@ export default function useTable(
     },
   };
 
-  const getTableData = ({
+  const getTableData = async ({
     searchFormParams,
-    paginationParams = {
-      current: pagination.model.current,
-      pageSize: pagination.model.pageSize,
-    },
+    paginationParams,
   }: {
-    searchFormParams: any;
-    paginationParams?: IPagination;
+    searchFormParams: Record<string, any>;
+    paginationParams?: Partial<IPagination>;
   }) => {
     table.update({ loading: true, selection: [] });
 
@@ -41,7 +42,12 @@ export default function useTable(
       /** 最终提交的参数 */
       const params = {
         ...searchFormParams,
-        ...paginationParams,
+        ...{
+          /** 没传paginationParams默认就是上一次 */
+          current: pagination.model.current,
+          pageSize: pagination.model.pageSize,
+          ...paginationParams,
+        },
       };
       return api(params)
         .then((res) => {
@@ -70,7 +76,7 @@ export default function useTable(
           current,
           pageSize,
         });
-        table.update({ loading: false });
+        return table.update({ loading: false });
       } else {
         return api(params)
           .then((res) => {
@@ -79,6 +85,7 @@ export default function useTable(
               dataSource: formatDataSource ? formatDataSource(data) : data,
             });
             pagination.update({
+              current: 1,
               total: data.length,
             });
           })
@@ -88,7 +95,7 @@ export default function useTable(
       }
     }
 
-    table.update({ loading: false });
+    return table.update({ loading: false });
   };
 
   return {
