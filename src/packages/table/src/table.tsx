@@ -16,7 +16,11 @@ const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
   const { searchFormRef, searchFormProps } = useSearchForm(tableProps);
   const { columns } = useTableColumns(tableProps);
   const { pagination } = usePagination(tableProps);
-  const { table, getTableData } = useTable(tableProps, pagination);
+  const { table, firstGetTableData, getTableData } = useTable(
+    tableProps,
+    pagination,
+    searchFormRef
+  );
 
   const getTableBindProps = () => {
     const {
@@ -30,15 +34,8 @@ const Table: TRefTable = forwardRef((props: TTableProps, ref) => {
     return rest;
   };
 
-
-  /** 首次是否自动请求 */
-  useEffect(() => {
-    const { autoRequest } = tableProps.table!;
-    if (autoRequest)
-      searchFormRef.current.validator().then((res) => {
-        getTableData({ searchFormParams: res });
-      });
-  }, []);
+  /** 首次请求 */
+  firstGetTableData()
 
   useImperativeHandle(ref, () => ({}));
   return (

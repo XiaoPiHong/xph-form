@@ -1,6 +1,7 @@
 import { TTableProps, TDataSourceItem } from "../types";
-import { useState, useRef } from "react";
+import { useState, useRef, Ref, useEffect } from "react";
 import { IPagination, IReturnPagination } from "./usePagination";
+import { IXphFormActionType } from "@xph-form/form";
 
 export interface ITable {
   loading: boolean;
@@ -10,7 +11,8 @@ export interface ITable {
 
 export default function useTable(
   props: TTableProps,
-  pagination: IReturnPagination
+  pagination: IReturnPagination,
+  searchFormRef: Ref<IXphFormActionType>
 ) {
   const { api, formatDataSource, apiPagination } = props.table!;
 
@@ -33,6 +35,18 @@ export default function useTable(
       setTableState(newModel);
       lastTableState.current = newModel;
     },
+  };
+
+  /** 首次请求 */
+  const firstGetTableData = async () => {
+    useEffect(() => {
+      const { autoRequest } = props.table!;
+      const { validator } = searchFormRef.current;
+      if (autoRequest)
+        validator().then((res) => {
+          getTableData({ searchFormParams: res });
+        });
+    }, []);
   };
 
   const getTableData = async ({
@@ -106,6 +120,7 @@ export default function useTable(
 
   return {
     table,
+    firstGetTableData,
     getTableData,
   };
 }

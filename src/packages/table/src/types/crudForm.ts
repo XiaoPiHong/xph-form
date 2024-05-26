@@ -1,3 +1,3 @@
-import { IXphFormProps } from "../../../form";
+import { IXphFormProps } from "@xph-form/form";
 
 export type TCrudFormProps = IXphFormProps & {};
