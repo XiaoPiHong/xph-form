@@ -3,7 +3,7 @@ import XphTable from "./src/table";
 import type {
   TTableProps as TXphTableProps,
   TDataSourceItem as TXphDataSourceItem,
-  TColumnsType as TXphColumnsType,
+  TColumnType as TXphColumnType,
   TApiTableProps as TXphApiTableProps,
   TSearchFormProps as TXphSearchFormProps,
   TCrudFormProps as TXphCrudFormProps,
@@ -13,7 +13,7 @@ export {
   XphTable,
   TXphTableProps,
   TXphDataSourceItem,
-  TXphColumnsType,
+  TXphColumnType,
   TXphApiTableProps,
   TXphSearchFormProps,
   TXphCrudFormProps,

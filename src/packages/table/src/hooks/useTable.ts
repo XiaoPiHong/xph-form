@@ -19,7 +19,7 @@ export default function useTable(
   searchFormRef: Ref<IXphFormActionType>
 ) {
   const { api, formatDataSource, apiPagination, onChange } = props.table!;
-  const onWholeChange = props.onChange;
+  const onWholePaginationChange = props.onPaginationChange;
   const { pagination } = pager;
 
   const [tableState, setTableState] = useState<ITable>({
@@ -125,8 +125,9 @@ export default function useTable(
   };
 
   /** 分页改变 */
-  const onPaginationChange = ({ current, pageSize }) => {
+  const onPaginationChange = (pagination) => {
     const { validator } = searchFormRef.current;
+    const { current, pageSize } = pagination;
     return new Promise((resolve, reject) => {
       if (!lastTableState.current) resolve(true);
       if (
@@ -138,13 +139,14 @@ export default function useTable(
           }
         )
       ) {
-        reject(false);
         validator().then((res) => {
           getTableData({
             searchFormParams: res,
             paginationParams: { current, pageSize },
           });
         });
+        reject(false);
+        if (onWholePaginationChange) onWholePaginationChange(pagination);
       }
       resolve(true);
     });
@@ -155,7 +157,6 @@ export default function useTable(
 
     onPaginationChange(pagination).finally(() => {
       if (onChange) onChange(pagination, filters, sorter, extra);
-      if (onWholeChange) onWholeChange(pagination, filters, sorter, extra);
     });
   };
 

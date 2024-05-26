@@ -1,4 +1,4 @@
-import { TableProps } from "antd";
+import { TableProps, TablePaginationConfig } from "antd";
 import type { ColumnType, ColumnGroupType, TableRef } from "antd/es/table";
 import { TSearchFormProps } from "./searchForm";
 import { TCrudFormProps } from "./crudForm";
@@ -42,8 +42,8 @@ export type TTableProps<RecordType = TDataSourceItem> = {
   /** 新增 / 修改表单配置项 */
   crudForm?: TCrudFormProps;
 
-  /** 表格的事件 */
-  onChange?: TApiTableProps<RecordType>["onChange"];
+  /** 分页改变事件 */
+  onPaginationChange?: (pagination: TablePaginationConfig) => void;
 };
 
 export type TRefTable = <RecordType extends TDataSourceItem = TDataSourceItem>(

@@ -13,7 +13,7 @@ const ReactApp: React.FC = () => {
   const props: TXphTableProps<DataType> = {
     table: {
       onChange: (e) => {
-        console.log(e);
+        console.log("11111");
       },
       columns: [
         {
@@ -84,7 +84,7 @@ const ReactApp: React.FC = () => {
     <XphTable<DataType>
       ref={xphTableRef}
       {...props}
-      onChange={(e) => console.log(e)}
+      onPaginationChange={(e) => console.log("2222")}
     />
   );
 };
