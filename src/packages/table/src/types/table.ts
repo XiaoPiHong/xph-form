@@ -41,6 +41,9 @@ export type TTableProps<RecordType = TDataSourceItem> = {
   searchForm?: TSearchFormProps;
   /** 新增 / 修改表单配置项 */
   crudForm?: TCrudFormProps;
+
+  /** 表格的事件 */
+  onChange?: TApiTableProps<RecordType>["onChange"];
 };
 
 export type TRefTable = <RecordType extends TDataSourceItem = TDataSourceItem>(

@@ -19,6 +19,7 @@ export default function useTable(
   searchFormRef: Ref<IXphFormActionType>
 ) {
   const { api, formatDataSource, apiPagination, onChange } = props.table!;
+  const onWholeChange = props.onChange;
   const { pagination } = pager;
 
   const [tableState, setTableState] = useState<ITable>({
@@ -154,6 +155,7 @@ export default function useTable(
 
     onPaginationChange(pagination).finally(() => {
       if (onChange) onChange(pagination, filters, sorter, extra);
+      if (onWholeChange) onWholeChange(pagination, filters, sorter, extra);
     });
   };
 

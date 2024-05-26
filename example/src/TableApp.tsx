@@ -12,6 +12,9 @@ interface DataType {
 const ReactApp: React.FC = () => {
   const props: TXphTableProps<DataType> = {
     table: {
+      onChange: (e) => {
+        console.log(e);
+      },
       columns: [
         {
           title: "姓名",
@@ -77,7 +80,13 @@ const ReactApp: React.FC = () => {
 
   const xphTableRef = useRef();
 
-  return <XphTable<DataType> ref={xphTableRef} {...props} />;
+  return (
+    <XphTable<DataType>
+      ref={xphTableRef}
+      {...props}
+      onChange={(e) => console.log(e)}
+    />
+  );
 };
 
 export default ReactApp;
