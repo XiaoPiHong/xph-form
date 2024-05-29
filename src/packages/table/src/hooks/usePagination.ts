@@ -15,16 +15,16 @@ export interface IReturnPagination {
 
 export default function usePagination(props: TTableProps): {
   pagination: IReturnPagination;
-  lastPaginationState: React.MutableRefObject<IPagination | boolean>;
+  lastPaginationState: React.MutableRefObject<IPagination | false>;
 } {
   const { pagination: propsPagination } = props.table!;
 
-  const [paginationState, setPaginationState] = useState<IPagination | boolean>(
+  const [paginationState, setPaginationState] = useState<IPagination | false>(
     propsPagination
   );
 
   /** 上一次update的数据，解决state异步问题 */
-  const lastPaginationState = useRef<IPagination | boolean>(propsPagination);
+  const lastPaginationState = useRef<IPagination | false>(propsPagination);
 
   const pagination = {
     model: paginationState,

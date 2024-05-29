@@ -14,13 +14,13 @@ export default function useTable(
   props: TTableProps,
   pager: {
     pagination: IReturnPagination;
-    lastPaginationState: React.MutableRefObject<IPagination | boolean>;
+    lastPaginationState: React.MutableRefObject<IPagination | false>;
   },
   searchFormRef: Ref<IXphFormActionType>
 ) {
   const { api, formatDataSource, apiPagination, onChange } = props.table!;
-  const onWholePaginationChange = props.onPaginationChange;
-  const { pagination } = pager;
+  const onBindTablePaginationChange = props.onPaginationChange;
+  const { pagination, lastPaginationState } = pager;
 
   const [tableState, setTableState] = useState<ITable>({
     loading: false,
@@ -64,15 +64,14 @@ export default function useTable(
   }) => {
     table.update({ loading: true, selection: [] });
 
-    /** 接口支持分页 */
+    /** 接口支持分页=================================================== */
     if (api && apiPagination) {
-      /** 最终提交的参数 */
       const params = {
         ...searchFormParams,
         ...{
           /** 没传paginationParams默认就是上一次 */
-          current: pagination.model.current,
-          pageSize: pagination.model.pageSize,
+          current: (lastPaginationState.current as IPagination).current,
+          pageSize: (lastPaginationState.current as IPagination).pageSize,
           ...paginationParams,
         },
       };
@@ -91,8 +90,7 @@ export default function useTable(
           table.update({ loading: false });
         });
     }
-
-    /** 接口不支持分页则根据用户是否需要前端分页 */
+    /** 接口不支持分页则根据用户是否需要前端分页==================================== */
     if (api && !apiPagination) {
       const params = {
         ...searchFormParams,
@@ -121,6 +119,7 @@ export default function useTable(
       }
     }
 
+    /** 其余情况================================================================ */
     return table.update({ loading: false });
   };
 
@@ -128,36 +127,40 @@ export default function useTable(
   const onPaginationChange = (pagination) => {
     const { validator } = searchFormRef.current;
     const { current, pageSize } = pagination;
-    return new Promise((resolve, reject) => {
-      if (!lastTableState.current) resolve(true);
-      if (
-        !isEqual(
-          { current, pageSize },
-          {
-            current: lastTableState.current.current,
-            pageSize: lastTableState.current.pageSize,
-          }
-        )
-      ) {
-        validator().then((res) => {
-          getTableData({
-            searchFormParams: res,
-            paginationParams: { current, pageSize },
-          });
+    if (!lastPaginationState.current) return;
+    if (
+      !isEqual(
+        { current, pageSize },
+        {
+          current: lastPaginationState.current.current,
+          pageSize: lastPaginationState.current.pageSize,
+        }
+      )
+    ) {
+      validator().then((res) => {
+        getTableData({
+          searchFormParams: res,
+          paginationParams: { current, pageSize },
         });
-        reject(false);
-        if (onWholePaginationChange) onWholePaginationChange(pagination);
-      }
-      resolve(true);
-    });
+      });
+      if (onBindTablePaginationChange) onBindTablePaginationChange(pagination);
+      return true;
+    }
   };
 
-  const onAllChange = (...args) => {
+  /** 分页、排序、筛选变化时触发 */
+  const onAllChange = async (...args) => {
     const [pagination, filters, sorter, extra] = args;
 
-    onPaginationChange(pagination).finally(() => {
-      if (onChange) onChange(pagination, filters, sorter, extra);
-    });
+    const processArr: Function[] = [() => onPaginationChange(pagination)];
+
+    for (let i = 0; i < processArr.length; i++) {
+      if (processArr[i]()) {
+        break;
+      }
+    }
+
+    if (onChange) onChange(pagination, filters, sorter, extra);
   };
 
   return {
