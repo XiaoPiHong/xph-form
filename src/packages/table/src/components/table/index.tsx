@@ -22,6 +22,7 @@ const Table = ({
     },
     searchFormRef
   );
+  console.log(columns);
 
   const getTableBindProps = () => {
     const {

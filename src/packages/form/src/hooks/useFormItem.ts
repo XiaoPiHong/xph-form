@@ -4,7 +4,7 @@ import {
   isComponentFormItemProps,
   Recordable,
 } from "../types";
-import { isBoolean, isFunction, isNull, cloneDeep } from "lodash-es";
+import { isBoolean, isFunction, isNull } from "lodash-es";
 import { setComponentRuleType, createPlaceholderMessage } from "../helper";
 import { RuleObject } from "antd/es/form";
 import { ColProps } from "antd";
@@ -41,7 +41,7 @@ export const useFormItemRules = ({
 }) => {
   const { rules: defRules = [], label, required } = item;
 
-  let rules = cloneDeep(defRules) as RuleObject[];
+  let rules = defRules as RuleObject[];
 
   const isComponent = isComponentFormItemProps(item);
 
