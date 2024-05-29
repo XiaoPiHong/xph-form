@@ -1,8 +1,12 @@
 import { Table as ATable } from "antd";
 import React, { memo, Ref } from "react";
 import { TTableProps } from "../../types";
-import { useTableColumns, usePagination, useTable } from "../../hooks";
-import { isObject } from "lodash-es";
+import {
+  useTableColumns,
+  usePagination,
+  useTable,
+  useRowSelection,
+} from "../../hooks";
 import { IXphFormActionType } from "@xph-form/form";
 
 const Table = ({
@@ -13,7 +17,8 @@ const Table = ({
   searchFormRef: Ref<IXphFormActionType>;
 }) => {
   const { columns } = useTableColumns(tableProps);
-  const { pagination, lastPaginationState } = usePagination(tableProps);
+  const { pagination, lastPaginationState, getNewPagination } =
+    usePagination(tableProps);
   const { table, firstGetTableData, getTableData, onAllChange } = useTable(
     tableProps,
     {
@@ -22,7 +27,7 @@ const Table = ({
     },
     searchFormRef
   );
-  console.log(columns);
+  const { rowSelection } = useRowSelection(tableProps, table);
 
   const getTableBindProps = () => {
     const {
@@ -31,6 +36,9 @@ const Table = ({
       formatDataSource,
       apiPagination,
       columns,
+      pagination,
+      rowSelection,
+      onChange,
       ...rest
     } = tableProps.table!;
     return rest;
@@ -42,15 +50,12 @@ const Table = ({
   return (
     <ATable
       {...getTableBindProps()}
-      columns={columns}
-      /** pagination可以是个boolean */
-      pagination={
-        isObject(pagination.model)
-          ? { ...pagination.model, disabled: table.model.loading }
-          : pagination.model
-      }
       loading={table.model.loading}
+      columns={columns}
       dataSource={table.model.dataSource}
+      /** 请求时需禁用，所以需根据loading判断 */
+      pagination={getNewPagination(table.model.loading)}
+      rowSelection={rowSelection}
       /** 分页、排序、筛选变化时触发 */
       onChange={onAllChange}
     />

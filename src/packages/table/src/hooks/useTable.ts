@@ -1,6 +1,6 @@
 import { TTableProps, TDataSourceItem } from "../types";
 import { useState, useRef, Ref, useEffect } from "react";
-import { IPagination, IReturnPagination } from "./usePagination";
+import { IPagination, IUsePagination } from "./usePagination";
 import { IXphFormActionType } from "@xph-form/form";
 import { isEqual } from "lodash-es";
 
@@ -10,10 +10,15 @@ export interface ITable {
   selection: TDataSourceItem[];
 }
 
+export interface IUseTable {
+  model: ITable;
+  update: (props: Partial<ITable>) => void;
+}
+
 export default function useTable(
   props: TTableProps,
   pager: {
-    pagination: IReturnPagination;
+    pagination: IUsePagination;
     lastPaginationState: React.MutableRefObject<IPagination | false>;
   },
   searchFormRef: Ref<IXphFormActionType>
@@ -34,7 +39,7 @@ export default function useTable(
     selection: [],
   });
 
-  const table = {
+  const table: IUseTable = {
     model: tableState,
     update: (props: Partial<ITable>) => {
       const newModel = { ...lastTableState.current, ...props };

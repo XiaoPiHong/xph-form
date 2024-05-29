@@ -8,3 +8,5 @@ export { default as usePagination } from "./usePagination";
 export * from "./usePagination";
 export { default as useTable } from "./useTable";
 export * from "./useTable";
+export { default as useRowSelection } from "./useRowSelection";
+export * from "./useRowSelection";

@@ -1,5 +1,7 @@
 import { TTableProps } from "../types";
 import { useState, useRef } from "react";
+import { isObject } from "lodash-es";
+import { TablePaginationConfig } from "antd/lib/table/interface";
 
 export interface IPagination {
   pageSize: number;
@@ -8,14 +10,15 @@ export interface IPagination {
   pageSizeOptions: number[];
 }
 
-export interface IReturnPagination {
+export interface IUsePagination {
   model: IPagination;
   update: (props: Partial<IPagination>) => void;
 }
 
 export default function usePagination(props: TTableProps): {
-  pagination: IReturnPagination;
+  pagination: IUsePagination;
   lastPaginationState: React.MutableRefObject<IPagination | false>;
+  getNewPagination: (disabled: boolean) => TablePaginationConfig | false;
 } {
   const { pagination: propsPagination } = props.table!;
 
@@ -37,8 +40,21 @@ export default function usePagination(props: TTableProps): {
     },
   };
 
+  const getNewPagination = (
+    disabled: boolean
+  ): TablePaginationConfig | false => {
+    if (isObject(pagination.model)) {
+      return {
+        ...pagination.model,
+        disabled,
+      };
+    }
+    return pagination.model;
+  };
+
   return {
     pagination,
     lastPaginationState,
+    getNewPagination,
   };
 }

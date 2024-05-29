@@ -2,6 +2,7 @@ import { TableProps, TablePaginationConfig } from "antd";
 import type { ColumnType, ColumnGroupType, TableRef } from "antd/es/table";
 import { TSearchFormProps } from "./searchForm";
 import { TCrudFormProps } from "./crudForm";
+import { TableRowSelection, RowSelectionType } from "antd/lib/table/interface";
 
 /** 行数据 */
 export type TDataSourceItem = Record<PropertyKey, any>;
@@ -11,6 +12,7 @@ type TBaseColumnType = {
   /** 单元格映射的组件 */
   component?: string;
 };
+
 export type TColumnType<RecordType = TDataSourceItem> =
   | (ColumnType<RecordType> & TBaseColumnType)
   | (ColumnGroupType<RecordType> & TBaseColumnType);
@@ -28,7 +30,9 @@ export type TApiTableProps<RecordType = TDataSourceItem> = Omit<
     formatDataSource?: (data: any) => any[];
     /** 是否接口支持分页 */
     apiPagination?: boolean;
-  } & TableProps<RecordType>,
+    /** 单选 / 多选 */
+    rowSelection?: RowSelectionType | TableRowSelection<RecordType>;
+  } & Omit<TableProps<RecordType>, "rowSelection" | "columns">,
   /** loading和dataSource设置为内部控制 */
   "loading" | "dataSource"
 >;
@@ -44,6 +48,9 @@ export type TTableProps<RecordType = TDataSourceItem> = {
 
   /** 分页改变事件 */
   onPaginationChange?: (pagination: TablePaginationConfig) => void;
+
+  /** 列表选中事件 */
+  onRowSelectionChange?: (selectedRows: RecordType[]) => void;
 };
 
 export type TRefTable = <RecordType extends TDataSourceItem = TDataSourceItem>(

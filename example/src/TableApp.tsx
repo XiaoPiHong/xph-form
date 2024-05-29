@@ -12,9 +12,7 @@ interface DataType {
 const ReactApp: React.FC = () => {
   const props: TXphTableProps<DataType> = {
     table: {
-      onChange: (e) => {
-        console.log("11111");
-      },
+      rowSelection: "checkbox",
       columns: [
         {
           title: "姓名",
@@ -22,7 +20,6 @@ const ReactApp: React.FC = () => {
           key: "name",
         },
       ],
-      pagination: {},
       apiPagination: false,
       api: async (params) => {
         console.log(params);
@@ -84,7 +81,9 @@ const ReactApp: React.FC = () => {
     <XphTable<DataType>
       ref={xphTableRef}
       {...props}
-      onPaginationChange={(e) => console.log("2222")}
+      onRowSelectionChange={(selectedRows) => {
+        console.log(selectedRows);
+      }}
     />
   );
 };
