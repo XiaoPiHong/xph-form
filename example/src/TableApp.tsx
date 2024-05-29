@@ -12,7 +12,7 @@ interface DataType {
 const ReactApp: React.FC = () => {
   const props: TXphTableProps<DataType> = {
     table: {
-      rowSelection: "checkbox",
+      rowSelection: "radio",
       columns: [
         {
           title: "姓名",

@@ -18,23 +18,23 @@ export type TColumnType<RecordType = TDataSourceItem> =
   | (ColumnGroupType<RecordType> & TBaseColumnType);
 
 /** 扩展antd table的属性 */
-export type TApiTableProps<RecordType = TDataSourceItem> = Omit<
-  {
-    /** 列配置项 */
-    columns?: TColumnType<RecordType>[];
-    /** 首次是否自动请求 */
-    autoRequest?: boolean;
-    /** 获取datasource的api */
-    api?: (params: any) => Promise<any>;
-    /** 格式化返回的datasource */
-    formatDataSource?: (data: any) => any[];
-    /** 是否接口支持分页 */
-    apiPagination?: boolean;
-    /** 单选 / 多选 */
-    rowSelection?: RowSelectionType | TableRowSelection<RecordType>;
-  } & Omit<TableProps<RecordType>, "rowSelection" | "columns">,
-  /** loading和dataSource设置为内部控制 */
-  "loading" | "dataSource"
+export type TApiTableProps<RecordType = TDataSourceItem> = {
+  /** 列配置项 */
+  columns?: TColumnType<RecordType>[];
+  /** 首次是否自动请求 */
+  autoRequest?: boolean;
+  /** 获取datasource的api */
+  api?: (params: any) => Promise<any>;
+  /** 格式化返回的datasource */
+  formatDataSource?: (data: any) => any[];
+  /** 是否接口支持分页 */
+  apiPagination?: boolean;
+  /** 单选 / 多选 */
+  rowSelection?: RowSelectionType | TableRowSelection<RecordType>;
+} & Omit<
+  TableProps<RecordType>,
+  /** 内部控制的属性/重写的属性 */
+  "rowSelection" | "columns" | "loading" | "dataSource"
 >;
 
 /** 整个组件的配置 */
