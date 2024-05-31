@@ -47,8 +47,6 @@ const Table = ({
   /** 首次请求 */
   firstGetTableData();
 
-  console.log(style);
-
   return (
     <div className={style["main-container"]}>
       <div>这里是操作按钮</div>
