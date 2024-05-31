@@ -1,11 +1,11 @@
-import { Table as ATable } from "antd";
+import { Table as ATable, Pagination as APagination } from "antd";
 import React, { memo, Ref } from "react";
 import { TTableProps } from "../../types";
 import {
   useTableColumns,
-  usePagination,
   useTable,
   useRowSelection,
+  useTableScroll,
 } from "../../hooks";
 import { IXphFormActionType } from "@xph-form/form";
 
@@ -17,24 +17,23 @@ const Table = ({
   searchFormRef: Ref<IXphFormActionType>;
 }) => {
   const { columns } = useTableColumns(tableProps);
-  const { pagination, lastPaginationState, getNewPagination } =
-    usePagination(tableProps);
-  const { table, firstGetTableData, getTableData, onAllChange } = useTable(
-    tableProps,
-    {
-      pagination,
-      lastPaginationState,
-    },
-    searchFormRef
-  );
+  const {
+    table,
+    pagination,
+    firstGetTableData,
+    onPaginationChange,
+    onAllChange,
+  } = useTable(tableProps, searchFormRef);
   const { rowSelection } = useRowSelection(tableProps, table);
+  const { divRef, height } = useTableScroll();
+  console.log(height);
 
   const getTableBindProps = () => {
     const {
       autoRequest,
       api,
       formatDataSource,
-      apiPagination,
+      autoPagination,
       columns,
       pagination,
       rowSelection,
@@ -48,17 +47,32 @@ const Table = ({
   firstGetTableData();
 
   return (
-    <ATable
-      {...getTableBindProps()}
-      loading={table.model.loading}
-      columns={columns}
-      dataSource={table.model.dataSource}
-      /** 请求时需禁用，所以需根据loading判断 */
-      pagination={getNewPagination(table.model.loading)}
-      rowSelection={rowSelection}
-      /** 分页、排序、筛选变化时触发 */
-      onChange={onAllChange}
-    />
+    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+      <div>这里是操作按钮</div>
+      <div ref={divRef} style={{ flex: 1, height: 0 }}>
+        <ATable
+          scroll={{ y: height - 70, x: "max-content" }}
+          {...getTableBindProps()}
+          loading={table.model.loading}
+          columns={columns}
+          dataSource={table.model.dataSource}
+          /** 不使用table的分页 */
+          pagination={false}
+          rowSelection={rowSelection}
+          /** 排序、筛选变化时触发 */
+          onChange={onAllChange}
+        />
+      </div>
+      {pagination.show() ? (
+        <div>
+          <APagination
+            disabled={table.model.loading}
+            {...pagination.model}
+            onChange={onPaginationChange}
+          />
+        </div>
+      ) : null}
+    </div>
   );
 };
 

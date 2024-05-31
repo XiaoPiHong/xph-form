@@ -10,11 +10,18 @@ const XphTable: TRefTable = forwardRef((props: TTableProps, ref) => {
 
   useImperativeHandle(ref, () => ({}));
   return (
-    <div>
-      <div>
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <div style={{}}>
         <SearchForm ref={searchFormRef} {...searchFormProps} />
       </div>
-      <div>
+      <div style={{ flex: 1, height: 0 }}>
         <Table tableProps={tableProps} searchFormRef={searchFormRef} />
       </div>
     </div>

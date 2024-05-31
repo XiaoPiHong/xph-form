@@ -1,7 +1,5 @@
 import { TTableProps } from "../types";
 import { useState, useRef } from "react";
-import { isObject } from "lodash-es";
-import { TablePaginationConfig } from "antd/lib/table/interface";
 
 export interface IPagination {
   pageSize: number;
@@ -11,6 +9,7 @@ export interface IPagination {
 }
 
 export interface IUsePagination {
+  show: () => boolean;
   model: IPagination;
   update: (props: Partial<IPagination>) => void;
 }
@@ -18,9 +17,8 @@ export interface IUsePagination {
 export default function usePagination(props: TTableProps): {
   pagination: IUsePagination;
   lastPaginationState: React.MutableRefObject<IPagination | false>;
-  getNewPagination: (disabled: boolean) => TablePaginationConfig | false;
 } {
-  const { pagination: propsPagination } = props.table!;
+  const { pagination: propsPagination, autoPagination } = props.table!;
 
   const [paginationState, setPaginationState] = useState<IPagination | false>(
     propsPagination
@@ -38,23 +36,17 @@ export default function usePagination(props: TTableProps): {
       setPaginationState(newModel);
       lastPaginationState.current = newModel;
     },
-  };
-
-  const getNewPagination = (
-    disabled: boolean
-  ): TablePaginationConfig | false => {
-    if (isObject(pagination.model)) {
-      return {
-        ...pagination.model,
-        disabled,
-      };
-    }
-    return pagination.model;
+    show: () => {
+      return (
+        (paginationState &&
+          (autoPagination === true || autoPagination === void 0)) ||
+        false
+      );
+    },
   };
 
   return {
     pagination,
     lastPaginationState,
-    getNewPagination,
   };
 }

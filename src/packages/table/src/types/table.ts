@@ -1,4 +1,4 @@
-import { TableProps, TablePaginationConfig } from "antd";
+import { TableProps, PaginationProps } from "antd";
 import type { ColumnType, ColumnGroupType, TableRef } from "antd/es/table";
 import { TSearchFormProps } from "./searchForm";
 import { TCrudFormProps } from "./crudForm";
@@ -27,14 +27,18 @@ export type TApiTableProps<RecordType = TDataSourceItem> = {
   api?: (params: any) => Promise<any>;
   /** 格式化返回的datasource */
   formatDataSource?: (data: any) => any[];
-  /** 是否接口支持分页 */
-  apiPagination?: boolean;
+  /** 是否开启前端自动分页（当api不支持分页时可用） */
+  autoPagination?: boolean;
   /** 单选 / 多选 */
   rowSelection?: RowSelectionType | TableRowSelection<RecordType>;
+  /** 分页配置（因为分页器是独立出来的，使用table的分页器布局需要修改样式） */
+  pagination?: false | PaginationProps;
+  /** 排序、筛选变化时触发 */
+  onChange?: (filters: any, sorter: any, extra: any) => void;
 } & Omit<
   TableProps<RecordType>,
   /** 内部控制的属性/重写的属性 */
-  "rowSelection" | "columns" | "loading" | "dataSource"
+  "rowSelection" | "columns" | "loading" | "dataSource" | "pagination"
 >;
 
 /** 整个组件的配置 */
@@ -47,7 +51,7 @@ export type TTableProps<RecordType = TDataSourceItem> = {
   crudForm?: TCrudFormProps;
 
   /** 分页改变事件 */
-  onPaginationChange?: (pagination: TablePaginationConfig) => void;
+  onPaginationChange?: (page: number, pageSize: number) => void;
 
   /** 列表选中事件 */
   onRowSelectionChange?: (selectedRows: RecordType[]) => void;

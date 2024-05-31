@@ -10,3 +10,5 @@ export { default as useTable } from "./useTable";
 export * from "./useTable";
 export { default as useRowSelection } from "./useRowSelection";
 export * from "./useRowSelection";
+export { default as useTableScroll } from "./useTableScroll";
+export * from "./useTableScroll";
