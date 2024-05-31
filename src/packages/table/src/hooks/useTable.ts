@@ -2,7 +2,6 @@ import { TTableProps, TDataSourceItem } from "../types";
 import { useState, useRef, Ref, useEffect } from "react";
 import usePagination, { IPagination } from "./usePagination";
 import { IXphFormActionType } from "@xph-form/form";
-import { cloneDeep, isBoolean } from "lodash-es";
 
 export interface ITable {
   loading: boolean;
@@ -152,7 +151,10 @@ export default function useTable(
       return api!(params)
         .then((data) => {
           let dataSource = formatDataSource ? formatDataSource(data) : data;
-          let backupsDataSource = cloneDeep(dataSource);
+          /**
+           * 这里一定要新数组（防止分页切换时改变了dataSource的引用），且一定要注意backupsDataSource内部元素引用需和dataSource的元素引用一致（后期可能用于做分页缓存选中）
+           */
+          let backupsDataSource = [...dataSource];
 
           const start = 0;
           const end =
