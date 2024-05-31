@@ -1,6 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
+import { TTableProps } from "../types";
 
-export default function useTableScroll() {
+export default function useTableScroll(tableProps: TTableProps) {
+  const { scroll } = tableProps.table!;
+
   const divRef = useRef(null);
   const [height, setHeight] = useState(0);
 
@@ -27,8 +30,16 @@ export default function useTableScroll() {
       }
     };
   }, []);
+
+  const newScroll = useMemo(() => {
+    return {
+      x: "max-content",
+      y: height - 70,
+      ...scroll,
+    };
+  }, [height]);
   return {
     divRef,
-    height,
+    scroll: newScroll,
   };
 }

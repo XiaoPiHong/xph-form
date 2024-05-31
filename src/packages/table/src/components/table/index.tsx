@@ -25,8 +25,7 @@ const Table = ({
     onAllChange,
   } = useTable(tableProps, searchFormRef);
   const { rowSelection } = useRowSelection(tableProps, table);
-  const { divRef, height } = useTableScroll();
-  console.log(height);
+  const { divRef, scroll } = useTableScroll(tableProps);
 
   const getTableBindProps = () => {
     const {
@@ -35,6 +34,7 @@ const Table = ({
       formatDataSource,
       autoPagination,
       columns,
+      scroll,
       pagination,
       rowSelection,
       onChange,
@@ -51,7 +51,6 @@ const Table = ({
       <div>这里是操作按钮</div>
       <div ref={divRef} style={{ flex: 1, height: 0 }}>
         <ATable
-          scroll={{ y: height - 70, x: "max-content" }}
           {...getTableBindProps()}
           loading={table.model.loading}
           columns={columns}
@@ -59,6 +58,7 @@ const Table = ({
           /** 不使用table的分页 */
           pagination={false}
           rowSelection={rowSelection}
+          scroll={scroll}
           /** 排序、筛选变化时触发 */
           onChange={onAllChange}
         />
