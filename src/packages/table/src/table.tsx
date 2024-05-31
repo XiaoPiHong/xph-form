@@ -3,6 +3,7 @@ import { TTableProps, TRefTable } from "./types";
 import SearchForm from "./components/searchForm";
 import { useSearchForm, useTableProps } from "./hooks";
 import Table from "./components/table";
+import style from "./style/index.module.css";
 
 const XphTable: TRefTable = forwardRef((props: TTableProps, ref) => {
   const { tableProps } = useTableProps(props);
@@ -10,18 +11,11 @@ const XphTable: TRefTable = forwardRef((props: TTableProps, ref) => {
 
   useImperativeHandle(ref, () => ({}));
   return (
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div style={{}}>
+    <div className={style["xph-table-wrapper"]}>
+      <div>
         <SearchForm ref={searchFormRef} {...searchFormProps} />
       </div>
-      <div style={{ flex: 1, height: 0 }}>
+      <div className={style["wrapper-table"]}>
         <Table tableProps={tableProps} searchFormRef={searchFormRef} />
       </div>
     </div>

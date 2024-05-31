@@ -8,6 +8,7 @@ import {
   useTableScroll,
 } from "../../hooks";
 import { IXphFormActionType } from "@xph-form/form";
+import style from "./index.module.css";
 
 const Table = ({
   tableProps,
@@ -46,10 +47,12 @@ const Table = ({
   /** 首次请求 */
   firstGetTableData();
 
+  console.log(style);
+
   return (
-    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+    <div className={style["main-container"]}>
       <div>这里是操作按钮</div>
-      <div ref={divRef} style={{ flex: 1, height: 0 }}>
+      <div ref={divRef} className={style["container-table"]}>
         <ATable
           {...getTableBindProps()}
           loading={table.model.loading}
@@ -63,8 +66,8 @@ const Table = ({
           onChange={onAllChange}
         />
       </div>
-      {pagination.show() ? (
-        <div>
+      {pagination.show ? (
+        <div className={style["container-pagination"]}>
           <APagination
             disabled={table.model.loading}
             {...pagination.model}

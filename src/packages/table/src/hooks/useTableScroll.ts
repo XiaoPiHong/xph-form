@@ -2,14 +2,16 @@ import { useRef, useState, useEffect, useMemo } from "react";
 import { TTableProps } from "../types";
 
 export default function useTableScroll(tableProps: TTableProps) {
-  const { scroll } = tableProps.table!;
+  const { scroll, virtual } = tableProps.table!;
 
   const divRef = useRef(null);
+  const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
       if (divRef.current) {
+        setWidth(divRef.current.offsetWidth);
         setHeight(divRef.current.offsetHeight);
       }
     };
@@ -32,8 +34,9 @@ export default function useTableScroll(tableProps: TTableProps) {
   }, []);
 
   const newScroll = useMemo(() => {
+    /** 官方文档开启虚拟滚动时候，x和y必须是number */
     return {
-      x: "max-content",
+      x: virtual ? width : "max-content",
       y: height - 70,
       ...scroll,
     };

@@ -1,5 +1,5 @@
 import { TTableProps } from "../types";
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 
 export interface IPagination {
   pageSize: number;
@@ -9,7 +9,7 @@ export interface IPagination {
 }
 
 export interface IUsePagination {
-  show: () => boolean;
+  show: boolean;
   model: IPagination;
   update: (props: Partial<IPagination>) => void;
 }
@@ -27,6 +27,14 @@ export default function usePagination(props: TTableProps): {
   /** 上一次update的数据，解决state异步问题 */
   const lastPaginationState = useRef<IPagination | false>(propsPagination);
 
+  const show = useMemo(() => {
+    return (
+      (paginationState &&
+        (autoPagination === true || autoPagination === void 0)) ||
+      false
+    );
+  }, [paginationState]);
+
   const pagination = {
     model: paginationState,
     update: (props: Partial<IPagination>) => {
@@ -36,13 +44,7 @@ export default function usePagination(props: TTableProps): {
       setPaginationState(newModel);
       lastPaginationState.current = newModel;
     },
-    show: () => {
-      return (
-        (paginationState &&
-          (autoPagination === true || autoPagination === void 0)) ||
-        false
-      );
-    },
+    show,
   };
 
   return {
