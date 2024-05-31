@@ -54,7 +54,10 @@ export type TTableProps<RecordType = TDataSourceItem> = {
   onPaginationChange?: (page: number, pageSize: number) => void;
 
   /** 列表选中事件 */
-  onRowSelectionChange?: (selectedRows: RecordType[]) => void;
+  onRowSelectionChange?: (
+    selectedRowKeys: React.Key[],
+    selectedRows: RecordType[]
+  ) => void;
 };
 
 export type TRefTable = <RecordType extends TDataSourceItem = TDataSourceItem>(

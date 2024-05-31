@@ -23,7 +23,8 @@ const useRowSelection = (
           table.update({
             selection: selectedRows,
           });
-          if (onRowSelectionChange) onRowSelectionChange(selectedRows);
+          if (onRowSelectionChange)
+            onRowSelectionChange(selectedRowKeys, selectedRows);
         },
       };
     }
@@ -36,7 +37,8 @@ const useRowSelection = (
             selection: selectedRows,
           });
           if (onChange) onChange(selectedRowKeys, selectedRows, info);
-          if (onRowSelectionChange) onRowSelectionChange(selectedRows);
+          if (onRowSelectionChange)
+            onRowSelectionChange(selectedRowKeys, selectedRows);
         },
       };
     }

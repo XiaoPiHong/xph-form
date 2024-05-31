@@ -12,7 +12,9 @@ interface DataType {
 const ReactApp: React.FC = () => {
   const props: TXphTableProps<DataType> = {
     table: {
-      rowSelection: "radio",
+      rowSelection: {
+        type: "checkbox",
+      },
       columns: [
         {
           title: "姓名",
@@ -253,8 +255,8 @@ const ReactApp: React.FC = () => {
     <XphTable<DataType>
       ref={xphTableRef}
       {...props}
-      onRowSelectionChange={(selectedRows) => {
-        console.log(selectedRows);
+      onRowSelectionChange={(selectRowKeys, selectedRows) => {
+        console.log(selectRowKeys, selectedRows);
       }}
     />
   );
