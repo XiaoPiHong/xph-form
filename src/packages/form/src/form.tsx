@@ -11,7 +11,6 @@ import React, {
 import {
   useFormProps,
   useFormItem,
-  useFormRow,
   useFormAction,
   useFormValues,
 } from "./hooks";
@@ -39,7 +38,6 @@ const Form: TRefForm = forwardRef((props: IFormProps, ref) => {
     handleFormatRenderValues,
     handleFormatReturnValues
   );
-  const { formItemRows } = useFormRow(formItems);
 
   /**
    * @description 用于绑定给form的属性
@@ -92,27 +90,23 @@ const Form: TRefForm = forwardRef((props: IFormProps, ref) => {
   }, []);
   return (
     <AForm form={formInstance} {...getFormBindProps()}>
-      {formItemRows.map((row, rowIndex) => {
-        return (
-          <Row key={rowIndex}>
-            {row.map((itemProps, itemPropsIndex) => {
-              // 在Map中为每个项目创建一个新的ref
-              if (!formItemRefs.current.has(itemProps.name)) {
-                formItemRefs.current.set(itemProps.name, React.createRef());
-              }
-              return (
-                <FormItem
-                  ref={formItemRefs.current.get(itemProps.name)}
-                  key={itemPropsIndex}
-                  formProps={formProps}
-                  itemProps={itemProps}
-                  methods={methods}
-                />
-              );
-            })}
-          </Row>
-        );
-      })}
+      <Row>
+        {formItems.map((itemProps, itemPropsIndex) => {
+          // 在Map中为每个项目创建一个新的ref
+          if (!formItemRefs.current.has(itemProps.name)) {
+            formItemRefs.current.set(itemProps.name, React.createRef());
+          }
+          return (
+            <FormItem
+              ref={formItemRefs.current.get(itemProps.name)}
+              key={itemPropsIndex}
+              formProps={formProps}
+              itemProps={itemProps}
+              methods={methods}
+            />
+          );
+        })}
+      </Row>
     </AForm>
   );
 });

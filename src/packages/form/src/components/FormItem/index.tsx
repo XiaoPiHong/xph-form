@@ -17,7 +17,7 @@ import {
 import { componentMap } from "..";
 import { Form, Col } from "antd";
 import style from "./index.module.css";
-import React, { forwardRef, useImperativeHandle } from "react";
+import React, { forwardRef, useImperativeHandle, Fragment } from "react";
 
 const FormItem = forwardRef(
   (
@@ -51,8 +51,15 @@ const FormItem = forwardRef(
       itemProps,
       rewritingModel
     );
-    const { name, label, wrapperCol, labelCol, valuePropName, initialValue } =
-      itemProps;
+    const {
+      name,
+      label,
+      wrapperCol,
+      labelCol,
+      valuePropName,
+      initialValue,
+      forceRow,
+    } = itemProps;
 
     /** 有些配置项是函数，需要等FormItem渲染完后获取，提供给父组件使用 */
     useImperativeHandle(ref, () => ({
@@ -101,10 +108,18 @@ const FormItem = forwardRef(
       }
       return null;
     };
+
     return isIfShow ? (
-      <Col {...colProps} className={isShow ? "" : style["form-item-hidden"]}>
-        <Form.Item {...getFormItemBindProps()}>{renderContent()}</Form.Item>
-      </Col>
+      <Fragment>
+        {forceRow ? <div className={style["form-item-force"]}></div> : null}
+
+        <Col
+          {...colProps}
+          className={isShow ? void 0 : style["form-item-hidden"]}
+        >
+          <Form.Item {...getFormItemBindProps()}>{renderContent()}</Form.Item>
+        </Col>
+      </Fragment>
     ) : null;
   }
 );

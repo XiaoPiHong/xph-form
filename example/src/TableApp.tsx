@@ -221,7 +221,73 @@ const ReactApp: React.FC = () => {
           label: "Input",
           component: "Input",
           required: true,
+          initialValue: "Input",
           colProps: { span: 6 },
+          componentProps: {
+            onChange: (e) => {
+              console.log(e);
+            },
+          },
+        },
+        {
+          name: "Input2",
+          label: "Input",
+          component: "Input",
+          required: true,
+          forceRow: true,
+          initialValue: "Input",
+          colProps: { span: 6 },
+          componentProps: {
+            onChange: (e) => {
+              console.log(e);
+            },
+          },
+        },
+        {
+          name: "Input3",
+          label: "Input",
+          component: "Input",
+          required: true,
+          initialValue: "Input",
+          colProps: { span: 6 },
+          componentProps: {
+            onChange: (e) => {
+              console.log(e);
+            },
+          },
+        },
+        {
+          name: "Input4",
+          label: "Input",
+          component: "Input",
+          required: true,
+          initialValue: "Input",
+          colProps: { span: 6 },
+          componentProps: {
+            onChange: (e) => {
+              console.log(e);
+            },
+          },
+        },
+        {
+          name: "Input5",
+          label: "Input",
+          component: "Input",
+          required: true,
+          initialValue: "Input",
+          colProps: { span: 6 },
+          componentProps: {
+            onChange: (e) => {
+              console.log(e);
+            },
+          },
+        },
+        {
+          name: "Input6",
+          label: "Input",
+          component: "Input",
+          colProps: { span: 6 },
+          required: true,
           initialValue: "Input",
           componentProps: {
             onChange: (e) => {
