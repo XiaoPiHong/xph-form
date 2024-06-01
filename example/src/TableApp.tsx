@@ -12,6 +12,7 @@ interface DataType {
 const ReactApp: React.FC = () => {
   const props: TXphTableProps<DataType> = {
     table: {
+      size: "small",
       rowSelection: {
         type: "checkbox",
       },
@@ -23,6 +24,9 @@ const ReactApp: React.FC = () => {
           key: "name",
         },
       ],
+      pagination: {
+        size: "small",
+      },
       autoPagination: true,
       api: async (params) => {
         console.log(params);
@@ -215,6 +219,8 @@ const ReactApp: React.FC = () => {
       },
     },
     searchForm: {
+      size: "small",
+      colProps: { span: 6 },
       items: [
         {
           name: "Input",
@@ -222,7 +228,6 @@ const ReactApp: React.FC = () => {
           component: "Input",
           required: true,
           initialValue: "Input",
-          colProps: { span: 6 },
           componentProps: {
             onChange: (e) => {
               console.log(e);
@@ -234,9 +239,7 @@ const ReactApp: React.FC = () => {
           label: "Input",
           component: "Input",
           required: true,
-          forceRow: true,
           initialValue: "Input",
-          colProps: { span: 6 },
           componentProps: {
             onChange: (e) => {
               console.log(e);
@@ -249,7 +252,6 @@ const ReactApp: React.FC = () => {
           component: "Input",
           required: true,
           initialValue: "Input",
-          colProps: { span: 6 },
           componentProps: {
             onChange: (e) => {
               console.log(e);
@@ -262,7 +264,6 @@ const ReactApp: React.FC = () => {
           component: "Input",
           required: true,
           initialValue: "Input",
-          colProps: { span: 6 },
           componentProps: {
             onChange: (e) => {
               console.log(e);
@@ -275,7 +276,6 @@ const ReactApp: React.FC = () => {
           component: "Input",
           required: true,
           initialValue: "Input",
-          colProps: { span: 6 },
           componentProps: {
             onChange: (e) => {
               console.log(e);
@@ -286,7 +286,6 @@ const ReactApp: React.FC = () => {
           name: "Input6",
           label: "Input",
           component: "Input",
-          colProps: { span: 6 },
           required: true,
           initialValue: "Input",
           componentProps: {
@@ -298,13 +297,13 @@ const ReactApp: React.FC = () => {
       ],
     },
     crudForm: {
+      size: "small",
       items: [
         {
           name: "Input",
           label: "Input",
           component: "Input",
           required: true,
-          colProps: { span: 6 },
           initialValue: "Input",
           componentProps: {
             onChange: (e) => {

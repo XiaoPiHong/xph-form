@@ -1,6 +1,7 @@
-import { Form as AForm, Row } from "antd";
+import { Form as AForm, Row, Col } from "antd";
 import { IFormProps, IFormActionType, TRefForm } from "./types";
 import FormItem from "./components/FormItem";
+import Collapse from "./components/Collapse";
 import React, {
   forwardRef,
   useImperativeHandle,
@@ -88,6 +89,7 @@ const Form: TRefForm = forwardRef((props: IFormProps, ref) => {
       formItemRefs.current.clear();
     };
   }, []);
+
   return (
     <AForm form={formInstance} {...getFormBindProps()}>
       <Row>
@@ -107,6 +109,8 @@ const Form: TRefForm = forwardRef((props: IFormProps, ref) => {
           );
         })}
       </Row>
+      {/* 折叠面板 */}
+      <Collapse formItemRefs={formItemRefs} />
     </AForm>
   );
 });
