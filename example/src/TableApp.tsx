@@ -15,6 +15,7 @@ const ReactApp: React.FC = () => {
       rowSelection: {
         type: "checkbox",
       },
+      fullHeight: true,
       columns: [
         {
           title: "姓名",

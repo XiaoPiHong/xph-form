@@ -5,6 +5,7 @@ const useTableProps = (props: TTableProps) => {
   const baseTableProps: Partial<TTableProps> = {
     table: {
       columns: [],
+      fullHeight: false,
       autoRequest: true,
       pagination: {
         pageSize: 20,

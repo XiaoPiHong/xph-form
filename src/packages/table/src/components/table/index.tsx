@@ -13,7 +13,9 @@ import style from "./index.module.css";
 const Table = ({
   tableProps,
   searchFormRef,
+  fullHeight,
 }: {
+  fullHeight?: boolean;
   tableProps: TTableProps;
   searchFormRef: Ref<IXphFormActionType>;
 }) => {
@@ -26,7 +28,7 @@ const Table = ({
     onAllChange,
   } = useTable(tableProps, searchFormRef);
   const { rowSelection } = useRowSelection(tableProps, table);
-  const { divRef, scroll } = useTableScroll(tableProps);
+  const { divRef, scroll } = useTableScroll(tableProps, fullHeight);
 
   const getTableBindProps = () => {
     const {
@@ -48,9 +50,12 @@ const Table = ({
   firstGetTableData();
 
   return (
-    <div className={style["main-container"]}>
+    <div className={fullHeight ? style["main-container"] : void 0}>
       <div>这里是操作按钮</div>
-      <div ref={divRef} className={style["container-table"]}>
+      <div
+        ref={divRef}
+        className={fullHeight ? style["container-table"] : void 0}
+      >
         <ATable
           {...getTableBindProps()}
           loading={table.model.loading}

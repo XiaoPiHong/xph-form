@@ -1,16 +1,16 @@
 import React from "react";
-import {
-  XphForm,
-  useXphForm,
-  IXphFormProps,
-  IXphFormActionType,
-} from "xph-form";
-// import XphForm from "@xph-form/form/src/form";
-// import { useForm as useXphForm } from "@xph-form/form/src/hooks";
 // import {
-//   IFormProps as IXphFormProps,
-//   IFormActionType as IXphFormActionType,
-// } from "@xph-form/form/src/types";
+//   XphForm,
+//   useXphForm,
+//   IXphFormProps,
+//   IXphFormActionType,
+// } from "xph-form";
+import XphForm from "@xph-form/form/src/form";
+import { useForm as useXphForm } from "@xph-form/form/src/hooks";
+import {
+  IFormProps as IXphFormProps,
+  IFormActionType as IXphFormActionType,
+} from "@xph-form/form/src/types";
 
 import { InputNumber } from "antd";
 import dayjs from "dayjs";

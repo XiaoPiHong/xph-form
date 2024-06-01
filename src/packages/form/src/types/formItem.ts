@@ -49,7 +49,13 @@ export interface IComponentFormItemProps extends IBaseFormItemProps {
   component: keyof TComponentPropsMap /** 映射组件 */;
 }
 
-export type TFormItemProps = IRenderFormItemProps | IComponentFormItemProps;
+type Without<T, K> = { [P in Exclude<keyof T, K>]?: never };
+
+type XOR<T, U> = T | U extends object
+  ? (Without<T, keyof U> & U) | (Without<U, keyof T> & T)
+  : T | U;
+
+export type TFormItemProps = XOR<IRenderFormItemProps, IComponentFormItemProps>;
 
 export function isComponentFormItemProps(
   item: TFormItemProps

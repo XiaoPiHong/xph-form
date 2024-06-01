@@ -33,6 +33,8 @@ export type TApiTableProps<RecordType = TDataSourceItem> = {
   rowSelection?: RowSelectionType | TableRowSelection<RecordType>;
   /** 分页配置（因为分页器是独立出来的，使用table的分页器布局需要修改样式） */
   pagination?: false | PaginationProps;
+  /** 表格撑满父容器（virtual为true时，默认fullHeight为true） */
+  fullHeight?: boolean;
   /** 排序、筛选变化时触发 */
   onChange?: (filters: any, sorter: any, extra: any) => void;
 } & Omit<
