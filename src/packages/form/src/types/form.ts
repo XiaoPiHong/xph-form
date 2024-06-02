@@ -31,6 +31,10 @@ export interface IFormProps {
   scrollToFirstError?: boolean;
   /** 设置字段组件的尺寸（仅限 antd 组件） */
   size?: "large" | "middle" | "small";
+  /** 是否可折叠，默认超过5个折叠 */
+  collapsible?: boolean;
+  /** 超过多少进行折叠，collapsible为true才生效 */
+  collapseNum?: number;
   /** 时间返回统一处理函数 */
   transformDateFunc?: (date: any, format: string) => string;
   /**

@@ -3,7 +3,7 @@ import { TTableProps, TRefTable } from "./types";
 import SearchForm from "./components/searchForm";
 import { useSearchForm, useTableProps } from "./hooks";
 import Table from "./components/table";
-import style from "./style/index.module.css";
+import style from "./table.module.css";
 
 const XphTable: TRefTable = forwardRef((props: TTableProps, ref) => {
   const { tableProps } = useTableProps(props);

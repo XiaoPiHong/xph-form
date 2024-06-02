@@ -1,15 +1,27 @@
+import { useRef, useState, Ref, useEffect } from "react";
 import {
   IFormProps,
   TFormItemProps,
   isComponentFormItemProps,
   Recordable,
 } from "../types";
-import { isBoolean, isFunction, isNull } from "lodash-es";
+import { isBoolean, isFunction, isNull, isEqual, isNil } from "lodash-es";
 import { setComponentRuleType, createPlaceholderMessage } from "../helper";
 import { RuleObject } from "antd/es/form";
 import { ColProps } from "antd";
 
-export const useFormItemShow = (item: TFormItemProps, model: any) => {
+export const useFormItemShow = (
+  item: TFormItemProps,
+  model: any,
+  collapseRef: Ref<any>
+) => {
+  /**
+   * 存储上一次的结果，如果开启了折叠状态，表单项由于联动数量发生了变化，需自动展开整个表单项
+   */
+  const lastIsShow = useRef(null);
+  const lastIsIfShow = useRef(null);
+  const { handleCollapseChangeFalse } = collapseRef.current || {};
+
   const { show, ifShow } = item;
   let isShow = true;
   let isIfShow = true;
@@ -21,11 +33,41 @@ export const useFormItemShow = (item: TFormItemProps, model: any) => {
   }
   if (isFunction(show)) {
     isShow = show({ model });
+    const lastIsShowTemp = isNil(lastIsShow.current)
+      ? isShow
+      : lastIsShow.current;
+    useEffect(() => {
+      if (!isEqual(isShow, lastIsShowTemp)) {
+        handleCollapseChangeFalse && handleCollapseChangeFalse();
+      }
+    }, [model]);
   }
   if (isFunction(ifShow)) {
     isIfShow = ifShow({ model });
+    const lastIsIfShowTemp = isNil(lastIsIfShow.current)
+      ? isIfShow
+      : lastIsIfShow.current;
+    useEffect(() => {
+      if (!isEqual(isIfShow, lastIsIfShowTemp)) {
+        handleCollapseChangeFalse && handleCollapseChangeFalse();
+      }
+    }, [model]);
   }
+
+  lastIsShow.current = isShow;
+  lastIsIfShow.current = isIfShow;
   return { isShow, isIfShow };
+};
+
+export const useFormItemCollapse = (formProps: IFormProps, index: number) => {
+  const { collapsible, collapseNum } = formProps;
+  const [itemCollapse, setItemCollapse] = useState(
+    collapsible && index < (collapseNum as number) ? false : true
+  );
+  return {
+    itemCollapse,
+    setItemCollapse,
+  };
 };
 
 export const useFormItemRules = ({

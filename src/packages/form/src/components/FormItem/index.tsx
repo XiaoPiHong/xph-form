@@ -13,28 +13,37 @@ import {
   useFormItemComponentProps,
   useFormItemRules,
   useFormItemDisabled,
+  useFormItemCollapse,
 } from "../../hooks";
 import { componentMap } from "..";
 import { Form, Col } from "antd";
 import style from "./index.module.css";
-import React, { forwardRef, useImperativeHandle, Fragment } from "react";
+import React, { forwardRef, useImperativeHandle, Fragment, Ref } from "react";
 
 const FormItem = forwardRef(
   (
     {
+      itemIndex,
       formProps,
       itemProps,
       methods,
+      collapseRef,
     }: {
+      itemIndex: number;
       formProps: IFormProps;
       itemProps: TFormItemProps;
       methods: IFormActionType;
+      collapseRef: Ref<any>;
     },
     ref
   ) => {
-    console.log("render FormItem");
+    console.log("render FormItem", itemProps.name);
     const { rewritingModel, isusewatch } = useFormModel(formProps, itemProps);
-    const { isIfShow, isShow } = useFormItemShow(itemProps, rewritingModel);
+    const { isIfShow, isShow } = useFormItemShow(
+      itemProps,
+      rewritingModel,
+      collapseRef
+    );
     const { colProps } = useFormItemColProps(itemProps, formProps);
     const { componentProps } = useFormItemComponentProps(
       itemProps,
@@ -51,6 +60,10 @@ const FormItem = forwardRef(
       itemProps,
       rewritingModel
     );
+    const { itemCollapse, setItemCollapse } = useFormItemCollapse(
+      formProps,
+      itemIndex
+    );
     const {
       name,
       label,
@@ -63,7 +76,10 @@ const FormItem = forwardRef(
 
     /** 有些配置项是函数，需要等FormItem渲染完后获取，提供给父组件使用 */
     useImperativeHandle(ref, () => ({
+      itemIndex,
       componentProps,
+      itemCollapse,
+      setItemCollapse,
     }));
 
     /**
@@ -109,18 +125,22 @@ const FormItem = forwardRef(
       return null;
     };
 
-    return isIfShow ? (
+    return (
       <Fragment>
         {forceRow ? <div className={style["form-item-force"]}></div> : null}
 
-        <Col
-          {...colProps}
-          className={isShow ? void 0 : style["form-item-hidden"]}
-        >
-          <Form.Item {...getFormItemBindProps()}>{renderContent()}</Form.Item>
-        </Col>
+        {isIfShow ? (
+          <Col
+            {...colProps}
+            className={
+              isShow && !itemCollapse ? void 0 : style["form-item-hidden"]
+            }
+          >
+            <Form.Item {...getFormItemBindProps()}>{renderContent()}</Form.Item>
+          </Col>
+        ) : null}
       </Fragment>
-    ) : null;
+    );
   }
 );
 

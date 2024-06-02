@@ -221,6 +221,7 @@ const ReactApp: React.FC = () => {
     searchForm: {
       size: "small",
       colProps: { span: 6 },
+      collapsible: true,
       items: [
         {
           name: "Input",
@@ -232,6 +233,9 @@ const ReactApp: React.FC = () => {
             onChange: (e) => {
               console.log(e);
             },
+          },
+          ifShow: ({ model }) => {
+            return model.Input2 === "Input1";
           },
         },
         {
@@ -263,6 +267,7 @@ const ReactApp: React.FC = () => {
           label: "Input",
           component: "Input",
           required: true,
+          forceRow: true,
           initialValue: "Input",
           componentProps: {
             onChange: (e) => {

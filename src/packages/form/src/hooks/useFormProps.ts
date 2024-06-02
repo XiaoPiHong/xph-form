@@ -2,6 +2,7 @@ import { IFormProps } from "../types";
 
 const useFormPorps = (formProps: IFormProps) => {
   const baseFormProps: Partial<IFormProps> = {
+    collapseNum: 5,
     colon: false,
     items: [],
     labelWrap: true,
