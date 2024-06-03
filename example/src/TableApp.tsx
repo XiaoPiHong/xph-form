@@ -12,7 +12,6 @@ interface DataType {
 const ReactApp: React.FC = () => {
   const props: TXphTableProps<DataType> = {
     table: {
-      size: "small",
       rowSelection: {
         type: "checkbox",
       },
@@ -24,9 +23,6 @@ const ReactApp: React.FC = () => {
           key: "name",
         },
       ],
-      pagination: {
-        size: "small",
-      },
       autoPagination: true,
       api: async (params) => {
         console.log(params);
@@ -219,7 +215,6 @@ const ReactApp: React.FC = () => {
       },
     },
     searchForm: {
-      size: "small",
       colProps: { span: 6 },
       collapsible: true,
       items: [
@@ -267,7 +262,6 @@ const ReactApp: React.FC = () => {
           label: "Input",
           component: "Input",
           required: true,
-          forceRow: true,
           initialValue: "Input",
           componentProps: {
             onChange: (e) => {
@@ -302,7 +296,6 @@ const ReactApp: React.FC = () => {
       ],
     },
     crudForm: {
-      size: "small",
       items: [
         {
           name: "Input",

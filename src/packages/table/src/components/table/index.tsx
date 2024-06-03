@@ -62,7 +62,7 @@ const Table = forwardRef(
       resetAllData,
       reloadData,
     }));
-
+    console.log("render Table");
     return (
       <div className={fullHeight ? style["main-container"] : void 0}>
         <div>这里是操作按钮</div>
