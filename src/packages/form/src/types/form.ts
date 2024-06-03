@@ -35,6 +35,8 @@ export interface IFormProps {
   collapsible?: boolean;
   /** 超过多少进行折叠，collapsible为true才生效 */
   collapseNum?: number;
+  /** 渲染操作组，用于渲染表单项的操作，这是一个预留项，是否需要操作组由业务自己决定（会跟折叠同行显示） */
+  renderActions?: () => React.ReactElement;
   /** 时间返回统一处理函数 */
   transformDateFunc?: (date: any, format: string) => string;
   /**

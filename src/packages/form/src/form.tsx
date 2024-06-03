@@ -124,7 +124,7 @@ const Form: TRefForm = forwardRef((props: IFormProps, ref) => {
       {/** 操作行 */}
       <div className={style["xph-form-action"]}>
         {/**操作组 */}
-        <ActionGroup />
+        <ActionGroup formProps={formProps} />
         {/* 折叠面板 */}
         {collapsible ? (
           <Collapse
