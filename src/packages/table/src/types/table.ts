@@ -62,7 +62,9 @@ export type TTableProps<RecordType = TDataSourceItem> = {
   ) => void;
 };
 
+export type TTableActionType = {} & TableRef;
+
 export type TRefTable = <RecordType extends TDataSourceItem = TDataSourceItem>(
   props: React.PropsWithChildren<TTableProps<RecordType>> &
-    React.RefAttributes<TableRef | undefined>
+    React.RefAttributes<TTableActionType | undefined>
 ) => React.ReactElement;
