@@ -63,7 +63,7 @@ export const useFormItemShow = (
 export const useFormItemCollapse = (formProps: IFormProps, index: number) => {
   const { collapsible, collapseNum } = formProps;
   const [itemCollapse, setItemCollapse] = useState(
-    collapsible && index < (collapseNum as number) ? false : true
+    collapsible && index >= (collapseNum as number) ? true : false
   );
   return {
     itemCollapse,
