@@ -1,3 +1,5 @@
 import { IXphFormProps } from "@xph-form/form";
 
-export type TSearchFormProps = IXphFormProps & {};
+export type TSearchFormProps = IXphFormProps & {
+  showSearch?: boolean;
+};

@@ -11,7 +11,7 @@ const SearchForm = forwardRef(
     },
     ref
   ) => {
-    const { renderActions, tableRef } = props;
+    const { renderActions, showSearch, tableRef } = props;
 
     const [loading, setLoading] = useState(false);
 
@@ -36,18 +36,20 @@ const SearchForm = forwardRef(
       return (
         <div style={{ width: "100%", display: "flex" }}>
           <div style={{ flex: 1, width: 0 }}>{renderActions?.()}</div>
-          <div style={{ display: "flex", gap: "8px" }}>
-            <Button
-              type="primary"
-              icon={<SearchOutlined />}
-              onClick={onClickSearch}
-            >
-              搜索
-            </Button>
-            <Button icon={<ReloadOutlined />} onClick={onClickReset}>
-              重置
-            </Button>
-          </div>
+          {showSearch && (
+            <div style={{ display: "flex", gap: "8px" }}>
+              <Button
+                type="primary"
+                icon={<SearchOutlined />}
+                onClick={onClickSearch}
+              >
+                搜索
+              </Button>
+              <Button icon={<ReloadOutlined />} onClick={onClickReset}>
+                重置
+              </Button>
+            </div>
+          )}
         </div>
       );
     };
@@ -65,7 +67,7 @@ const SearchForm = forwardRef(
     }, []);
 
     return (
-      <Spin tip="Loading..." spinning={loading}>
+      <Spin spinning={loading}>
         <CacheForm ref={ref} getBindProps={getBindCacheFormProps} />
       </Spin>
     );

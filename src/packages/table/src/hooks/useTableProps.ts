@@ -21,6 +21,7 @@ const useTableProps = (props: TTableProps) => {
       items: [],
     },
     searchForm: {
+      showSearch: true,
       items: [],
     },
   };
