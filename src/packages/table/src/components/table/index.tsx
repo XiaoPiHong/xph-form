@@ -54,7 +54,7 @@ const Table = ({
       <div>这里是操作按钮</div>
       <div
         ref={divRef}
-        className={fullHeight ? style["container-table"] : void 0}
+        className={fullHeight ? style["container__table"] : void 0}
       >
         <ATable
           {...getTableBindProps()}
@@ -70,7 +70,7 @@ const Table = ({
         />
       </div>
       {pagination.show ? (
-        <div className={style["container-pagination"]}>
+        <div className={style["container__pagination"]}>
           <APagination
             disabled={table.model.loading}
             {...pagination.model}

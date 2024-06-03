@@ -17,7 +17,7 @@ const XphTable: TRefTable = forwardRef((props: TTableProps, ref) => {
       <div>
         <SearchForm ref={searchFormRef} {...searchFormProps} />
       </div>
-      <div className={fullHeight ? style["full-wrapper-table"] : void 0}>
+      <div className={fullHeight ? style["full-wrapper__table"] : void 0}>
         <Table
           fullHeight={fullHeight}
           tableProps={tableProps}

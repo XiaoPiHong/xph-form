@@ -16,10 +16,11 @@ export const useFormItemShow = (
   collapseRef: Ref<any>
 ) => {
   /**
-   * 存储上一次的结果，如果开启了折叠状态，表单项由于联动数量发生了变化，需自动展开整个表单项
+   * useRef存储上一次的结果，如果开启了折叠状态，表单项由于联动数量发生了变化，需自动展开整个表单项
    */
   const lastIsShow = useRef(null);
   const lastIsIfShow = useRef(null);
+
   const { handleCollapseChangeFalse } = collapseRef.current || {};
 
   const { show, ifShow } = item;

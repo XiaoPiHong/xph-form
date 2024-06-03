@@ -24,15 +24,15 @@ const FormItem = forwardRef(
   (
     {
       itemIndex,
-      formProps,
       itemProps,
       methods,
+      formProps,
       collapseRef,
     }: {
       itemIndex: number;
-      formProps: IFormProps;
       itemProps: TFormItemProps;
       methods: IFormActionType;
+      formProps: IFormProps;
       collapseRef: Ref<any>;
     },
     ref

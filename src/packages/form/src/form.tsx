@@ -2,6 +2,7 @@ import { Form as AForm, Row } from "antd";
 import { IFormProps, IFormActionType, TRefForm } from "./types";
 import FormItem from "./components/FormItem";
 import Collapse from "./components/Collapse";
+import ActionGroup from "./components/ActionGroup";
 import style from "./form.module.css";
 import React, {
   forwardRef,
@@ -122,6 +123,8 @@ const Form: TRefForm = forwardRef((props: IFormProps, ref) => {
       </Row>
       {/** 操作行 */}
       <div className={style["xph-form-action"]}>
+        {/**操作组 */}
+        <ActionGroup />
         {/* 折叠面板 */}
         {collapsible ? (
           <Collapse

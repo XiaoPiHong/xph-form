@@ -4,11 +4,11 @@
   display: flex;
   flex-direction: column;
 }
-.container-table {
+.container__table {
   flex: 1;
   height: 0;
 }
-.container-pagination {
+.container__pagination {
   display: flex;
   justify-content: flex-end;
   align-items: center;
