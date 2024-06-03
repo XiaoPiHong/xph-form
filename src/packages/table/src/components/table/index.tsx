@@ -30,6 +30,10 @@ const Table = forwardRef(
       firstGetTableData,
       onPaginationChange,
       onAllChange,
+
+      resetData,
+      resetAllData,
+      reloadData,
     } = useTable(tableProps, searchFormRef);
     const { rowSelection } = useRowSelection(tableProps, table);
     const { divRef, scroll } = useTableScroll(tableProps, fullHeight);
@@ -53,7 +57,11 @@ const Table = forwardRef(
     /** 首次请求 */
     firstGetTableData();
 
-    useImperativeHandle(ref, () => ({}));
+    useImperativeHandle(ref, () => ({
+      resetData,
+      resetAllData,
+      reloadData,
+    }));
 
     return (
       <div className={fullHeight ? style["main-container"] : void 0}>

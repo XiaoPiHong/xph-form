@@ -248,11 +248,51 @@ export default function useTable(
     if (onChange) onChange(filters, sorter, extra);
   };
 
+  /** 重置事件（重置页码、表单后重新请求） */
+  const resetAllData = async () => {
+    const { resetFields, validator } = searchFormRef.current;
+    return resetFields().then(async () => {
+      const params: any = {};
+      /** 只有接口分页时才传分页参数 */
+      if (lastPaginationState.current) {
+        const { pageSize } = lastPaginationState.current;
+        /** 接口分页 */
+        autoPagination === void 0 &&
+          (params.paginationParams = { current: 1, pageSize });
+      }
+      params.searchFormParams = await validator();
+      return getTableData(params);
+    });
+  };
+
+  /** 重置事件（重置表单后重新请求） */
+  const resetData = async () => {
+    const { resetFields, validator } = searchFormRef.current;
+    return resetFields().then(async () => {
+      const searchFormParams = await validator();
+      return getTableData({ searchFormParams });
+    });
+  };
+
+  /** 刷新数据 */
+  const reloadData = async () => {
+    const { validator } = searchFormRef.current;
+    return validator().then((res) => {
+      return getTableData({
+        searchFormParams: res,
+      });
+    });
+  };
+
   return {
     table,
     pagination,
     firstGetTableData,
     onPaginationChange,
     onAllChange,
+
+    resetData,
+    resetAllData,
+    reloadData,
   };
 }

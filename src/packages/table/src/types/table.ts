@@ -62,7 +62,11 @@ export type TTableProps<RecordType = TDataSourceItem> = {
   ) => void;
 };
 
-export type TTableActionType = {} & TableRef;
+export type TTableActionType = {
+  resetAllData: () => Promise<void>;
+  resetData: () => Promise<void>;
+  reloadData: () => Promise<void>;
+} & TableRef;
 
 export type TRefTable = <RecordType extends TDataSourceItem = TDataSourceItem>(
   props: React.PropsWithChildren<TTableProps<RecordType>> &
