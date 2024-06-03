@@ -22,19 +22,13 @@ const SearchForm = forwardRef(
     }, []);
 
     const onClickSearch = () => {
-      setLoading(true);
       const { reloadData } = tableRef.current;
-      reloadData().finally(() => {
-        setLoading(false);
-      });
+      reloadData();
     };
 
     const onClickReset = () => {
-      const { resetAllData } = tableRef.current;
-      setLoading(true);
-      resetAllData().finally(() => {
-        setLoading(false);
-      });
+      const { resetData } = tableRef.current;
+      resetData();
     };
 
     /** 代理一下renderActions */
@@ -61,8 +55,9 @@ const SearchForm = forwardRef(
     /** useCallback缓存函数，加载时不刷新整个表单（此时无论该文件的任何数据修改，都不会引发CacheForm内部任何变化） */
     const getBindCacheFormProps = useCallback(() => {
       return {
-        xphRef: ref,
-        xphFormProps: {
+        setFormLoading: setLoading,
+
+        formProps: {
           ...getBindProps(),
           renderActions: proxyRenderActions,
         },
@@ -71,7 +66,7 @@ const SearchForm = forwardRef(
 
     return (
       <Spin tip="Loading..." spinning={loading}>
-        <CacheForm getBindProps={getBindCacheFormProps} />
+        <CacheForm ref={ref} getBindProps={getBindCacheFormProps} />
       </Spin>
     );
   }

@@ -50,6 +50,10 @@ export default function useTable(
       const newModel = { ...lastTableState.current, ...props };
       setTableState(newModel);
       lastTableState.current = newModel;
+
+      /** 这里是loading表单 */
+      const { setFormLoading } = searchFormRef.current;
+      setFormLoading(newModel.loading);
     },
   };
 
