@@ -8,6 +8,7 @@ import {
   useTableScroll,
 } from "../../hooks";
 import { IXphFormActionType } from "@xph-form/form";
+import TableAction from "./components/TableAction";
 import style from "./index.module.css";
 
 const Table = forwardRef(
@@ -65,7 +66,9 @@ const Table = forwardRef(
     console.log("render Table");
     return (
       <div className={fullHeight ? style["main-container"] : void 0}>
-        <div>这里是操作按钮</div>
+        <div className={style["container__action"]}>
+          <TableAction />
+        </div>
         <div
           ref={divRef}
           className={fullHeight ? style["container__table"] : void 0}
