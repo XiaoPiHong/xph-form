@@ -4,9 +4,11 @@ import React, {
   useImperativeHandle,
   useMemo,
 } from "react";
-import { Button } from "antd";
+import { Button, theme } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import style from "./index.module.css";
+
+const { useToken } = theme;
 
 const Collapse = forwardRef(
   (
@@ -21,6 +23,7 @@ const Collapse = forwardRef(
     },
     ref
   ) => {
+    const { token } = useToken();
     /** 是否折叠 */
     const [collapseState, setCollapseState] = useState(collapsible);
 
@@ -51,6 +54,7 @@ const Collapse = forwardRef(
             onClick={handleCollapseChangeFalse}
             type={"link"}
             icon={<DownOutlined />}
+            style={{ color: token.colorPrimary }}
           >
             展开
           </Button>
@@ -59,6 +63,7 @@ const Collapse = forwardRef(
             onClick={handleCollapseChangeTrue}
             type={"link"}
             icon={<UpOutlined />}
+            style={{ color: token.colorPrimary }}
           >
             折叠
           </Button>
