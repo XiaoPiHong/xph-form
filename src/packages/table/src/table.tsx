@@ -5,7 +5,7 @@ import { useSearchForm, useTableProps } from "./hooks";
 import Table from "./components/table";
 import style from "./table.module.css";
 
-const XphTable: TRefTable = forwardRef((props: TTableProps, ref) => {
+const XphTable: TRefTable = forwardRef((props: TTableProps, tableRef) => {
   const { tableProps } = useTableProps(props);
   const { searchFormRef, searchFormProps } = useSearchForm(tableProps);
   let { fullHeight, virtual } = tableProps.table!;
@@ -14,13 +14,17 @@ const XphTable: TRefTable = forwardRef((props: TTableProps, ref) => {
   return (
     <div className={fullHeight ? style["xph-table-full-wrapper"] : void 0}>
       <div>
-        <SearchForm ref={searchFormRef} tableRef={ref} {...searchFormProps} />
+        <SearchForm
+          ref={searchFormRef}
+          tableRef={tableRef}
+          {...searchFormProps}
+        />
       </div>
       <div className={fullHeight ? style["full-wrapper__table"] : void 0}>
         <Table
-          fullHeight={fullHeight}
-          ref={ref}
+          ref={tableRef}
           searchFormRef={searchFormRef}
+          fullHeight={fullHeight}
           tableProps={tableProps}
         />
       </div>
