@@ -1,6 +1,6 @@
 import React, { forwardRef, Ref, useCallback, useState } from "react";
 import { TSearchFormProps, TTableActionType } from "../../types";
-import CacheForm from "./components/CacheForm";
+import CacheForm from "./components/cacheForm";
 import { Button, Spin } from "antd";
 import { SearchOutlined, ReloadOutlined } from "@ant-design/icons";
 

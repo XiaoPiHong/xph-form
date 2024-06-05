@@ -8,7 +8,7 @@ import {
   useTableScroll,
 } from "../../hooks";
 import { IXphFormActionType } from "@xph-form/form";
-import TableAction from "./components/TableAction";
+import TableAction from "./components/tableAction";
 import style from "./index.module.css";
 
 const Table = forwardRef(
