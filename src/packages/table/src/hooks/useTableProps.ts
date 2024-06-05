@@ -16,6 +16,9 @@ const useTableProps = (props: TTableProps) => {
         showSizeChanger: true,
         showQuickJumper: true,
       },
+      toolbar: {
+        type: "default",
+      },
     },
     crudForm: {
       items: [],
@@ -31,6 +34,7 @@ const useTableProps = (props: TTableProps) => {
   };
 
   return {
+    baseTableProps,
     tableProps: newTableProps,
   };
 };

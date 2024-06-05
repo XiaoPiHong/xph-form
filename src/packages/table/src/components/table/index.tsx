@@ -6,20 +6,23 @@ import {
   useTable,
   useRowSelection,
   useTableScroll,
+  useTopToolbar,
 } from "../../hooks";
 import { IXphFormActionType } from "@xph-form/form";
-import Toolbar from "./components/toolbar";
+import { XphActions as TopToolbar } from "@xph-form/common";
 import style from "./index.module.css";
 
 const Table = forwardRef(
   (
     {
       tableProps,
+      baseTableProps,
       searchFormRef,
       fullHeight,
     }: {
       fullHeight?: boolean;
       tableProps: TTableProps;
+      baseTableProps: TTableProps;
       searchFormRef: Ref<IXphFormActionType>;
     },
     ref
@@ -38,6 +41,11 @@ const Table = forwardRef(
     } = useTable(tableProps, searchFormRef);
     const { rowSelection } = useRowSelection(tableProps, table);
     const { divRef, scroll } = useTableScroll(tableProps, fullHeight);
+    const { getTopToolbarBindProps } = useTopToolbar(
+      tableProps,
+      baseTableProps,
+      table
+    );
 
     const getTableBindProps = () => {
       const {
@@ -68,7 +76,7 @@ const Table = forwardRef(
       <div className={fullHeight ? style["main-container"] : void 0}>
         {/** 操作栏 */}
         <div className={style["container__toolbar"]}>
-          <Toolbar />
+          <TopToolbar {...getTopToolbarBindProps()} />
         </div>
         {/** 表格 */}
         <div

@@ -3,6 +3,7 @@ import type { ColumnType, ColumnGroupType, TableRef } from "antd/es/table";
 import { TSearchFormProps } from "./searchForm";
 import { TCrudFormProps } from "./crudForm";
 import { TableRowSelection, RowSelectionType } from "antd/lib/table/interface";
+import type { IXphActionsProps } from "@xph-form/common";
 
 /** 行数据 */
 export type TDataSourceItem = Record<PropertyKey, any>;
@@ -16,6 +17,11 @@ type TBaseColumnType = {
 export type TColumnType<RecordType = TDataSourceItem> =
   | (ColumnType<RecordType> & TBaseColumnType)
   | (ColumnGroupType<RecordType> & TBaseColumnType);
+
+export interface IFunctionPropParams<RecordType = TDataSourceItem> {
+  loading: boolean;
+  selection: RecordType[];
+}
 
 /** 扩展antd table的属性 */
 export type TApiTableProps<RecordType = TDataSourceItem> = {
@@ -35,6 +41,10 @@ export type TApiTableProps<RecordType = TDataSourceItem> = {
   pagination?: false | PaginationProps;
   /** 表格撑满父容器（virtual为true时，默认fullHeight为true） */
   fullHeight?: boolean;
+  /** 顶部操作栏配置，函数时可以传递参数，参数是什么由调用方决定 */
+  toolbar?:
+    | IXphActionsProps
+    | ((e: IFunctionPropParams<RecordType>) => IXphActionsProps);
   /** 排序、筛选变化时触发 */
   onChange?: (filters: any, sorter: any, extra: any) => void;
 } & Omit<

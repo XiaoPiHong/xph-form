@@ -1,4 +1,7 @@
-import Actions from "./actions/actions";
-import type { TActionItemProps } from "./actions/types";
+import { default as XphActions } from "./actions/actions";
+import type {
+  TActionItemProps as TXphActionItemProps,
+  IActionsProps as IXphActionsProps,
+} from "./actions/types";
 
-export { Actions, TActionItemProps };
+export { XphActions, TXphActionItemProps, IXphActionsProps };
