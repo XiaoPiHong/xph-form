@@ -8,7 +8,7 @@ import {
   useTableScroll,
 } from "../../hooks";
 import { IXphFormActionType } from "@xph-form/form";
-import TableAction from "./components/tableAction";
+import Toolbar from "./components/toolbar";
 import style from "./index.module.css";
 
 const Table = forwardRef(
@@ -66,9 +66,11 @@ const Table = forwardRef(
     console.log("render Table");
     return (
       <div className={fullHeight ? style["main-container"] : void 0}>
-        <div className={style["container__action"]}>
-          <TableAction />
+        {/** 操作栏 */}
+        <div className={style["container__toolbar"]}>
+          <Toolbar />
         </div>
+        {/** 表格 */}
         <div
           ref={divRef}
           className={fullHeight ? style["container__table"] : void 0}
@@ -86,6 +88,7 @@ const Table = forwardRef(
             onChange={onAllChange}
           />
         </div>
+        {/** 分页器 */}
         {pagination.show ? (
           <div className={style["container__pagination"]}>
             <APagination

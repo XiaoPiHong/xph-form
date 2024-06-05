@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableAction = () => {
+const Toolbar = () => {
   return <div>这里是操作按钮</div>;
 };
-export default TableAction;
+export default Toolbar;

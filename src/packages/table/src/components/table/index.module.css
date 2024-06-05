@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
 }
-.container__action {
+.container__toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
