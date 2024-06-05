@@ -1,3 +1,4 @@
-import Actions from "./actions";
+import Actions from "./actions/actions";
+import type { TActionItemProps } from "./actions/types";
 
-export { Actions };
+export { Actions, TActionItemProps };
