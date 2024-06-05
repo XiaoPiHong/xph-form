@@ -1,1 +1,3 @@
-export * from "./buttonAction";
+import Actions from "./actions";
+
+export { Actions };
