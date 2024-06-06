@@ -15,21 +15,22 @@ export default function useTopToolbar(
   const getTopToolbarBindProps = (): IXphActionsProps => {
     if (isFunction(toolbar)) {
       /** 把loading和selection传递给toolbar，因为这些顶部的按钮可能需要用到 */
+      const funcToolbarProps = toolbar({
+        loading: table.model.loading,
+        selection: table.model.selection,
+      });
       return {
         ...baseToolbar,
-        ...toolbar({
-          loading: table.model.loading,
-          selection: table.model.selection,
-        }),
-        /** 获取数据的时候禁用 */
-        disabled: table.model.loading,
+        ...funcToolbarProps,
+        /** 这里代理了一下禁用，获取数据的时候禁用 */
+        disabled: table.model.loading || funcToolbarProps.disabled,
       };
     }
     return {
       ...baseToolbar,
       ...toolbar,
-      /** 获取数据的时候禁用 */
-      disabled: table.model.loading,
+      /** 这里代理了一下禁用，获取数据的时候禁用 */
+      disabled: table.model.loading || toolbar?.disabled,
     };
   };
 

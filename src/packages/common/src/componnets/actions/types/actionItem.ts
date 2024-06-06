@@ -15,7 +15,7 @@ interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
   dropDownItems: {
     key: string;
     label: string;
-    /** 注意：父级如果disabled为true，子级无法展开 */
+    /** 注意：父级如果disabled为true，子级无法展开（所以相当于是变向的父级禁用，子级也禁用了） */
     disabled?: boolean;
     icon?: React.ReactNode;
   }[];
