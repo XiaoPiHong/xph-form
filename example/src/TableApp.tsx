@@ -214,6 +214,7 @@ const ReactApp: React.FC = () => {
         });
       },
       toolbar: {
+        type: "primary",
         items: [
           {
             key: "add",
