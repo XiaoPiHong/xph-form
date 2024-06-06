@@ -3,14 +3,14 @@ import { Button as AButton } from "antd";
 import { IComponentActionProps } from "../types";
 
 const Button = (props: IComponentActionProps<"Button">) => {
-  const { componentProps, onClick } = props;
+  const { componentProps } = props;
 
   const getBindProps = () => {
     const { ...reset } = componentProps!;
     return reset;
   };
 
-  return <AButton {...getBindProps()} onClick={onClick}></AButton>;
+  return <AButton {...getBindProps()}></AButton>;
 };
 
 export default Button;

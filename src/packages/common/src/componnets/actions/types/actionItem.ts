@@ -1,4 +1,4 @@
-import { ButtonProps } from "antd";
+import { ButtonProps, MenuProps } from "antd";
 
 export interface IBaseActionProps {
   /** 唯一标识 */
@@ -11,8 +11,15 @@ export type TComponentType = {
 };
 
 interface IButtonProps extends ButtonProps {}
-interface IDropdownProps extends ButtonProps {
-  dropDownItems: any[];
+interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
+  dropDownItems: {
+    key: string;
+    label: string;
+    /** 注意：父级如果disabled为true，子级无法展开 */
+    disabled?: boolean;
+    icon?: React.ReactNode;
+  }[];
+  onClick: MenuProps["onClick"];
 }
 
 /** 组件类型 */
@@ -20,8 +27,6 @@ export interface IComponentActionProps<T extends keyof TComponentType>
   extends IBaseActionProps {
   /** 组件 */
   component: T;
-  /** 事件 */
-  onClick?: () => void;
   /** 组件属性 */
   componentProps?: TComponentType[T];
 }

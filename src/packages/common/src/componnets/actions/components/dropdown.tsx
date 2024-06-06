@@ -3,10 +3,10 @@ import { Dropdown as ADropdown, Button as AButton } from "antd";
 import { IComponentActionProps } from "../types";
 
 const Dropdown = (props: IComponentActionProps<"Dropdown">) => {
-  const { componentProps, onClick } = props;
+  const { componentProps } = props;
 
   const getBindProps = () => {
-    const { dropDownItems, ...reset } = componentProps!;
+    const { dropDownItems, onClick, ...reset } = componentProps!;
     return reset;
   };
 
@@ -17,35 +17,11 @@ const Dropdown = (props: IComponentActionProps<"Dropdown">) => {
     <ADropdown
       disabled={bindProps.disabled}
       menu={{
-        items: [
-          {
-            key: "2",
-            label: (
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.aliyun.com"
-              >
-                2nd menu item (disabled)
-              </a>
-            ),
-          },
-          {
-            key: "3",
-            label: (
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://www.luohanacademy.com"
-              >
-                3rd menu item (disabled)
-              </a>
-            ),
-          },
-        ],
+        items: componentProps?.dropDownItems || [],
+        onClick: componentProps?.onClick,
       }}
     >
-      <AButton {...bindProps} onClick={onClick}></AButton>
+      <AButton {...bindProps}></AButton>
     </ADropdown>
   );
 };

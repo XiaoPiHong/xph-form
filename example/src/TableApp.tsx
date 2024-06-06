@@ -220,6 +220,9 @@ const ReactApp: React.FC = () => {
             component: "Button",
             componentProps: {
               children: "我是按钮",
+              onClick: (e) => {
+                console.log(e);
+              },
             },
           },
           {
@@ -227,7 +230,19 @@ const ReactApp: React.FC = () => {
             component: "Dropdown",
             componentProps: {
               children: "我是下拉",
-              dropDownItems: [],
+              dropDownItems: [
+                {
+                  key: "1",
+                  label: "我是下拉1",
+                },
+                {
+                  key: "2",
+                  label: "我是下拉2",
+                },
+              ],
+              onClick: (e) => {
+                console.log(e);
+              },
             },
           },
           {
