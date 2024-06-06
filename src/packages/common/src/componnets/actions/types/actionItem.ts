@@ -5,14 +5,14 @@ export interface IBaseActionProps {
   key?: string;
 }
 
-type TComponentType = {
+export type TComponentType = {
   Button: IButtonProps;
   Dropdown: IDropdownProps;
 };
 
 interface IButtonProps extends ButtonProps {}
-interface IDropdownProps {
-  children: any[];
+interface IDropdownProps extends ButtonProps {
+  dropDownItems: any[];
 }
 
 /** 组件类型 */
@@ -26,10 +26,10 @@ export interface IComponentActionProps<T extends keyof TComponentType>
   componentProps?: TComponentType[T];
 }
 
-/** 自定义渲染类型 */
+/** 自定义内容 */
 export interface IRenderActionProps extends IBaseActionProps {
-  /** 自定义渲染函数 */
-  render: () => React.ReactElement;
+  /** 自定义内容 */
+  render: React.ReactElement;
 }
 
 /**
@@ -72,3 +72,16 @@ export type TActionItemProps = XOR<
     IRenderActionProps
   ]
 >;
+
+/** 判断是哪种类型的action */
+export function isComponentActionItemProps(
+  item: TActionItemProps
+): item is IComponentActionProps<"Button"> {
+  return "component" in item;
+}
+
+export function isRenderActionItemProps(
+  item: TActionItemProps
+): item is IRenderActionProps {
+  return "render" in item;
+}

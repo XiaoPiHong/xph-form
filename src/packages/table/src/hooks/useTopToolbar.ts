@@ -21,11 +21,15 @@ export default function useTopToolbar(
           loading: table.model.loading,
           selection: table.model.selection,
         }),
+        /** 获取数据的时候禁用 */
+        disabled: table.model.loading,
       };
     }
     return {
       ...baseToolbar,
       ...toolbar,
+      /** 获取数据的时候禁用 */
+      disabled: table.model.loading,
     };
   };
 

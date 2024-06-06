@@ -1,10 +1,42 @@
-import React, { Framgent } from "react";
-import { IActionsProps } from "./types";
+import React, { Fragment, useCallback } from "react";
+import {
+  IActionsProps,
+  TActionItemProps,
+  isComponentActionItemProps,
+  isRenderActionItemProps,
+} from "./types";
+import { useActionsProps, useActionItems } from "./hooks";
+import { componentMap } from "./components";
 
 const Actions = (props: IActionsProps) => {
-  const { render, disabled, type, items } = props;
+  const { actionsProps } = useActionsProps(props);
+
+  const { actionItems } = useActionItems(actionsProps);
+
+  const renderContent = useCallback((item: TActionItemProps, index: number) => {
+    const isComponent = isComponentActionItemProps(item);
+    const isRender = isRenderActionItemProps(item);
+
+    if (isComponent) {
+      const Component = componentMap.get(item.component)!;
+      return <Component key={index} {...item} />;
+    }
+    if (isRender) {
+      return <div key={index}>{item.render}</div>;
+    }
+
+    return null;
+  });
   /** 组件的布局由调用方决定 */
-  return render ? render() : <div>我是顶部操作按钮</div>;
+  return actionsProps?.render ? (
+    actionsProps.render
+  ) : (
+    <Fragment>
+      {actionItems?.map((item, index) => {
+        return renderContent(item, index);
+      })}
+    </Fragment>
+  );
 };
 
 export default Actions;

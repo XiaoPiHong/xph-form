@@ -213,32 +213,28 @@ const ReactApp: React.FC = () => {
           }, 2000);
         });
       },
-      toolbar: ({ loading, selection }) => {
-        console.log(loading, selection);
-        return {
-          items: [
-            {
-              key: "add",
-              component: "Button",
-              componentProps: {
-                children: "我是按钮",
-              },
+      toolbar: {
+        items: [
+          {
+            key: "add",
+            component: "Button",
+            componentProps: {
+              children: "我是按钮",
             },
-            {
-              key: "more",
-              component: "Dropdown",
-              componentProps: {
-                children: [],
-              },
+          },
+          {
+            key: "more",
+            component: "Dropdown",
+            componentProps: {
+              children: "我是下拉",
+              dropDownItems: [],
             },
-            {
-              key: "render",
-              render: () => {
-                return <div></div>;
-              },
-            },
-          ],
-        };
+          },
+          {
+            key: "render",
+            render: <div>我是render</div>,
+          },
+        ],
       },
     },
     searchForm: {
