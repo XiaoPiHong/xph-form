@@ -24,7 +24,7 @@ export default function useActionItems(props: IActionsProps): {
   });
 
   /** 如果有max属性，则进行截取 */
-  const needSplice = isNumber(max) && max > 0;
+  const needSplice = isNumber(max) && max >= 0;
   return {
     showActionItems: actionItems.slice(
       0,

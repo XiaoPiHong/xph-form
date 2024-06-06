@@ -1,6 +1,7 @@
 import React from "react";
 import { Dropdown as ADropdown, Button as AButton } from "antd";
 import { IComponentActionProps } from "../types";
+import { CaretDownOutlined } from "@ant-design/icons";
 
 const Dropdown = (props: IComponentActionProps<"Dropdown">) => {
   const { componentProps } = props;
@@ -20,8 +21,14 @@ const Dropdown = (props: IComponentActionProps<"Dropdown">) => {
         items: componentProps?.dropDownItems || [],
         onClick: componentProps?.onClick,
       }}
+      trigger={["click"]}
     >
-      <AButton {...bindProps}></AButton>
+      <div>
+        <AButton {...bindProps}>
+          {bindProps.children}
+          <CaretDownOutlined />
+        </AButton>
+      </div>
     </ADropdown>
   );
 };

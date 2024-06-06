@@ -248,7 +248,7 @@ const ReactApp: React.FC = () => {
           },
           {
             key: "render",
-            render: <div>我是render</div>,
+            render: <div>我是自定义render</div>,
           },
         ],
       },

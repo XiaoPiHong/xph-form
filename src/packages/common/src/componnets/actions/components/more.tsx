@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { TActionItemProps, IActionsProps } from "../types";
 import {
   Dropdown as ADropdown,
@@ -7,6 +7,7 @@ import {
   theme,
 } from "antd";
 import { useRenderContent } from "../hooks";
+import { CaretDownOutlined } from "@ant-design/icons";
 
 const { useToken } = theme;
 const More = ({
@@ -45,8 +46,9 @@ const More = ({
       disabled={disabled}
       menu={{ items: [] }}
       dropdownRender={dropdownRender}
+      trigger={["click"]}
     >
-      <AButton type={type}>更多...</AButton>
+      <AButton type={type}>更多{<CaretDownOutlined />}</AButton>
     </ADropdown>
   );
 };
