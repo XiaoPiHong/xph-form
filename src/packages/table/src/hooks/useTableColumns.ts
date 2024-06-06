@@ -1,4 +1,4 @@
-import { TTableProps, TColumnType, TDataSourceItem } from "../types";
+import { TTableProps, TDataSourceItem } from "../types";
 import { ColumnsType } from "antd/es/table";
 import { buildUUID } from "@xph-form/common";
 
