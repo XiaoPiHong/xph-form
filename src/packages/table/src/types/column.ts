@@ -4,7 +4,8 @@ import { TDataSourceItem } from "./table";
 /** 扩展一下antd column的属性，不一定要扩展，只是预留 */
 type TBaseColumnType<T> = {} & ColumnType<T>;
 
-export interface IComponentColumnProps<T> extends TBaseColumnType<T> {
+export interface IComponentColumnProps<T>
+  extends Omit<TBaseColumnType<T>, "render"> {
   cellFunc: (() => any[]) | any[];
 }
 
