@@ -1,17 +1,24 @@
 import { ColumnType, ColumnGroupType } from "antd/es/table";
 import { TDataSourceItem } from "./table";
+import {
+  ICellProps,
+  TCellComponentType,
+} from "../components/table/components/cellFunc/types";
 
 /** 扩展一下antd column的属性，不一定要扩展，只是预留 */
 type TBaseColumnType<T> = {} & ColumnType<T>;
 
-export interface IComponentColumnProps<T>
+export interface IComponentColumnProps<T, U extends TCellComponentType>
   extends Omit<TBaseColumnType<T>, "render"> {
-  cellFunc: (() => any[]) | any[];
+  /** 单元格渲染属性（原理也是使用render渲染不同的内容） */
+  cellFunc:
+    | ((value: any, record: T, index: number) => ICellProps<U>[])
+    | ICellProps<U>[];
 }
 
 export interface IRenderColumnProps<T>
   extends Omit<TBaseColumnType<T>, "render"> {
-  render: ColumnType<T>["render"];
+  render?: ColumnType<T>["render"];
 }
 
 export interface IGroupColumnProps<T>
@@ -32,10 +39,25 @@ type XOR<T extends any[]> = T extends [infer A, infer B, ...infer Rest]
   ? A
   : never;
 
-export type TColumnProps<RecordType = TDataSourceItem> = XOR<
+export type TColumnProps<
+  RecordType = TDataSourceItem,
+  ComponentType extends TCellComponentType = TCellComponentType
+> = XOR<
   [
-    IComponentColumnProps<RecordType>,
+    IComponentColumnProps<RecordType, ComponentType>,
     IRenderColumnProps<RecordType>,
     IGroupColumnProps<RecordType>
   ]
 >;
+
+export function isComponentColumnProps<T, U extends TCellComponentType>(
+  column: TColumnProps<T, U>
+): column is IComponentColumnProps<T, U> {
+  return "cellFunc" in column;
+}
+
+export function isChildrenColumnProps<T>(
+  column: TColumnProps<T>
+): column is IGroupColumnProps<T> {
+  return "children" in column;
+}

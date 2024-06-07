@@ -21,19 +21,32 @@ const ReactApp: React.FC = () => {
           title: "姓名",
           dataIndex: "name",
           key: "name",
-          render: (text) => <a>{text}</a>,
+          cellFunc: [
+            {
+              component: "link",
+              componentProps: {
+                url: "baidu.com",
+              },
+            },
+          ],
         },
         {
           title: "地址",
           dataIndex: "address",
           key: "address",
-          render: (text) => <a>{text}</a>,
         },
         {
           title: "年龄",
           dataIndex: "age",
           key: "age",
-          cellFunc: () => [],
+          cellFunc: () => [
+            {
+              component: "link",
+              componentProps: {
+                url: "baidu.com",
+              },
+            },
+          ],
         },
       ],
       autoPagination: true,
