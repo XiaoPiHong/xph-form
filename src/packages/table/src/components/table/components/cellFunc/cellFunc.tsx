@@ -9,7 +9,11 @@ const Main = () => {
 
 /** CellFunc需循环处理组件(这个是一个递归组件) */
 const CellFunc = <T,>(props: ICellFuncProps<T>) => {
-  return <div></div>;
+  const { dslConfig, renderPrams } = props;
+  const [text, record, index] = renderPrams;
+  console.log(dslConfig, renderPrams);
+  console.log(text, record, index);
+  return <div>我是CellFunc组件</div>;
 };
 
 export default CellFunc;

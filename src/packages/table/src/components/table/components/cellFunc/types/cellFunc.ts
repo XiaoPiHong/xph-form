@@ -14,7 +14,7 @@ export interface ICellProps<T extends TCellComponentType = TCellComponentType> {
 }
 
 export interface ICellFuncProps<
-  T,
+  T = unknown,
   U extends TCellComponentType = TCellComponentType
 > {
   dslConfig: ICellProps<U>[];
