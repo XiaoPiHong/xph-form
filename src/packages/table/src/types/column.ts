@@ -12,7 +12,7 @@ export interface IComponentColumnProps<T, U extends TCellComponentType>
   extends Omit<TBaseColumnType<T>, "render"> {
   /** 单元格渲染属性（原理也是使用render渲染不同的内容） */
   cellFunc:
-    | ((value: any, record: T, index: number) => ICellProps<U>[])
+    | ((props: { text: any; record: T; index: number }) => ICellProps<U>[])
     | ICellProps<U>[];
 }
 

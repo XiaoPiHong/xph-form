@@ -25,12 +25,12 @@ function addAttributesToNodes(
         ...reset,
         render: (...args) => {
           const flag = isFunction(cellFunc);
-          const curCellFunc = flag ? cellFunc(...args) : cellFunc;
 
-          const renderPrams = args;
-          const dslConfig = curCellFunc;
+          const [text, record, index] = args;
+          const renderParams = { text, record, index };
+          const dslConfig = flag ? cellFunc(renderParams) : cellFunc;
 
-          return <CellFunc dslConfig={dslConfig} renderPrams={renderPrams} />;
+          return <CellFunc dslConfig={dslConfig} renderPrams={renderParams} />;
         },
       };
     }

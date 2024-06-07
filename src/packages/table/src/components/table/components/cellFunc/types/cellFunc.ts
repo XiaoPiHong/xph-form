@@ -18,5 +18,5 @@ export interface ICellFuncProps<
   U extends TCellComponentType = TCellComponentType
 > {
   dslConfig: ICellProps<U>[];
-  renderPrams: [value: any, record: T, index: number];
+  renderPrams: { text: any; record: T; index: number };
 }

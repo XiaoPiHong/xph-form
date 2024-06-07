@@ -39,11 +39,11 @@ const ReactApp: React.FC = () => {
           title: "年龄",
           dataIndex: "age",
           key: "age",
-          cellFunc: () => [
+          cellFunc: ({ record }) => [
             {
               component: "link",
               componentProps: {
-                url: "baidu.com",
+                url: record.address,
               },
             },
           ],
