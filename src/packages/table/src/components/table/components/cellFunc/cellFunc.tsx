@@ -11,8 +11,6 @@ const Main = () => {
 const CellFunc = <T,>(props: ICellFuncProps<T>) => {
   const { dslConfig, renderPrams } = props;
   const { text, record, index } = renderPrams;
-  console.log(dslConfig, renderPrams);
-  console.log(text, record, index);
   return <div>我是CellFunc组件</div>;
 };
 
