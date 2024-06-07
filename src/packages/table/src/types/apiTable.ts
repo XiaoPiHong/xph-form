@@ -31,7 +31,6 @@ export type TApiTableProps<RecordType = TDataSourceItem> = {
   toolbar?:
     | IXphActionsProps
     | ((e: IFunctionToolbarParams<RecordType>) => IXphActionsProps);
-  action?: IXphActionsProps;
   /** 排序、筛选变化时触发 */
   onChange?: (filters: any, sorter: any, extra: any) => void;
 } & Omit<

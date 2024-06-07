@@ -16,13 +16,11 @@ const Table = forwardRef(
   (
     {
       tableProps,
-      baseTableProps,
       searchFormRef,
       fullHeight,
     }: {
       fullHeight?: boolean;
       tableProps: TTableProps;
-      baseTableProps: TTableProps;
       searchFormRef: Ref<IXphFormActionType>;
     },
     ref
@@ -41,11 +39,7 @@ const Table = forwardRef(
     } = useTable(tableProps, searchFormRef);
     const { rowSelection } = useRowSelection(tableProps, table);
     const { divRef, scroll } = useTableScroll(tableProps, fullHeight);
-    const { getTopToolbarBindProps } = useTopToolbar(
-      tableProps,
-      baseTableProps,
-      table
-    );
+    const { getTopToolbarBindProps } = useTopToolbar(tableProps, table);
 
     const getTableBindProps = () => {
       const {

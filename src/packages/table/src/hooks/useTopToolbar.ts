@@ -5,11 +5,9 @@ import { IXphActionsProps } from "@xph-form/common";
 
 export default function useTopToolbar(
   tableProps: TTableProps,
-  baseTableProps: TTableProps,
   table: IUseTable
 ) {
   const { toolbar } = tableProps.table!;
-  const { toolbar: baseToolbar } = baseTableProps.table!;
 
   /** 获取绑定的属性，兼容一下函数传递的方式 */
   const getTopToolbarBindProps = (): IXphActionsProps => {
@@ -20,14 +18,12 @@ export default function useTopToolbar(
         selection: table.model.selection,
       });
       return {
-        ...baseToolbar,
         ...funcToolbarProps,
         /** 这里代理了一下禁用，获取数据的时候禁用 */
         disabled: table.model.loading || funcToolbarProps.disabled,
       };
     }
     return {
-      ...baseToolbar,
       ...toolbar,
       /** 这里代理了一下禁用，获取数据的时候禁用 */
       disabled: table.model.loading || toolbar?.disabled,

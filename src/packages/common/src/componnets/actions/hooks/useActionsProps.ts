@@ -12,7 +12,6 @@ export default function useActionsProps(props: IActionsProps) {
   };
 
   return {
-    baseActionsProps,
     actionsProps: newActionsProps,
   };
 }

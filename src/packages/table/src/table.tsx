@@ -6,7 +6,7 @@ import Table from "./components/table";
 import style from "./table.module.css";
 
 const XphTable: TRefTable = forwardRef((props: TTableProps, tableRef) => {
-  const { tableProps, baseTableProps } = useTableProps(props);
+  const { tableProps } = useTableProps(props);
   const { searchFormRef, searchFormProps } = useSearchForm(tableProps);
   let { fullHeight, virtual } = tableProps.table!;
   if (virtual) fullHeight = true;
@@ -25,7 +25,6 @@ const XphTable: TRefTable = forwardRef((props: TTableProps, tableRef) => {
           ref={tableRef}
           searchFormRef={searchFormRef}
           fullHeight={fullHeight}
-          baseTableProps={baseTableProps}
           tableProps={tableProps}
         />
       </div>

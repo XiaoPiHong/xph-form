@@ -31,7 +31,6 @@ const useTableProps = (props: TTableProps) => {
   };
 
   return {
-    baseTableProps,
     tableProps: newTableProps,
   };
 };
