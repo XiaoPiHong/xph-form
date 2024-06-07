@@ -2,7 +2,7 @@ import { TableProps, PaginationProps } from "antd";
 import { TableRowSelection, RowSelectionType } from "antd/lib/table/interface";
 import { IXphActionsProps } from "@xph-form/common";
 import { TDataSourceItem } from "./table";
-import { TColumnType } from "./column";
+import { TColumnProps } from "./column";
 
 export interface IFunctionToolbarParams<RecordType = TDataSourceItem> {
   loading: boolean;
@@ -12,7 +12,7 @@ export interface IFunctionToolbarParams<RecordType = TDataSourceItem> {
 /** 扩展antd table的属性 */
 export type TApiTableProps<RecordType = TDataSourceItem> = {
   /** 列配置项 */
-  columns?: TColumnType<RecordType>[];
+  columns?: TColumnProps<RecordType>[];
   /** 首次是否自动请求 */
   autoRequest?: boolean;
   /** 获取datasource的api */
