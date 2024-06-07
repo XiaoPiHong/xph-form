@@ -1,4 +1,5 @@
 import { IFormProps } from "../types";
+import { merge } from "lodash-es";
 
 const useFormPorps = (formProps: IFormProps) => {
   const baseFormProps: Partial<IFormProps> = {
@@ -12,8 +13,7 @@ const useFormPorps = (formProps: IFormProps) => {
     fieldMapToTime: [],
   };
   const newFormProps: IFormProps = {
-    ...baseFormProps,
-    ...formProps,
+    ...merge(baseFormProps, formProps),
   };
   return {
     formProps: newFormProps,
