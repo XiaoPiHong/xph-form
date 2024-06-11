@@ -1,13 +1,17 @@
 import React from "react";
 import { CellComponentMap } from "./components";
-import { ICellFuncProps } from "./types";
+import { ICellFuncProps, IMainProps } from "./types";
 
 /** 最底层的组件 */
-const BottomCellFunc = (cellFuncProps: ICellFuncProps, mainProps: any) => {
+const BottomCellFunc = (
+  cellFuncProps: ICellFuncProps,
+  mainProps: IMainProps
+) => {
   const {
     renderPrams: { text },
   } = cellFuncProps;
-  return <span>{text}</span>;
+
+  return <span onClick={mainProps?.mainClick}>{text}</span>;
 };
 
 /** CellFunc需循环处理组件(这个是一个递归组件) */
