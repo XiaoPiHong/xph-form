@@ -1,4 +1,6 @@
-export type TCellComponentType = "link";
+import { IXphActionsProps } from "@xph-form/common";
+
+export type TCellComponentType = "link" | "actions";
 
 /** cellFunc中每一项对应的组件componentProps属性映射  */
 export interface ICellComponentPropsMap {
@@ -8,6 +10,7 @@ export interface ICellComponentPropsMap {
     /** 点击事件（优先级最高） */
     onClick?: () => void;
   };
+  actions: IXphActionsProps;
 }
 
 /** cellFunc中每一项的配置  */

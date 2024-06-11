@@ -56,6 +56,55 @@ const ReactApp: React.FC = () => {
             },
           ],
         },
+        {
+          title: "操作",
+          dataIndex: "actions",
+          cellFunc: ({ record }) => [
+            {
+              component: "actions",
+              componentProps: {
+                type: "link",
+                max: 0,
+                items: [
+                  {
+                    key: "add",
+                    component: "Button",
+                    componentProps: {
+                      children: "我是按钮",
+                      onClick: (e) => {
+                        console.log(e);
+                      },
+                    },
+                  },
+                  {
+                    key: "more",
+                    component: "Dropdown",
+                    componentProps: {
+                      children: "我是下拉",
+                      dropDownItems: [
+                        {
+                          key: "1",
+                          label: "我是下拉1",
+                        },
+                        {
+                          key: "2",
+                          label: "我是下拉2",
+                        },
+                      ],
+                      onClick: (e) => {
+                        console.log(e);
+                      },
+                    },
+                  },
+                  {
+                    key: "render",
+                    render: <div>我是自定义render</div>,
+                  },
+                ],
+              },
+            },
+          ],
+        },
       ],
       autoPagination: true,
       api: async (params) => {
