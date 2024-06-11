@@ -43,7 +43,7 @@ const ReactApp: React.FC = () => {
             {
               component: "link",
               componentProps: {
-                url: record.address,
+                url: record.age.toString(),
               },
             },
           ],
