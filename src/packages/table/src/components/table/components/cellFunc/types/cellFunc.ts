@@ -3,7 +3,10 @@ export type TCellComponentType = "link";
 /** cellFunc中每一项对应的组件componentProps属性映射  */
 export interface ICellComponentPropsMap {
   link: {
-    url: string;
+    /** 超链接，点击超链接跳转 */
+    url?: string;
+    /** 点击事件（优先级最高） */
+    onClick?: () => void;
   };
 }
 

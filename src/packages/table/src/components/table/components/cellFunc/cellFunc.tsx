@@ -7,7 +7,7 @@ const BottomCellFunc = (cellFuncProps: ICellFuncProps, mainProps: any) => {
   const {
     renderPrams: { text },
   } = cellFuncProps;
-  return <>{text}</>;
+  return <span>{text}</span>;
 };
 
 /** CellFunc需循环处理组件(这个是一个递归组件) */
@@ -25,7 +25,7 @@ const CellFunc = (props: ICellFuncProps) => {
 
     // 处理完后将结果丢给下一个组件
     CurrentComponent = Component.Comp.bind(null, CurrentComponent, {
-      curComponentProps: dslConfig[i].componentProps,
+      curComponentProps: dslConfig[i].componentProps || {},
       cellFuncProps: props,
     });
   }

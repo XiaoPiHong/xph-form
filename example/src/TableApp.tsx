@@ -21,14 +21,14 @@ const ReactApp: React.FC = () => {
           title: "姓名",
           dataIndex: "name",
           key: "name",
-          cellFunc: [
-            {
-              component: "link",
-              componentProps: {
-                url: "baidu.com",
-              },
-            },
-          ],
+          // cellFunc: [
+          //   {
+          //     component: "link",
+          //     componentProps: {
+          //       url: "baidu.com",
+          //     },
+          //   },
+          // ],
         },
         {
           title: "地址",
@@ -43,7 +43,13 @@ const ReactApp: React.FC = () => {
             {
               component: "link",
               componentProps: {
-                url: record.age.toString(),
+                url: "111",
+              },
+            },
+            {
+              component: "link",
+              componentProps: {
+                url: "222",
               },
             },
           ],

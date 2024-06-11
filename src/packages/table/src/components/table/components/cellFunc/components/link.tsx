@@ -8,16 +8,9 @@ const Link = (
 ) => {
   const { curComponentProps, cellFuncProps } = curCellFuncProps;
 
-  if (curComponentProps) {
-    const { url } = curComponentProps;
-    console.log(url);
-  }
-
-  return (
-    <a>
-      <Comp></Comp>
-    </a>
-  );
+  const { url, onClick } = curComponentProps!;
+  console.log(url);
+  return <Comp></Comp>;
 };
 
 export default Link;
