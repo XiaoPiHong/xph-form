@@ -64,7 +64,7 @@ const ReactApp: React.FC = () => {
               component: "actions",
               componentProps: {
                 type: "link",
-                max: 0,
+                max: 3,
                 items: [
                   {
                     key: "add",
