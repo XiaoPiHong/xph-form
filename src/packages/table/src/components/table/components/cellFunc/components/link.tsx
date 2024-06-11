@@ -1,5 +1,8 @@
 import React from "react";
 import { ICurCellFuncProps, IMainProps } from "../types";
+import { theme } from "antd";
+
+const { useToken } = theme;
 
 const Link = (
   Comp: React.ReactElement,
@@ -9,6 +12,14 @@ const Link = (
   const { curComponentProps, cellFuncProps } = curCellFuncProps;
 
   const { url, onClick } = curComponentProps!;
+
+  /** 获取一下继承过来的超链接颜色 */
+  const { token } = useToken();
+
+  const mainStyle: React.CSSProperties = {
+    color: token.colorLink,
+    cursor: "pointer",
+  };
 
   const handleMainClick = () => {
     /**
@@ -25,7 +36,13 @@ const Link = (
       return;
     }
   };
-  return <Comp {...mainProps} mainClick={handleMainClick}></Comp>;
+  return (
+    <Comp
+      {...mainProps}
+      mainClick={handleMainClick}
+      mainStyle={Object.assign(mainStyle, mainProps?.mainStyle || {})}
+    ></Comp>
+  );
 };
 
 export default Link;

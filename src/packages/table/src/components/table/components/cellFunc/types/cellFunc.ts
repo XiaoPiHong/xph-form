@@ -42,4 +42,5 @@ export interface ICurCellFuncProps<
  */
 export interface IMainProps {
   mainClick?: () => void;
+  mainStyle?: React.CSSProperties;
 }

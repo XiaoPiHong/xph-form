@@ -11,7 +11,11 @@ const BottomCellFunc = (
     renderPrams: { text },
   } = cellFuncProps;
 
-  return <span onClick={mainProps?.mainClick}>{text}</span>;
+  return (
+    <span onClick={mainProps?.mainClick} style={mainProps?.mainStyle}>
+      {text}
+    </span>
+  );
 };
 
 /** CellFunc需循环处理组件(这个是一个递归组件) */
