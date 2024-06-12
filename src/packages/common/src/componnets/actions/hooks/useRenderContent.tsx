@@ -13,9 +13,7 @@ export default function useRenderContent(): {
     index: number | string
   ) => React.ReactNode;
 } {
-  /**
-   * 扩展一下用户自定义的actions映射组件
-   */
+  /** * 扩展一下用户自定义的组件 */
   const { setExtendActionsComp } = useExtendActions();
   setExtendActionsComp(componentMap);
 
