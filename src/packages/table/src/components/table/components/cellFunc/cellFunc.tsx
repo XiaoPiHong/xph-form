@@ -1,5 +1,5 @@
 import React from "react";
-import { CellComponentMap } from "./components";
+import { cellComponentMap } from "./components";
 import { ICellFuncProps, IMainProps } from "./types";
 
 /** 最底层的组件 */
@@ -27,7 +27,7 @@ const CellFunc = (props: ICellFuncProps) => {
   let dslIndex = 0;
   while (dslIndex < dslConfig.length) {
     const i = dslIndex++;
-    const Component = CellComponentMap[dslConfig[i].component];
+    const Component = cellComponentMap[dslConfig[i].component];
     // 避免匹配不到.
     if (!Component) continue;
 

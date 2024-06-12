@@ -1,7 +1,10 @@
 import Link from "./link";
 import Actions from "./actions";
+import { useExtendTable } from "../../../../../hooks";
 
-export const CellComponentMap = {
+const { setExtendTableCellFuncComp } = useExtendTable();
+
+const cellComponentMap = {
   /** 超链接 */
   link: {
     Comp: Link,
@@ -11,3 +14,8 @@ export const CellComponentMap = {
     Comp: Actions,
   },
 };
+
+/** 扩展用户自定义的单元格映射组件 */
+setExtendTableCellFuncComp(cellComponentMap);
+
+export { cellComponentMap };
