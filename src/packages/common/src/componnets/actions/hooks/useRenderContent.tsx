@@ -5,6 +5,7 @@ import {
   isRenderActionItemProps,
 } from "../types";
 import { componentMap } from "../components";
+import { useExtendActions } from "../hooks";
 
 export default function useRenderContent(): {
   renderContent: (
@@ -12,6 +13,12 @@ export default function useRenderContent(): {
     index: number | string
   ) => React.ReactNode;
 } {
+  /**
+   * 扩展一下用户自定义的actions映射组件
+   */
+  const { setExtendActionsComp } = useExtendActions();
+  setExtendActionsComp(componentMap);
+
   const renderContent = useCallback((item: TActionItemProps, index: number) => {
     const isComponent = isComponentActionItemProps(item);
     const isRender = isRenderActionItemProps(item);

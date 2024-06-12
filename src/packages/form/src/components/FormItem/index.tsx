@@ -100,8 +100,8 @@ const FormItem = forwardRef(
     };
 
     /** 扩展一下用户自定义的表单项 */
-    const { getExtendFormComp } = useExtendForm();
-    getExtendFormComp(componentMap);
+    const { setExtendFormComp } = useExtendForm();
+    setExtendFormComp(componentMap);
 
     const isComponent = isComponentFormItemProps(itemProps);
     const isRender = isRenderFormItemProps(itemProps);

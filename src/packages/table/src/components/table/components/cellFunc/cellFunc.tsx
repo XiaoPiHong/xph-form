@@ -22,8 +22,8 @@ const BottomCellFunc = (
 /** CellFunc需循环处理组件(这个是一个递归组件) */
 const CellFunc = (props: ICellFuncProps) => {
   /** 扩展用户自定义的组件 */
-  const { getExtendTableCellComp } = useExtendTable();
-  getExtendTableCellComp(cellComponentMap);
+  const { setExtendTableCellComp } = useExtendTable();
+  setExtendTableCellComp(cellComponentMap);
 
   const { dslConfig } = props;
 

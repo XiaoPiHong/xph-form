@@ -3,7 +3,7 @@ import { useXphExtendCompProps } from "@xph-form/common";
 const useExtendTable = () => {
   const { extendProps, extendComp } = useXphExtendCompProps();
 
-  const getExtendTableCellComp = (componentMap: { [key: string]: any }) => {
+  const setExtendTableCellComp = (componentMap: { [key: string]: any }) => {
     const cellComp = extendComp?.tableCellFunc;
     if (cellComp) {
       Object.keys(cellComp).forEach((key) => {
@@ -16,7 +16,7 @@ const useExtendTable = () => {
   };
   return {
     extendTableProps: extendProps?.table,
-    getExtendTableCellComp,
+    setExtendTableCellComp,
   };
 };
 
