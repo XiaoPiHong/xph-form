@@ -32,10 +32,14 @@ const CellFunc = (props: ICellFuncProps) => {
     if (!Component) continue;
 
     // 处理完后将结果丢给下一个组件
-    CurrentComponent = Component.Comp.bind(null, CurrentComponent, {
-      curComponentProps: dslConfig[i].componentProps || {},
-      cellFuncProps: props,
-    });
+    CurrentComponent = (Component.Comp as React.FC).bind(
+      null,
+      CurrentComponent,
+      {
+        curComponentProps: dslConfig[i].componentProps || {},
+        cellFuncProps: props,
+      }
+    );
   }
 
   return <CurrentComponent />;
