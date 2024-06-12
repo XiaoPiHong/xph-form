@@ -1,6 +1,7 @@
 import React from "react";
 import { cellComponentMap } from "./components";
 import { ICellFuncProps, IMainProps } from "./types";
+import { useExtendTable } from "../../../../hooks";
 
 /** 最底层的组件 */
 const BottomCellFunc = (
@@ -20,6 +21,10 @@ const BottomCellFunc = (
 
 /** CellFunc需循环处理组件(这个是一个递归组件) */
 const CellFunc = (props: ICellFuncProps) => {
+  /** 扩展用户自定义的组件 */
+  const { getExtendTableCellComp } = useExtendTable();
+  const allTableCellCompMap = getExtendTableCellComp(cellComponentMap);
+
   const { dslConfig } = props;
 
   /** 最底层组件 */
@@ -27,7 +32,7 @@ const CellFunc = (props: ICellFuncProps) => {
   let dslIndex = 0;
   while (dslIndex < dslConfig.length) {
     const i = dslIndex++;
-    const Component = cellComponentMap[dslConfig[i].component];
+    const Component = allTableCellCompMap[dslConfig[i].component];
     // 避免匹配不到.
     if (!Component) continue;
 
