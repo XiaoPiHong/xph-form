@@ -64,7 +64,7 @@ const ReactApp: React.FC = () => {
               component: "actions",
               componentProps: {
                 type: "dashed",
-                max: 3,
+                max: 1,
                 items: [
                   {
                     key: "add",
@@ -298,6 +298,7 @@ const ReactApp: React.FC = () => {
       },
       toolbar: {
         type: "primary",
+        max: 2,
         items: [
           {
             key: "add",
@@ -439,7 +440,7 @@ const ReactApp: React.FC = () => {
 
   return (
     <XphExtendCompPropsProvider
-      value={{ extendProps: { actions: { type: "link" } } }}
+      value={{ extendProps: { actions: { type: "link", max: 0 } } }}
     >
       <XphTable<DataType>
         ref={xphTableRef}
