@@ -1,4 +1,6 @@
 import React from "react";
+import { TComponentPropsMap } from "../types";
+import { useExtendForm } from "../hooks";
 import {
   Input,
   Select,
@@ -21,7 +23,7 @@ import ApiTransfer from "./ApiTransfer";
 import ApiAutoComplete from "./ApiAutoComplete";
 import AutoUpload from "./AutoUpload";
 
-import { TComponentPropsMap } from "../types";
+const { setExtendFormComp } = useExtendForm();
 
 const componentMap = new Map<keyof TComponentPropsMap, React.FC<any>>();
 
@@ -51,5 +53,8 @@ componentMap.set("ApiAutoComplete", ApiAutoComplete);
 componentMap.set("AutoComplete", AutoComplete);
 componentMap.set("Upload", Upload);
 componentMap.set("AutoUpload", AutoUpload);
+
+/** 扩展用户自定义的组件 */
+setExtendFormComp(componentMap);
 
 export { componentMap };
