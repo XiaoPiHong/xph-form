@@ -23,7 +23,7 @@ const BottomCellFunc = (
 const CellFunc = (props: ICellFuncProps) => {
   /** 扩展用户自定义的组件 */
   const { getExtendTableCellComp } = useExtendTable();
-  const allTableCellCompMap = getExtendTableCellComp(cellComponentMap);
+  getExtendTableCellComp(cellComponentMap);
 
   const { dslConfig } = props;
 
@@ -32,7 +32,7 @@ const CellFunc = (props: ICellFuncProps) => {
   let dslIndex = 0;
   while (dslIndex < dslConfig.length) {
     const i = dslIndex++;
-    const Component = allTableCellCompMap[dslConfig[i].component];
+    const Component = cellComponentMap[dslConfig[i].component];
     // 避免匹配不到.
     if (!Component) continue;
 

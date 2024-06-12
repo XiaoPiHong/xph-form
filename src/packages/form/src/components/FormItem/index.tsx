@@ -14,6 +14,7 @@ import {
   useFormItemRules,
   useFormItemDisabled,
   useFormItemCollapse,
+  useExtendForm,
 } from "../../hooks";
 import { componentMap } from "..";
 import { Form, Col } from "antd";
@@ -97,6 +98,10 @@ const FormItem = forwardRef(
         initialValue,
       };
     };
+
+    /** 扩展一下用户自定义的表单项 */
+    const { getExtendFormComp } = useExtendForm();
+    getExtendFormComp(componentMap);
 
     const isComponent = isComponentFormItemProps(itemProps);
     const isRender = isRenderFormItemProps(itemProps);
