@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import XphTable from "@xph-form/table/src/table";
-import { TTableProps as TXphTableProps } from "@xph-form/table/src/types";
+import { XphTable, TXphTableProps } from "@xph-form/table";
+import { XphExtendCompPropsProvider } from "@xph-form/common";
 
 interface DataType {
   key: React.Key;
@@ -63,7 +63,7 @@ const ReactApp: React.FC = () => {
             {
               component: "actions",
               componentProps: {
-                type: "link",
+                type: "dashed",
                 max: 3,
                 items: [
                   {
@@ -438,13 +438,17 @@ const ReactApp: React.FC = () => {
   const xphTableRef = useRef();
 
   return (
-    <XphTable<DataType>
-      ref={xphTableRef}
-      {...props}
-      onRowSelectionChange={(selectRowKeys, selectedRows) => {
-        console.log(selectRowKeys, selectedRows);
-      }}
-    />
+    <XphExtendCompPropsProvider
+      value={{ extendProps: { actions: { type: "link" } } }}
+    >
+      <XphTable<DataType>
+        ref={xphTableRef}
+        {...props}
+        onRowSelectionChange={(selectRowKeys, selectedRows) => {
+          console.log(selectRowKeys, selectedRows);
+        }}
+      />
+    </XphExtendCompPropsProvider>
   );
 };
 

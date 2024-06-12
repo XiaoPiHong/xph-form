@@ -1,7 +1,9 @@
 import { TTableProps } from "../types";
 import { merge } from "lodash-es";
+import { useXphExtendCompProps } from "@xph-form/common";
 
 const useTableProps = (props: TTableProps) => {
+  const { extendProps } = useXphExtendCompProps();
   const baseTableProps: Partial<TTableProps> = {
     table: {
       columns: [],
@@ -27,7 +29,7 @@ const useTableProps = (props: TTableProps) => {
   };
 
   const newTableProps: TTableProps = {
-    ...merge(baseTableProps, props),
+    ...merge(merge(baseTableProps, extendProps?.table), props),
   };
 
   return {
