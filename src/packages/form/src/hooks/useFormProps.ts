@@ -1,9 +1,10 @@
 import { IFormProps } from "../types";
 import { merge } from "lodash-es";
-import { useXphExtendCompProps } from "@xph-form/common";
+import { useExtendForm } from "../hooks";
 
 const useFormPorps = (formProps: IFormProps) => {
-  const { extendProps } = useXphExtendCompProps();
+  const { extendFormProps } = useExtendForm();
+
   const baseFormProps: Partial<IFormProps> = {
     collapseNum: 5,
     colon: false,
@@ -15,7 +16,7 @@ const useFormPorps = (formProps: IFormProps) => {
     fieldMapToTime: [],
   };
   const newFormProps: IFormProps = {
-    ...merge(merge(baseFormProps, extendProps?.form), formProps),
+    ...merge(merge(baseFormProps, extendFormProps), formProps),
   };
   return {
     formProps: newFormProps,

@@ -4,3 +4,5 @@ export { default as useActionItems } from "./useActionItems";
 export * from "./useActionItems";
 export { default as useRenderContent } from "./useRenderContent";
 export * from "./useRenderContent";
+export { default as useExtendActions } from "./useExtendActions";
+export * from "./useExtendActions";

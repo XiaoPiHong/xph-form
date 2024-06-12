@@ -12,10 +12,18 @@ export interface IExtendProps {
   actions?: IXphActionsProps;
 }
 
+export interface IExtendComp {
+  /** 扩展的表单项 */
+  form?: { [key: string]: React.FC<any> };
+}
+
 export interface IExtendComponentProps {
   children: React.ReactNode;
   value: {
+    /** 扩展的属性 */
     extendProps?: IExtendProps;
+    /** 扩展的组件 */
+    extendComp?: IExtendComp;
   };
 }
 
@@ -24,12 +32,13 @@ export const ExtendCompPropsContext = createContext<
 >({});
 
 export const ExtendCompPropsProvider = (props: IExtendComponentProps) => {
-  const { extendProps } = props.value;
+  const { extendProps, extendComp } = props.value;
 
   return (
     <ExtendCompPropsContext.Provider
       value={{
         extendProps,
+        extendComp,
       }}
     >
       {props.children}

@@ -14,3 +14,5 @@ export { default as useTableScroll } from "./useTableScroll";
 export * from "./useTableScroll";
 export { default as useTopToolbar } from "./useTopToolbar";
 export * from "./useTopToolbar";
+export { default as useExtendTable } from "./useExtendTable";
+export * from "./useExtendTable";
