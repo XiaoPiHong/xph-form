@@ -1,4 +1,4 @@
-import { useXphExtendCompProps } from "@xph-form/common";
+import { useXphExtendCompProps } from "../../../hooks";
 
 const useExtendActions = () => {
   const { extendProps } = useXphExtendCompProps();

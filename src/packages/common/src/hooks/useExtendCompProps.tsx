@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import { IXphActionsProps } from "@xph-form/common";
+import { IXphActionsProps } from "../componnets";
 import { IXphFormProps } from "@xph-form/form";
 import { TXphTableProps } from "@xph-form/table";
 
