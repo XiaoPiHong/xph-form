@@ -8,7 +8,10 @@ export interface IApiTransferProps extends TransferProps {
   api?: (...args) => Promise<any>;
   /** 扩展api的参数 */
   params?: any;
-  /** 是否启用了Form.useWatch监听（'true' | 'false'） */
+  /**
+   * @ignore
+   * 是否启用了Form.useWatch监听（'true' \| 'false'）
+   */
   isusewatch?: string;
 }
 

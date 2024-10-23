@@ -7,8 +7,8 @@ import { isComponentFormItemProps, isRenderFormItemProps } from "../types";
 
 /**
  * @description 构建值数组
- * @param field `[key1, key2, key3]`
- * @param values = { key1: 'value1', key2: 'value2', key3: 'value3' }
+ * @param field - '[key1, key2, key3]
+ * @param values - { key1: 'value1', key2: 'value2', key3: 'value3' }
  * @returns ['value1', 'value2', 'value3']
  */
 function tryConstructArray(
@@ -36,10 +36,9 @@ function tryConstructArray(
 
 /**
  * @description 构建值对象
- * @param field '{key1, key2, key3}'
- * @param values = { key1: 'value1', key2: 'value2', key3: 'value3' }
- * @returns = { key1: 'value1', key2: 'value2', key3: 'value3' }
- *
+ * @param field - '{key1, key2, key3}'
+ * @param values - { key1: 'value1', key2: 'value2', key3: 'value3' }
+ * @returns { key1: 'value1', key2: 'value2', key3: 'value3' }
  */
 function tryConstructObject(
   field: string,
@@ -104,7 +103,7 @@ function tryDeconstructObject(
 }
 
 /**
- * @description: Processing time interval parameters
+ * @description Processing time interval parameters
  */
 function handleRangeTimeValue(values: Recordable<any>, formProps: IFormProps) {
   const fieldMapToTime = formProps.fieldMapToTime;

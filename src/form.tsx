@@ -54,7 +54,7 @@ const XphForm = (props: IFormProps, ref: ForwardedRef<IFormActionType>) => {
 
   /**
    * @description 用于绑定给form的属性
-   * @description 后续绑定给form的属性需在这里扩展一下
+   * 后续绑定给form的属性需在这里扩展一下
    */
   const getFormBindProps = () => {
     const {

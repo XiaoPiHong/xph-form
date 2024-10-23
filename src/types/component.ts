@@ -49,3 +49,27 @@ export type TComponentPropsMap<T extends TXphExtendComponentPropsMap = {}> = {
   ApiAutoComplete: IApiAutoCompleteProps;
   AutoUpload: IAutoUploadProps;
 } & T;
+
+export type {
+  SelectProps,
+  InputProps,
+  InputNumberProps,
+  TreeSelectProps,
+  TransferProps,
+  SwitchProps,
+  ButtonProps,
+  RadioProps,
+  CheckboxProps,
+  CascaderProps,
+  TimePickerProps,
+  DatePickerProps,
+  AutoCompleteProps,
+  UploadProps,
+} from "antd";
+export type {
+  IApiSelectProps,
+  IApiTreeSelectProps,
+  IApiTransferProps,
+  IApiAutoCompleteProps,
+  IAutoUploadProps,
+};

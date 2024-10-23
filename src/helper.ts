@@ -7,7 +7,7 @@ import {
 import { isFunction } from "lodash-es";
 
 /**
- * @description: 生成placeholder
+ * @description 生成placeholder
  */
 export function createPlaceholderMessage(component: keyof TComponentPropsMap) {
   if (component.includes("Input") || component.includes("Complete")) {

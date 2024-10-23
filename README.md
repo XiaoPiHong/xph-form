@@ -602,8 +602,7 @@ const ReactApp: React.FC = () => {
           maxCount: 2, // 文件最大数量
           /**
            * @description 表单获取到的类型
-           * @type "String"（默认，配合api使用） | "String[]"（配合api使用） | "File[]" | "FileList"（配合api使用）
-           * @description
+           * "String"（默认，配合api使用） | "String[]"（配合api使用） | "File[]" | "FileList"（配合api使用）
            * String时如果上传多文件，则返回字符串,拼接   initialValue：字符串
            * String[]时如果上传多文件，则返回数组        initialValue：数组
            * File[]时如果上传多文件，则返回数组          initialValue：数组
@@ -713,7 +712,7 @@ const ReactApp: React.FC = () => {
    * 第一种调用form组件api的方式，通过useRef
    *=============================================
    *  */
-  const reactFormRef = React.useRef<IXphFormActionType>();
+  const reactFormRef = React.useRef<IXphFormActionType>(null);
 
   /**
    * ==========================================

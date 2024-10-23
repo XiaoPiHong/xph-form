@@ -85,7 +85,7 @@ const FormItem = forwardRef(
 
     /**
      * @description 用于绑定给formItem的属性
-     * @description 后续绑定给formItem的属性需在这里扩展一下
+     * 后续绑定给formItem的属性需在这里扩展一下
      */
     const getFormItemBindProps = () => {
       return {

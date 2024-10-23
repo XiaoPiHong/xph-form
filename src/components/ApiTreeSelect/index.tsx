@@ -10,7 +10,10 @@ export interface IApiTreeSelectProps extends TreeSelectProps {
   params?: any;
   /** 是否立即触发（默认立即触发,否者展开选项时触发） */
   immediate?: boolean;
-  /** 是否启用了Form.useWatch监听（'true' | 'false'） */
+  /**
+   * @ignore
+   * 是否启用了Form.useWatch监听（'true' \| 'false'）
+   */
   isusewatch?: string;
 }
 
